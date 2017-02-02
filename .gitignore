@@ -1,0 +1,10 @@
+iBOfficeBeacon/InfoLocalDev.info
+iBOfficeBeacon.xcworkspace/xcuserdata/**/UserInterfaceState.xcuserstate
+iBOfficeBeacon.xcworkspace/xcuserdata/**/xcdebugger/Breakpoints*
+iBOfficeBeacon.xcodeproj/xcuserdata/*.xcuserdatad/*
+iBOfficeBeacon.xcworkspace/*
+HockeySDK-iOS/*
+.git/
+Pods/
+Podfile.lock
+
