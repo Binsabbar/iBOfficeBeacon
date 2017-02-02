@@ -1,0 +1,1683 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1DBF1D440457430C3B0F361F /* libPods-iBOfficeBeaconTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF0BADF2AFCCA055F4BD69B /* libPods-iBOfficeBeaconTests.a */; };
+		217E22F051FF18643A380DBF /* libPods-iBOfficeBeacon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C728BD076C8C7E4F51B52C /* libPods-iBOfficeBeacon.a */; };
+		6EEB8F601C681AD500DC623E /* BeaconEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEB8F5F1C681AD500DC623E /* BeaconEventDelegate.swift */; };
+		6EEC0CB61C67E83300ADA7AE /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEC0CB51C67E83300ADA7AE /* TestHelpers.swift */; };
+		CD6B7ABF6EFCEB25C026BD12 /* libPods-iBOfficeBeacon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D4B8BE21812288A40F8F8F /* libPods-iBOfficeBeacon.a */; };
+		DBABAA0DA416E30CD4208885 /* libPods-iBOfficeBeaconTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 883C7C582B8FFEE3E84B2144 /* libPods-iBOfficeBeaconTests.a */; };
+		E3006EB81CFC45ED00EF1B23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3006EB71CFC45ED00EF1B23 /* LaunchScreen.storyboard */; };
+		E304C9A51CA9BC030022323A /* FakeNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E304C9A41CA9BC030022323A /* FakeNotificationService.swift */; };
+		E306C25B1E2656CC00A5D60A /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E306C25A1E2656CC00A5D60A /* GameKit.framework */; };
+		E306C25D1E2656D600A5D60A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E306C25C1E2656D600A5D60A /* StoreKit.framework */; };
+		E3076B341CA5E9D5000A8603 /* GoogleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3076B331CA5E9D5000A8603 /* GoogleSettings.swift */; };
+		E3076B351CA5E9D5000A8603 /* GoogleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3076B331CA5E9D5000A8603 /* GoogleSettings.swift */; };
+		E30CD8EE1CF6171A00BF79BA /* AppDelegateHockeyAppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30CD8ED1CF6171A00BF79BA /* AppDelegateHockeyAppExtensions.swift */; };
+		E30D4D791DAA721D002F643D /* NavigationControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D4D781DAA721D002F643D /* NavigationControllerSpy.swift */; };
+		E3128D431E0D67F4007992A8 /* MalformedBeaconUUIDError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3128D421E0D67F4007992A8 /* MalformedBeaconUUIDError.swift */; };
+		E3128D441E0D6B66007992A8 /* MalformedBeaconUUIDError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3128D421E0D67F4007992A8 /* MalformedBeaconUUIDError.swift */; };
+		E31405E01DC1035A0071DAC4 /* NavigationControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31405DF1DC1035A0071DAC4 /* NavigationControllerBuilder.swift */; };
+		E31405E21DC107F30071DAC4 /* DummyErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31405E11DC107F30071DAC4 /* DummyErrorHandler.swift */; };
+		E3163B5C1D3B09B2005FCFE4 /* FileMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B5B1D3B09B2005FCFE4 /* FileMetadata.swift */; };
+		E3163B5D1D3B09CE005FCFE4 /* FileMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B5B1D3B09B2005FCFE4 /* FileMetadata.swift */; };
+		E3163B5F1D3B0A2E005FCFE4 /* SheetDriveWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B5E1D3B0A2E005FCFE4 /* SheetDriveWrapper.swift */; };
+		E3163B601D3B0A67005FCFE4 /* SheetDriveWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B5E1D3B0A2E005FCFE4 /* SheetDriveWrapper.swift */; };
+		E3163B621D3B0A85005FCFE4 /* RemoteFileServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B611D3B0A85005FCFE4 /* RemoteFileServiceProtocol.swift */; };
+		E3163B631D3B0A85005FCFE4 /* RemoteFileServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B611D3B0A85005FCFE4 /* RemoteFileServiceProtocol.swift */; };
+		E3163B681D3BDD48005FCFE4 /* UTF8DataWriterServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B671D3BDD48005FCFE4 /* UTF8DataWriterServiceTest.swift */; };
+		E3163B6B1D3BE8F4005FCFE4 /* UTF8DataWriterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B6A1D3BE8F4005FCFE4 /* UTF8DataWriterService.swift */; };
+		E3163B6C1D3BE8F4005FCFE4 /* UTF8DataWriterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B6A1D3BE8F4005FCFE4 /* UTF8DataWriterService.swift */; };
+		E3163B6E1D3BE976005FCFE4 /* FileServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B6D1D3BE976005FCFE4 /* FileServiceTest.swift */; };
+		E3163B711D3BF009005FCFE4 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B701D3BF009005FCFE4 /* FileService.swift */; };
+		E3163B721D3BF009005FCFE4 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B701D3BF009005FCFE4 /* FileService.swift */; };
+		E3163B741D3C4B3B005FCFE4 /* SpreadsheetAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B731D3C4B3B005FCFE4 /* SpreadsheetAPITest.swift */; };
+		E3163B761D3C52C6005FCFE4 /* FakeSheetDriveWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B751D3C52C6005FCFE4 /* FakeSheetDriveWrapper.swift */; };
+		E3163B771D3C52C6005FCFE4 /* FakeSheetDriveWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B751D3C52C6005FCFE4 /* FakeSheetDriveWrapper.swift */; };
+		E3163B791D3C52EA005FCFE4 /* FakeFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B781D3C52EA005FCFE4 /* FakeFileService.swift */; };
+		E3163B7A1D3C52EA005FCFE4 /* FakeFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B781D3C52EA005FCFE4 /* FakeFileService.swift */; };
+		E3163B7C1D3C5313005FCFE4 /* SpreadsheetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B7B1D3C5313005FCFE4 /* SpreadsheetAPI.swift */; };
+		E3163B7D1D3C5313005FCFE4 /* SpreadsheetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B7B1D3C5313005FCFE4 /* SpreadsheetAPI.swift */; };
+		E3163B7F1D402C48005FCFE4 /* SpreadsheetAPIDelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3163B7E1D402C48005FCFE4 /* SpreadsheetAPIDelegateSpy.swift */; };
+		E3197EA91CB9CC4800910C8C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3197EA81CB9CC4800910C8C /* SettingsViewController.swift */; };
+		E31A0E9C1C5EA88300BD020D /* FakeESTBeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31A0E9B1C5EA88300BD020D /* FakeESTBeaconManager.swift */; };
+		E31EDEE41E246B4400A65B15 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E31EDEE31E246B4400A65B15 /* LICENSE */; };
+		E32C54991CC98E4800135073 /* BeaconAddressStoreIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C54981CC98E4800135073 /* BeaconAddressStoreIntegrationTest.swift */; };
+		E336EE8A1E06D47D00E5A628 /* FakeAppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E336EE891E06D47D00E5A628 /* FakeAppSettings.swift */; };
+		E33C2E241CC8FAAC00D77CD2 /* CSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33C2E231CC8FAAC00D77CD2 /* CSV.swift */; };
+		E33C2E261CC8FACC00D77CD2 /* String+Lines.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33C2E251CC8FACC00D77CD2 /* String+Lines.swift */; };
+		E33C2E281CC8FAE000D77CD2 /* ParserHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33C2E271CC8FAE000D77CD2 /* ParserHelpers.swift */; };
+		E33C2E2A1CC8FAF000D77CD2 /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33C2E291CC8FAF000D77CD2 /* Description.swift */; };
+		E33C2E2C1CC8FB1C00D77CD2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33C2E2B1CC8FB1C00D77CD2 /* Parser.swift */; };
+		E33C2E2D1CC91B5900D77CD2 /* CSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33C2E231CC8FAAC00D77CD2 /* CSV.swift */; };
+		E33C2E2E1CC91B5900D77CD2 /* String+Lines.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33C2E251CC8FACC00D77CD2 /* String+Lines.swift */; };
+		E33C2E2F1CC91B5900D77CD2 /* ParserHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33C2E271CC8FAE000D77CD2 /* ParserHelpers.swift */; };
+		E33C2E301CC91B5900D77CD2 /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33C2E291CC8FAF000D77CD2 /* Description.swift */; };
+		E33C2E311CC91B5900D77CD2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33C2E2B1CC8FB1C00D77CD2 /* Parser.swift */; };
+		E33F68271CF9DA2000CD3ADC /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F68261CF9DA2000CD3ADC /* GradientView.swift */; };
+		E33F68291CF9DA5800CD3ADC /* GradientView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E33F68281CF9DA5800CD3ADC /* GradientView.xib */; };
+		E33F682B1CF9F50700CD3ADC /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F682A1CF9F50700CD3ADC /* GradientLayer.swift */; };
+		E33F682D1CFA084B00CD3ADC /* UIBlurredBorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F682C1CFA084B00CD3ADC /* UIBlurredBorderedButton.swift */; };
+		E341AA9D1D3990E8004E0AEC /* SheetDriveWrapperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E341AA9C1D3990E8004E0AEC /* SheetDriveWrapperTest.swift */; };
+		E341C86B1C76820800D80FD6 /* IBeaconEventSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E341C86A1C76820800D80FD6 /* IBeaconEventSimulator.swift */; };
+		E34CE0091E3BE1DF00BF549B /* FreeTimeslotCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34CE0081E3BE1DF00BF549B /* FreeTimeslotCalculator.swift */; };
+		E34CE00D1E3BE2B200BF549B /* FreeTimeslotCalculatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34CE00C1E3BE2B200BF549B /* FreeTimeslotCalculatorTest.swift */; };
+		E34CE00E1E3C0A7F00BF549B /* FreeTimeslotCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34CE0081E3BE1DF00BF549B /* FreeTimeslotCalculator.swift */; };
+		E34CE0101E3CC26000BF549B /* CalendarEventBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34CE00F1E3CC26000BF549B /* CalendarEventBuilder.swift */; };
+		E34CE0121E3CC27900BF549B /* RoomScheduleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34CE0111E3CC27900BF549B /* RoomScheduleBuilder.swift */; };
+		E34CE0151E3CC3B000BF549B /* FreeTimeslot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34CE0141E3CC3B000BF549B /* FreeTimeslot.swift */; };
+		E34CE0161E3CC3B000BF549B /* FreeTimeslot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34CE0141E3CC3B000BF549B /* FreeTimeslot.swift */; };
+		E359449E1CA9AC2200E1F1A2 /* CalendarClientUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E359449D1CA9AC2200E1F1A2 /* CalendarClientUnitTest.swift */; };
+		E35944A21CA9B6D500E1F1A2 /* FakeGoogleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35944A11CA9B6D500E1F1A2 /* FakeGoogleSettings.swift */; };
+		E35F58E01B07731D003D04DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35F58DF1B07731D003D04DB /* AppDelegate.swift */; };
+		E3600D761CC926A00063AC48 /* BeaconAddressMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3600D751CC926A00063AC48 /* BeaconAddressMapper.swift */; };
+		E3600D781CC9285F0063AC48 /* BeaconAddressMapperUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3600D771CC9285F0063AC48 /* BeaconAddressMapperUnitTest.swift */; };
+		E3600D791CC928CA0063AC48 /* OfficeAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E404931CC7942100FE2BB9 /* OfficeAddress.swift */; };
+		E3600D7A1CC929F50063AC48 /* BeaconAddressMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3600D751CC926A00063AC48 /* BeaconAddressMapper.swift */; };
+		E3634BCB1E0603C20087B01B /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3634BCA1E0603C20087B01B /* AppSettings.swift */; };
+		E3634BCD1E0603FD0087B01B /* AppSettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3634BCC1E0603FD0087B01B /* AppSettingsTest.swift */; };
+		E3634BCE1E0604010087B01B /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3634BCA1E0603C20087B01B /* AppSettings.swift */; };
+		E3649EE01D7459E6003E1F51 /* ErrorHandlingServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3649EDF1D7459E6003E1F51 /* ErrorHandlingServiceProtocol.swift */; };
+		E3649EE41D745C99003E1F51 /* GoogleAuthorizationErrorHandlerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3649EE31D745C99003E1F51 /* GoogleAuthorizationErrorHandlerTest.swift */; };
+		E366817B1D07918A00B88DEA /* BluetoothController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E366817A1D07918A00B88DEA /* BluetoothController.swift */; };
+		E366817D1D07943C00B88DEA /* ViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E366817C1D07943C00B88DEA /* ViewControllerSpy.swift */; };
+		E366817F1D07946B00B88DEA /* BluetoothControllerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E366817E1D07946B00B88DEA /* BluetoothControllerUnitTest.swift */; };
+		E36681801D0794E200B88DEA /* BluetoothController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E366817A1D07918A00B88DEA /* BluetoothController.swift */; };
+		E36681821D0795A500B88DEA /* CBPeripheralManager Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36681811D0795A500B88DEA /* CBPeripheralManager Stub.swift */; };
+		E36737C21CF8805500C2FD5A /* RoomScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36737C11CF8805500C2FD5A /* RoomScheduleViewModel.swift */; };
+		E36737C71CF8992D00C2FD5A /* RoomScheduleViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36737C61CF8992D00C2FD5A /* RoomScheduleViewModelTest.swift */; };
+		E36737C81CF899BF00C2FD5A /* RoomScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36737C11CF8805500C2FD5A /* RoomScheduleViewModel.swift */; };
+		E36737C91CF89E0700C2FD5A /* AppColours.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BE944E1C33FFB5005D6FE0 /* AppColours.swift */; };
+		E36737CB1CF8F2FD00C2FD5A /* LocationServiceAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36737CA1CF8F2FD00C2FD5A /* LocationServiceAuthController.swift */; };
+		E36737CC1CF900CC00C2FD5A /* LocationServiceAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36737CA1CF8F2FD00C2FD5A /* LocationServiceAuthController.swift */; };
+		E36737CE1CF9034500C2FD5A /* LocationServiceAuthzControllerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36737CD1CF9034500C2FD5A /* LocationServiceAuthzControllerUnitTest.swift */; };
+		E36737D11CF906D100C2FD5A /* CLLocationManagerStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36737D01CF906D100C2FD5A /* CLLocationManagerStub.swift */; };
+		E368CE691D1375F300BDB9A8 /* ErrorHandlerAlertUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368CE681D1375F300BDB9A8 /* ErrorHandlerAlertUnitTest.swift */; };
+		E368CE6A1D13760500BDB9A8 /* ErrorHandlerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E2F6771D10EC590063A4AA /* ErrorHandlerAlert.swift */; };
+		E36981C71CC773610027C1D7 /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36981C61CC773610027C1D7 /* FileUtils.swift */; };
+		E36AA8861C14E00200DA4A9D /* OfficeRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36AA8851C14E00200DA4A9D /* OfficeRoom.swift */; };
+		E36AA8891C14EF0300DA4A9D /* OfficeRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36AA8851C14E00200DA4A9D /* OfficeRoom.swift */; };
+		E37047221CCCF5D600250178 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37047211CCCF5D600250178 /* BeaconManager.swift */; };
+		E3761B3A1C79F06C00A6471A /* UserAuthorisationRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3761B391C79F06C00A6471A /* UserAuthorisationRequests.swift */; };
+		E3761B421C7A45FE00A6471A /* BackgroundBeaconService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3761B411C7A45FE00A6471A /* BackgroundBeaconService.swift */; };
+		E3761B441C7A470D00A6471A /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3761B431C7A470D00A6471A /* LocalNotificationService.swift */; };
+		E3761B491C7A479E00A6471A /* BackgroundBeaconServiceUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3761B481C7A479E00A6471A /* BackgroundBeaconServiceUnitTest.swift */; };
+		E3761B4A1C7A47D800A6471A /* BackgroundBeaconService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3761B411C7A45FE00A6471A /* BackgroundBeaconService.swift */; };
+		E3761B4B1C7A47DB00A6471A /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3761B431C7A470D00A6471A /* LocalNotificationService.swift */; };
+		E3761B4C1C7A4ACD00A6471A /* TWBeaconServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3761B3F1C7A452900A6471A /* TWBeaconServiceProtocol.swift */; };
+		E3761B4D1C7A4AF700A6471A /* TWBeaconServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3761B3F1C7A452900A6471A /* TWBeaconServiceProtocol.swift */; };
+		E376C4B11CCD42B9008AE799 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37047211CCCF5D600250178 /* BeaconManager.swift */; };
+		E37A35161CB8618B00AD10DE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37A35151CB8618B00AD10DE /* LoginViewController.swift */; };
+		E37A35191CB92BA500AD10DE /* UIBorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37A35181CB92BA500AD10DE /* UIBorderedButton.swift */; };
+		E37A351B1CB933E600AD10DE /* UIBlurredLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37A351A1CB933E600AD10DE /* UIBlurredLabel.swift */; };
+		E38129051DE9B6A3007ABEA1 /* LogoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38129041DE9B6A3007ABEA1 /* LogoutController.swift */; };
+		E38129071DE9B83A007ABEA1 /* LogoutControllerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38129061DE9B83A007ABEA1 /* LogoutControllerUnitTest.swift */; };
+		E38129081DE9B876007ABEA1 /* LogoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38129041DE9B6A3007ABEA1 /* LogoutController.swift */; };
+		E381290A1DE9BBA3007ABEA1 /* FileServiceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38129091DE9BBA3007ABEA1 /* FileServiceSpy.swift */; };
+		E3826D631C5ECF0200F618A7 /* CLBeaconStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3826D621C5ECF0200F618A7 /* CLBeaconStub.swift */; };
+		E384A7991DDFC9990025F087 /* RoomScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E384A7981DDFC9990025F087 /* RoomScheduleViewController.swift */; };
+		E38865E61C78B3370026CC64 /* TWBeaconServiceUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38865E51C78B3370026CC64 /* TWBeaconServiceUnitTest.swift */; };
+		E38865E91C78F5420026CC64 /* CLBeaconRegionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38865E81C78F5420026CC64 /* CLBeaconRegionExtension.swift */; };
+		E38865EB1C78F8860026CC64 /* CLBeaconRegionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38865E81C78F5420026CC64 /* CLBeaconRegionExtension.swift */; };
+		E39581341C18F3F700383010 /* Wiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39581331C18F3F700383010 /* Wiring.swift */; };
+		E39581361C18F6DF00383010 /* BeaconManagerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39581351C18F6DF00383010 /* BeaconManagerUnitTest.swift */; };
+		E39581371C18F9BE00383010 /* Wiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39581331C18F3F700383010 /* Wiring.swift */; };
+		E39581381C18FDBA00383010 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B979711B07A31A004FF250 /* CoreLocation.framework */; };
+		E39944731CC697F700344681 /* GoogleFakeServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39944721CC697F700344681 /* GoogleFakeServices.swift */; };
+		E39A6ABA1C81D35D001A5588 /* AppDelegateBeaconManagerHandlerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39A6AB91C81D35D001A5588 /* AppDelegateBeaconManagerHandlerExtensions.swift */; };
+		E39DA32E1CA7286000BAD76D /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D58EEC1CA72788007F6860 /* CalendarEvent.swift */; };
+		E39DA3301CA81C9B00BAD76D /* CalendarQueryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39DA32F1CA81C9B00BAD76D /* CalendarQueryFactory.swift */; };
+		E39DA3311CA81C9B00BAD76D /* CalendarQueryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39DA32F1CA81C9B00BAD76D /* CalendarQueryFactory.swift */; };
+		E39DA3341CA81CCC00BAD76D /* CalendarQueryFactoryUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39DA3331CA81CCC00BAD76D /* CalendarQueryFactoryUnitTest.swift */; };
+		E3A00D221DBE5A1D00E926DE /* NSErrorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A00D211DBE5A1D00E926DE /* NSErrorBuilder.swift */; };
+		E3A54F9D1CA96372008B0343 /* CalendarEventUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A54F9C1CA96372008B0343 /* CalendarEventUnitTest.swift */; };
+		E3A54F9F1CA96FC3008B0343 /* GTLEventsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A54F9E1CA96FC3008B0343 /* GTLEventsBuilder.swift */; };
+		E3A569BA1DE85E26001AE96A /* NSThreadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A569B91DE85E26001AE96A /* NSThreadExtension.swift */; };
+		E3A828671DDF1ACE00010896 /* MainV1.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3A828691DDF1ACE00010896 /* MainV1.storyboard */; };
+		E3AC8D3E1C832F0900E1FF70 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3AC8D3D1C832F0900E1FF70 /* Media.xcassets */; };
+		E3B37E7A1C2C9B0D00495C7B /* TWBeaconService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B37E791C2C9B0D00495C7B /* TWBeaconService.swift */; };
+		E3B37E7B1C2C9B0D00495C7B /* TWBeaconService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B37E791C2C9B0D00495C7B /* TWBeaconService.swift */; };
+		E3B37E7D1C2CC72700495C7B /* TWBeaconServiceIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B37E7C1C2CC72700495C7B /* TWBeaconServiceIntegrationTest.swift */; };
+		E3B49C351CA56AF900C9D97F /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B49C341CA56AF900C9D97F /* AuthController.swift */; };
+		E3B49C361CA5777200C9D97F /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B49C341CA56AF900C9D97F /* AuthController.swift */; };
+		E3B4B5B71CA6A8350057BB4A /* AuthControllerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4B5B61CA6A8350057BB4A /* AuthControllerUnitTest.swift */; };
+		E3B4B5B91CA7183B0057BB4A /* CalendarEventsProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4B5B81CA7183B0057BB4A /* CalendarEventsProcessor.swift */; };
+		E3B4B5BA1CA7183B0057BB4A /* CalendarEventsProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4B5B81CA7183B0057BB4A /* CalendarEventsProcessor.swift */; };
+		E3B4B5BC1CA71A960057BB4A /* CalendarEventsProcessorUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4B5BB1CA71A960057BB4A /* CalendarEventsProcessorUnitTest.swift */; };
+		E3B9796F1B078AFD004FF250 /* CLBeaconRegionStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9796E1B078AFD004FF250 /* CLBeaconRegionStub.swift */; };
+		E3B979721B07A31A004FF250 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B979711B07A31A004FF250 /* CoreLocation.framework */; };
+		E3B979741B07A320004FF250 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B979731B07A320004FF250 /* CoreBluetooth.framework */; };
+		E3BE944F1C33FFB5005D6FE0 /* AppColours.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BE944E1C33FFB5005D6FE0 /* AppColours.swift */; };
+		E3CA95EC1D77320300443702 /* ErrorHandlingServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3649EDF1D7459E6003E1F51 /* ErrorHandlingServiceProtocol.swift */; };
+		E3CA95EE1D7737ED00443702 /* AuthControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CA95ED1D7737ED00443702 /* AuthControllerSpy.swift */; };
+		E3CA95F01D773C1900443702 /* GoogleAuthorizationErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CA95EF1D773C1900443702 /* GoogleAuthorizationErrorHandler.swift */; };
+		E3CA95F11D773C1900443702 /* GoogleAuthorizationErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CA95EF1D773C1900443702 /* GoogleAuthorizationErrorHandler.swift */; };
+		E3D58E7D1CC421E2009C0BCC /* BeaconAddressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D58E7C1CC421E2009C0BCC /* BeaconAddressStore.swift */; };
+		E3D58E7E1CC42539009C0BCC /* BeaconAddressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D58E7C1CC421E2009C0BCC /* BeaconAddressStore.swift */; };
+		E3D58E881CC51A03009C0BCC /* InsertEventRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D58E871CC51A03009C0BCC /* InsertEventRequest.swift */; };
+		E3D58E891CC51A18009C0BCC /* InsertEventRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D58E871CC51A03009C0BCC /* InsertEventRequest.swift */; };
+		E3D58EED1CA72788007F6860 /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D58EEC1CA72788007F6860 /* CalendarEvent.swift */; };
+		E3D7FF5D1CF661F600A17578 /* AppUpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D7FF5C1CF661F600A17578 /* AppUpdateController.swift */; };
+		E3D7FF5E1CF661F900A17578 /* AppUpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D7FF5C1CF661F600A17578 /* AppUpdateController.swift */; };
+		E3D7FF601CF6620C00A17578 /* AppUpdateControllerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D7FF5F1CF6620C00A17578 /* AppUpdateControllerUnitTest.swift */; };
+		E3D7FF621CF6632600A17578 /* UpdateManagerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D7FF611CF6632600A17578 /* UpdateManagerSpy.swift */; };
+		E3DBD8501C947C9800BDB79C /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DBD84F1C947C9800BDB79C /* CalendarService.swift */; };
+		E3DBD8511C947C9800BDB79C /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DBD84F1C947C9800BDB79C /* CalendarService.swift */; };
+		E3DBD8551C947DC100BDB79C /* CalendarServiceIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DBD8541C947DC100BDB79C /* CalendarServiceIntegrationTest.swift */; };
+		E3DBD8571C947F6D00BDB79C /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DBD8561C947F6D00BDB79C /* Schedule.swift */; };
+		E3DBD8581C947F9500BDB79C /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DBD8561C947F6D00BDB79C /* Schedule.swift */; };
+		E3DBD85E1C94839D00BDB79C /* CalendarClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DBD85D1C94839D00BDB79C /* CalendarClient.swift */; };
+		E3DBD85F1C94839D00BDB79C /* CalendarClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DBD85D1C94839D00BDB79C /* CalendarClient.swift */; };
+		E3DBD8611C94942400BDB79C /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DBD8601C94942400BDB79C /* NSDateExtension.swift */; };
+		E3DBD8621C94942400BDB79C /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DBD8601C94942400BDB79C /* NSDateExtension.swift */; };
+		E3E18ABB1DCA6ED000E70333 /* ErrorHandlerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E18ABA1DCA6ED000E70333 /* ErrorHandlerSpy.swift */; };
+		E3E2F6781D10EC590063A4AA /* ErrorHandlerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E2F6771D10EC590063A4AA /* ErrorHandlerAlert.swift */; };
+		E3E404941CC7942100FE2BB9 /* OfficeAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E404931CC7942100FE2BB9 /* OfficeAddress.swift */; };
+		E3E404961CC7973E00FE2BB9 /* BeaconAddressLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E404951CC7973E00FE2BB9 /* BeaconAddressLoader.swift */; };
+		E3E404981CC79A6000FE2BB9 /* BeaconAddressLoaderIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E404971CC79A6000FE2BB9 /* BeaconAddressLoaderIntegrationTest.swift */; };
+		E3E404991CC79A8900FE2BB9 /* BeaconAddressLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E404951CC7973E00FE2BB9 /* BeaconAddressLoader.swift */; };
+		E3E540B31D438A810085B594 /* SpreadsheetAPIIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E540B21D438A810085B594 /* SpreadsheetAPIIntegrationTest.swift */; };
+		E3EABD241C6F5E76001994B4 /* BeaconEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEB8F5F1C681AD500DC623E /* BeaconEventDelegate.swift */; };
+		E3ECDE8B1CA8782C002762E6 /* RoomScheduleCoordinatorUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECDE8A1CA8782C002762E6 /* RoomScheduleCoordinatorUnitTest.swift */; };
+		E3ECDE8D1CA8786B002762E6 /* RoomScheduleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECDE8C1CA8786B002762E6 /* RoomScheduleCoordinator.swift */; };
+		E3ECDE8E1CA8786B002762E6 /* RoomScheduleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECDE8C1CA8786B002762E6 /* RoomScheduleCoordinator.swift */; };
+		E3F5AC101D5F42A90005C4A1 /* ServiceDriveMockHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F5AC0F1D5F42A90005C4A1 /* ServiceDriveMockHelpers.swift */; };
+		E3F7A4371DDF2AD50049DE9B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7A4361DDF2AD50049DE9B /* MainViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E35F58F01B07731D003D04DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E35F58D21B07731D003D04DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E35F58D91B07731D003D04DB;
+			remoteInfo = iBOfficeBeacon;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		031BDF8FEBEC7AA0C81D16F3 /* Pods-iBOfficeBeacon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iBOfficeBeacon.release.xcconfig"; path = "Pods/Target Support Files/Pods-iBOfficeBeacon/Pods-iBOfficeBeacon.release.xcconfig"; sourceTree = "<group>"; };
+		26C728BD076C8C7E4F51B52C /* libPods-iBOfficeBeacon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iBOfficeBeacon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		50905EC6D56D002F300D108B /* Pods-iBOfficeBeaconTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iBOfficeBeaconTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-iBOfficeBeaconTests/Pods-iBOfficeBeaconTests.beta.xcconfig"; sourceTree = "<group>"; };
+		68070009C9D60BB87813D1E1 /* Pods-iBOfficeBeaconTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iBOfficeBeaconTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iBOfficeBeaconTests/Pods-iBOfficeBeaconTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6EEB8F5F1C681AD500DC623E /* BeaconEventDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconEventDelegate.swift; sourceTree = "<group>"; };
+		6EEC0CB51C67E83300ADA7AE /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		70D4B8BE21812288A40F8F8F /* libPods-iBOfficeBeacon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iBOfficeBeacon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8789170B7A00812EA3216033 /* Pods-iBOfficeBeacon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iBOfficeBeacon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iBOfficeBeacon/Pods-iBOfficeBeacon.debug.xcconfig"; sourceTree = "<group>"; };
+		883C7C582B8FFEE3E84B2144 /* libPods-iBOfficeBeaconTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iBOfficeBeaconTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90F6EF50CA6268AF4884E716 /* Pods-iBOfficeBeacon.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iBOfficeBeacon.beta.xcconfig"; path = "Pods/Target Support Files/Pods-iBOfficeBeacon/Pods-iBOfficeBeacon.beta.xcconfig"; sourceTree = "<group>"; };
+		ABF0BADF2AFCCA055F4BD69B /* libPods-iBOfficeBeaconTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iBOfficeBeaconTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD76D6A8031FEE8C0FE72754 /* Pods-iBOfficeBeaconTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iBOfficeBeaconTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iBOfficeBeaconTests/Pods-iBOfficeBeaconTests.release.xcconfig"; sourceTree = "<group>"; };
+		E3006EB71CFC45ED00EF1B23 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E304C9A41CA9BC030022323A /* FakeNotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNotificationService.swift; sourceTree = "<group>"; };
+		E306C25A1E2656CC00A5D60A /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		E306C25C1E2656D600A5D60A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		E3076B331CA5E9D5000A8603 /* GoogleSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleSettings.swift; sourceTree = "<group>"; };
+		E30CD8ED1CF6171A00BF79BA /* AppDelegateHockeyAppExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateHockeyAppExtensions.swift; sourceTree = "<group>"; };
+		E30D4D781DAA721D002F643D /* NavigationControllerSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerSpy.swift; sourceTree = "<group>"; };
+		E3128D421E0D67F4007992A8 /* MalformedBeaconUUIDError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MalformedBeaconUUIDError.swift; sourceTree = "<group>"; };
+		E31405DF1DC1035A0071DAC4 /* NavigationControllerBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerBuilder.swift; sourceTree = "<group>"; };
+		E31405E11DC107F30071DAC4 /* DummyErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyErrorHandler.swift; sourceTree = "<group>"; };
+		E3163B5B1D3B09B2005FCFE4 /* FileMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMetadata.swift; sourceTree = "<group>"; };
+		E3163B5E1D3B0A2E005FCFE4 /* SheetDriveWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetDriveWrapper.swift; sourceTree = "<group>"; };
+		E3163B611D3B0A85005FCFE4 /* RemoteFileServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteFileServiceProtocol.swift; sourceTree = "<group>"; };
+		E3163B671D3BDD48005FCFE4 /* UTF8DataWriterServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTF8DataWriterServiceTest.swift; sourceTree = "<group>"; };
+		E3163B6A1D3BE8F4005FCFE4 /* UTF8DataWriterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTF8DataWriterService.swift; sourceTree = "<group>"; };
+		E3163B6D1D3BE976005FCFE4 /* FileServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileServiceTest.swift; sourceTree = "<group>"; };
+		E3163B701D3BF009005FCFE4 /* FileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
+		E3163B731D3C4B3B005FCFE4 /* SpreadsheetAPITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpreadsheetAPITest.swift; sourceTree = "<group>"; };
+		E3163B751D3C52C6005FCFE4 /* FakeSheetDriveWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeSheetDriveWrapper.swift; sourceTree = "<group>"; };
+		E3163B781D3C52EA005FCFE4 /* FakeFileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeFileService.swift; sourceTree = "<group>"; };
+		E3163B7B1D3C5313005FCFE4 /* SpreadsheetAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpreadsheetAPI.swift; sourceTree = "<group>"; };
+		E3163B7E1D402C48005FCFE4 /* SpreadsheetAPIDelegateSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpreadsheetAPIDelegateSpy.swift; sourceTree = "<group>"; };
+		E3197EA81CB9CC4800910C8C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		E31A0E9B1C5EA88300BD020D /* FakeESTBeaconManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeESTBeaconManager.swift; sourceTree = "<group>"; };
+		E31EDEE31E246B4400A65B15 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		E32C54981CC98E4800135073 /* BeaconAddressStoreIntegrationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconAddressStoreIntegrationTest.swift; sourceTree = "<group>"; };
+		E336EE891E06D47D00E5A628 /* FakeAppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeAppSettings.swift; sourceTree = "<group>"; };
+		E338DF871B07AA0B00DF3286 /* ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
+		E33C2E231CC8FAAC00D77CD2 /* CSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSV.swift; sourceTree = "<group>"; };
+		E33C2E251CC8FACC00D77CD2 /* String+Lines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Lines.swift"; sourceTree = "<group>"; };
+		E33C2E271CC8FAE000D77CD2 /* ParserHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserHelpers.swift; sourceTree = "<group>"; };
+		E33C2E291CC8FAF000D77CD2 /* Description.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
+		E33C2E2B1CC8FB1C00D77CD2 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		E33F68261CF9DA2000CD3ADC /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		E33F68281CF9DA5800CD3ADC /* GradientView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GradientView.xib; sourceTree = "<group>"; };
+		E33F682A1CF9F50700CD3ADC /* GradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
+		E33F682C1CFA084B00CD3ADC /* UIBlurredBorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBlurredBorderedButton.swift; sourceTree = "<group>"; };
+		E341AA9C1D3990E8004E0AEC /* SheetDriveWrapperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetDriveWrapperTest.swift; sourceTree = "<group>"; };
+		E341C86A1C76820800D80FD6 /* IBeaconEventSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBeaconEventSimulator.swift; sourceTree = "<group>"; };
+		E34CE0081E3BE1DF00BF549B /* FreeTimeslotCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeTimeslotCalculator.swift; sourceTree = "<group>"; };
+		E34CE00C1E3BE2B200BF549B /* FreeTimeslotCalculatorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeTimeslotCalculatorTest.swift; sourceTree = "<group>"; };
+		E34CE00F1E3CC26000BF549B /* CalendarEventBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventBuilder.swift; sourceTree = "<group>"; };
+		E34CE0111E3CC27900BF549B /* RoomScheduleBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomScheduleBuilder.swift; sourceTree = "<group>"; };
+		E34CE0141E3CC3B000BF549B /* FreeTimeslot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeTimeslot.swift; sourceTree = "<group>"; };
+		E359449D1CA9AC2200E1F1A2 /* CalendarClientUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarClientUnitTest.swift; sourceTree = "<group>"; };
+		E35944A11CA9B6D500E1F1A2 /* FakeGoogleSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeGoogleSettings.swift; sourceTree = "<group>"; };
+		E35F58DA1B07731D003D04DB /* iBOfficeBeacon.dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBOfficeBeacon.dev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E35F58DE1B07731D003D04DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E35F58DF1B07731D003D04DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E35F58EF1B07731D003D04DB /* iBOfficeBeaconTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iBOfficeBeaconTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E35F58F41B07731D003D04DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3600D751CC926A00063AC48 /* BeaconAddressMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconAddressMapper.swift; sourceTree = "<group>"; };
+		E3600D771CC9285F0063AC48 /* BeaconAddressMapperUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconAddressMapperUnitTest.swift; sourceTree = "<group>"; };
+		E3634BCA1E0603C20087B01B /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		E3634BCC1E0603FD0087B01B /* AppSettingsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettingsTest.swift; sourceTree = "<group>"; };
+		E3649EDF1D7459E6003E1F51 /* ErrorHandlingServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandlingServiceProtocol.swift; sourceTree = "<group>"; };
+		E3649EE31D745C99003E1F51 /* GoogleAuthorizationErrorHandlerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAuthorizationErrorHandlerTest.swift; sourceTree = "<group>"; };
+		E366817A1D07918A00B88DEA /* BluetoothController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothController.swift; sourceTree = "<group>"; };
+		E366817C1D07943C00B88DEA /* ViewControllerSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSpy.swift; sourceTree = "<group>"; };
+		E366817E1D07946B00B88DEA /* BluetoothControllerUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothControllerUnitTest.swift; sourceTree = "<group>"; };
+		E36681811D0795A500B88DEA /* CBPeripheralManager Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CBPeripheralManager Stub.swift"; sourceTree = "<group>"; };
+		E36737C11CF8805500C2FD5A /* RoomScheduleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomScheduleViewModel.swift; sourceTree = "<group>"; };
+		E36737C61CF8992D00C2FD5A /* RoomScheduleViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomScheduleViewModelTest.swift; sourceTree = "<group>"; };
+		E36737CA1CF8F2FD00C2FD5A /* LocationServiceAuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServiceAuthController.swift; sourceTree = "<group>"; };
+		E36737CD1CF9034500C2FD5A /* LocationServiceAuthzControllerUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServiceAuthzControllerUnitTest.swift; sourceTree = "<group>"; };
+		E36737D01CF906D100C2FD5A /* CLLocationManagerStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLocationManagerStub.swift; sourceTree = "<group>"; };
+		E368CE681D1375F300BDB9A8 /* ErrorHandlerAlertUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandlerAlertUnitTest.swift; sourceTree = "<group>"; };
+		E36981C61CC773610027C1D7 /* FileUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
+		E36AA8851C14E00200DA4A9D /* OfficeRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficeRoom.swift; sourceTree = "<group>"; };
+		E37047211CCCF5D600250178 /* BeaconManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
+		E3761B391C79F06C00A6471A /* UserAuthorisationRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthorisationRequests.swift; sourceTree = "<group>"; };
+		E3761B3F1C7A452900A6471A /* TWBeaconServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWBeaconServiceProtocol.swift; sourceTree = "<group>"; };
+		E3761B411C7A45FE00A6471A /* BackgroundBeaconService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundBeaconService.swift; sourceTree = "<group>"; };
+		E3761B431C7A470D00A6471A /* LocalNotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
+		E3761B481C7A479E00A6471A /* BackgroundBeaconServiceUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundBeaconServiceUnitTest.swift; sourceTree = "<group>"; };
+		E37A35151CB8618B00AD10DE /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E37A35181CB92BA500AD10DE /* UIBorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBorderedButton.swift; sourceTree = "<group>"; };
+		E37A351A1CB933E600AD10DE /* UIBlurredLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBlurredLabel.swift; sourceTree = "<group>"; };
+		E38129041DE9B6A3007ABEA1 /* LogoutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutController.swift; sourceTree = "<group>"; };
+		E38129061DE9B83A007ABEA1 /* LogoutControllerUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutControllerUnitTest.swift; sourceTree = "<group>"; };
+		E38129091DE9BBA3007ABEA1 /* FileServiceSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileServiceSpy.swift; sourceTree = "<group>"; };
+		E3826D621C5ECF0200F618A7 /* CLBeaconStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBeaconStub.swift; sourceTree = "<group>"; };
+		E384A7981DDFC9990025F087 /* RoomScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomScheduleViewController.swift; sourceTree = "<group>"; };
+		E38865E51C78B3370026CC64 /* TWBeaconServiceUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWBeaconServiceUnitTest.swift; sourceTree = "<group>"; };
+		E38865E81C78F5420026CC64 /* CLBeaconRegionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBeaconRegionExtension.swift; sourceTree = "<group>"; };
+		E39581331C18F3F700383010 /* Wiring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wiring.swift; sourceTree = "<group>"; };
+		E39581351C18F6DF00383010 /* BeaconManagerUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconManagerUnitTest.swift; sourceTree = "<group>"; };
+		E39944721CC697F700344681 /* GoogleFakeServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleFakeServices.swift; sourceTree = "<group>"; };
+		E39A6AB91C81D35D001A5588 /* AppDelegateBeaconManagerHandlerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateBeaconManagerHandlerExtensions.swift; sourceTree = "<group>"; };
+		E39DA32F1CA81C9B00BAD76D /* CalendarQueryFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarQueryFactory.swift; sourceTree = "<group>"; };
+		E39DA3331CA81CCC00BAD76D /* CalendarQueryFactoryUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarQueryFactoryUnitTest.swift; sourceTree = "<group>"; };
+		E3A00D211DBE5A1D00E926DE /* NSErrorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSErrorBuilder.swift; sourceTree = "<group>"; };
+		E3A54F9C1CA96372008B0343 /* CalendarEventUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventUnitTest.swift; sourceTree = "<group>"; };
+		E3A54F9E1CA96FC3008B0343 /* GTLEventsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTLEventsBuilder.swift; sourceTree = "<group>"; };
+		E3A569B91DE85E26001AE96A /* NSThreadExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSThreadExtension.swift; sourceTree = "<group>"; };
+		E3A828681DDF1ACE00010896 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainV1.storyboard; sourceTree = "<group>"; };
+		E3AC8D3D1C832F0900E1FF70 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		E3B37E791C2C9B0D00495C7B /* TWBeaconService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWBeaconService.swift; sourceTree = "<group>"; };
+		E3B37E7C1C2CC72700495C7B /* TWBeaconServiceIntegrationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWBeaconServiceIntegrationTest.swift; sourceTree = "<group>"; };
+		E3B49C341CA56AF900C9D97F /* AuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
+		E3B4B5B61CA6A8350057BB4A /* AuthControllerUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthControllerUnitTest.swift; sourceTree = "<group>"; };
+		E3B4B5B81CA7183B0057BB4A /* CalendarEventsProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventsProcessor.swift; sourceTree = "<group>"; };
+		E3B4B5BB1CA71A960057BB4A /* CalendarEventsProcessorUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventsProcessorUnitTest.swift; sourceTree = "<group>"; };
+		E3B9796E1B078AFD004FF250 /* CLBeaconRegionStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBeaconRegionStub.swift; sourceTree = "<group>"; };
+		E3B979701B07A20C004FF250 /* ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
+		E3B979711B07A31A004FF250 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E3B979731B07A320004FF250 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		E3BE944E1C33FFB5005D6FE0 /* AppColours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColours.swift; sourceTree = "<group>"; };
+		E3CA95ED1D7737ED00443702 /* AuthControllerSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthControllerSpy.swift; sourceTree = "<group>"; };
+		E3CA95EF1D773C1900443702 /* GoogleAuthorizationErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAuthorizationErrorHandler.swift; sourceTree = "<group>"; };
+		E3D58E7C1CC421E2009C0BCC /* BeaconAddressStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconAddressStore.swift; sourceTree = "<group>"; };
+		E3D58E871CC51A03009C0BCC /* InsertEventRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertEventRequest.swift; sourceTree = "<group>"; };
+		E3D58EEC1CA72788007F6860 /* CalendarEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
+		E3D7FF5C1CF661F600A17578 /* AppUpdateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUpdateController.swift; sourceTree = "<group>"; };
+		E3D7FF5F1CF6620C00A17578 /* AppUpdateControllerUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUpdateControllerUnitTest.swift; sourceTree = "<group>"; };
+		E3D7FF611CF6632600A17578 /* UpdateManagerSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateManagerSpy.swift; sourceTree = "<group>"; };
+		E3DBD84F1C947C9800BDB79C /* CalendarService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
+		E3DBD8541C947DC100BDB79C /* CalendarServiceIntegrationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarServiceIntegrationTest.swift; sourceTree = "<group>"; };
+		E3DBD8561C947F6D00BDB79C /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		E3DBD85D1C94839D00BDB79C /* CalendarClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarClient.swift; sourceTree = "<group>"; };
+		E3DBD8601C94942400BDB79C /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtension.swift; sourceTree = "<group>"; };
+		E3E18ABA1DCA6ED000E70333 /* ErrorHandlerSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandlerSpy.swift; sourceTree = "<group>"; };
+		E3E2F6771D10EC590063A4AA /* ErrorHandlerAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandlerAlert.swift; sourceTree = "<group>"; };
+		E3E404931CC7942100FE2BB9 /* OfficeAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficeAddress.swift; sourceTree = "<group>"; };
+		E3E404951CC7973E00FE2BB9 /* BeaconAddressLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconAddressLoader.swift; sourceTree = "<group>"; };
+		E3E404971CC79A6000FE2BB9 /* BeaconAddressLoaderIntegrationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconAddressLoaderIntegrationTest.swift; sourceTree = "<group>"; };
+		E3E540B21D438A810085B594 /* SpreadsheetAPIIntegrationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpreadsheetAPIIntegrationTest.swift; sourceTree = "<group>"; };
+		E3ECDE8A1CA8782C002762E6 /* RoomScheduleCoordinatorUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomScheduleCoordinatorUnitTest.swift; sourceTree = "<group>"; };
+		E3ECDE8C1CA8786B002762E6 /* RoomScheduleCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomScheduleCoordinator.swift; sourceTree = "<group>"; };
+		E3F5AC0F1D5F42A90005C4A1 /* ServiceDriveMockHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceDriveMockHelpers.swift; sourceTree = "<group>"; };
+		E3F7A4361DDF2AD50049DE9B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E35F58D71B07731D003D04DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3B979741B07A320004FF250 /* CoreBluetooth.framework in Frameworks */,
+				E3B979721B07A31A004FF250 /* CoreLocation.framework in Frameworks */,
+				217E22F051FF18643A380DBF /* libPods-iBOfficeBeacon.a in Frameworks */,
+				E306C25D1E2656D600A5D60A /* StoreKit.framework in Frameworks */,
+				CD6B7ABF6EFCEB25C026BD12 /* libPods-iBOfficeBeacon.a in Frameworks */,
+				E306C25B1E2656CC00A5D60A /* GameKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E35F58EC1B07731D003D04DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E39581381C18FDBA00383010 /* CoreLocation.framework in Frameworks */,
+				DBABAA0DA416E30CD4208885 /* libPods-iBOfficeBeaconTests.a in Frameworks */,
+				1DBF1D440457430C3B0F361F /* libPods-iBOfficeBeaconTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04AE1D0801895CBFD90E1077 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E306C25C1E2656D600A5D60A /* StoreKit.framework */,
+				E306C25A1E2656CC00A5D60A /* GameKit.framework */,
+				E3B979731B07A320004FF250 /* CoreBluetooth.framework */,
+				E3B979711B07A31A004FF250 /* CoreLocation.framework */,
+				70D4B8BE21812288A40F8F8F /* libPods-iBOfficeBeacon.a */,
+				ABF0BADF2AFCCA055F4BD69B /* libPods-iBOfficeBeaconTests.a */,
+				26C728BD076C8C7E4F51B52C /* libPods-iBOfficeBeacon.a */,
+				883C7C582B8FFEE3E84B2144 /* libPods-iBOfficeBeaconTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		162FC3BA713BC622CB1B96B8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8789170B7A00812EA3216033 /* Pods-iBOfficeBeacon.debug.xcconfig */,
+				90F6EF50CA6268AF4884E716 /* Pods-iBOfficeBeacon.beta.xcconfig */,
+				031BDF8FEBEC7AA0C81D16F3 /* Pods-iBOfficeBeacon.release.xcconfig */,
+				68070009C9D60BB87813D1E1 /* Pods-iBOfficeBeaconTests.debug.xcconfig */,
+				50905EC6D56D002F300D108B /* Pods-iBOfficeBeaconTests.beta.xcconfig */,
+				BD76D6A8031FEE8C0FE72754 /* Pods-iBOfficeBeaconTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E304C9A61CA9BC760022323A /* models */ = {
+			isa = PBXGroup;
+			children = (
+				E3A54F9C1CA96372008B0343 /* CalendarEventUnitTest.swift */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		E304C9A71CA9BFAA0022323A /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E3B4B5B61CA6A8350057BB4A /* AuthControllerUnitTest.swift */,
+				E3D7FF5F1CF6620C00A17578 /* AppUpdateControllerUnitTest.swift */,
+				E36737CD1CF9034500C2FD5A /* LocationServiceAuthzControllerUnitTest.swift */,
+				E366817E1D07946B00B88DEA /* BluetoothControllerUnitTest.swift */,
+				E368CE681D1375F300BDB9A8 /* ErrorHandlerAlertUnitTest.swift */,
+				E38129061DE9B83A007ABEA1 /* LogoutControllerUnitTest.swift */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		E3076B321CA5E99A000A8603 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E3B49C341CA56AF900C9D97F /* AuthController.swift */,
+				E3D7FF5C1CF661F600A17578 /* AppUpdateController.swift */,
+				E36737CA1CF8F2FD00C2FD5A /* LocationServiceAuthController.swift */,
+				E366817A1D07918A00B88DEA /* BluetoothController.swift */,
+				E3E2F6771D10EC590063A4AA /* ErrorHandlerAlert.swift */,
+				E38129041DE9B6A3007ABEA1 /* LogoutController.swift */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		E3076B361CA5E9DA000A8603 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				E3076B331CA5E9D5000A8603 /* GoogleSettings.swift */,
+				E3634BCA1E0603C20087B01B /* AppSettings.swift */,
+			);
+			name = settings;
+			sourceTree = "<group>";
+		};
+		E30CDDB81C8297700062C885 /* view controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E3197EA81CB9CC4800910C8C /* SettingsViewController.swift */,
+				E37A35151CB8618B00AD10DE /* LoginViewController.swift */,
+				E3F7A4361DDF2AD50049DE9B /* MainViewController.swift */,
+				E384A7981DDFC9990025F087 /* RoomScheduleViewController.swift */,
+			);
+			name = "view controllers";
+			sourceTree = "<group>";
+		};
+		E3128D411E0D67C1007992A8 /* errors */ = {
+			isa = PBXGroup;
+			children = (
+				E3128D421E0D67F4007992A8 /* MalformedBeaconUUIDError.swift */,
+			);
+			name = errors;
+			sourceTree = "<group>";
+		};
+		E3163B641D3BA740005FCFE4 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				E3634BCC1E0603FD0087B01B /* AppSettingsTest.swift */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		E3163B661D3BDD29005FCFE4 /* file service */ = {
+			isa = PBXGroup;
+			children = (
+				E3163B671D3BDD48005FCFE4 /* UTF8DataWriterServiceTest.swift */,
+				E3163B6D1D3BE976005FCFE4 /* FileServiceTest.swift */,
+			);
+			name = "file service";
+			sourceTree = "<group>";
+		};
+		E3163B691D3BE8E2005FCFE4 /* file services */ = {
+			isa = PBXGroup;
+			children = (
+				E3163B6A1D3BE8F4005FCFE4 /* UTF8DataWriterService.swift */,
+				E3163B701D3BF009005FCFE4 /* FileService.swift */,
+			);
+			name = "file services";
+			sourceTree = "<group>";
+		};
+		E31A0E9D1C5EA8E400BD020D /* doubles */ = {
+			isa = PBXGroup;
+			children = (
+				E36737CF1CF906A600C2FD5A /* Stubs */,
+				E31A0E9B1C5EA88300BD020D /* FakeESTBeaconManager.swift */,
+				E39944721CC697F700344681 /* GoogleFakeServices.swift */,
+				E35944A11CA9B6D500E1F1A2 /* FakeGoogleSettings.swift */,
+				E304C9A41CA9BC030022323A /* FakeNotificationService.swift */,
+				E3B9796E1B078AFD004FF250 /* CLBeaconRegionStub.swift */,
+				E3826D621C5ECF0200F618A7 /* CLBeaconStub.swift */,
+				E3D7FF631CF6632900A17578 /* Spies */,
+				E3163B751D3C52C6005FCFE4 /* FakeSheetDriveWrapper.swift */,
+				E3163B781D3C52EA005FCFE4 /* FakeFileService.swift */,
+				E31405E11DC107F30071DAC4 /* DummyErrorHandler.swift */,
+				E336EE891E06D47D00E5A628 /* FakeAppSettings.swift */,
+			);
+			name = doubles;
+			sourceTree = "<group>";
+		};
+		E33C2E211CC8FA6600D77CD2 /* 3rd Party Manual Install */ = {
+			isa = PBXGroup;
+			children = (
+				E33C2E221CC8FA9A00D77CD2 /* SwiftCSV */,
+			);
+			name = "3rd Party Manual Install";
+			sourceTree = "<group>";
+		};
+		E33C2E221CC8FA9A00D77CD2 /* SwiftCSV */ = {
+			isa = PBXGroup;
+			children = (
+				E33C2E231CC8FAAC00D77CD2 /* CSV.swift */,
+				E33C2E251CC8FACC00D77CD2 /* String+Lines.swift */,
+				E33C2E271CC8FAE000D77CD2 /* ParserHelpers.swift */,
+				E33C2E291CC8FAF000D77CD2 /* Description.swift */,
+				E33C2E2B1CC8FB1C00D77CD2 /* Parser.swift */,
+				E31EDEE31E246B4400A65B15 /* LICENSE */,
+			);
+			name = SwiftCSV;
+			sourceTree = "<group>";
+		};
+		E33F68251CF9D9C100CD3ADC /* GradientView */ = {
+			isa = PBXGroup;
+			children = (
+				E33F68281CF9DA5800CD3ADC /* GradientView.xib */,
+				E33F68261CF9DA2000CD3ADC /* GradientView.swift */,
+				E33F682A1CF9F50700CD3ADC /* GradientLayer.swift */,
+			);
+			name = GradientView;
+			sourceTree = "<group>";
+		};
+		E341C86C1C76820D00D80FD6 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6EEC0CB51C67E83300ADA7AE /* TestHelpers.swift */,
+				E341C86A1C76820800D80FD6 /* IBeaconEventSimulator.swift */,
+				E36981C61CC773610027C1D7 /* FileUtils.swift */,
+				E3F5AC0F1D5F42A90005C4A1 /* ServiceDriveMockHelpers.swift */,
+			);
+			name = helpers;
+			sourceTree = "<group>";
+		};
+		E35F58D11B07731D003D04DB = {
+			isa = PBXGroup;
+			children = (
+				E35F58DC1B07731D003D04DB /* iBOfficeBeacon */,
+				E35F58F21B07731D003D04DB /* iBOfficeBeaconTests */,
+				E35F58DB1B07731D003D04DB /* Products */,
+				04AE1D0801895CBFD90E1077 /* Frameworks */,
+				162FC3BA713BC622CB1B96B8 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		E35F58DB1B07731D003D04DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E35F58DA1B07731D003D04DB /* iBOfficeBeacon.dev.app */,
+				E35F58EF1B07731D003D04DB /* iBOfficeBeaconTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E35F58DC1B07731D003D04DB /* iBOfficeBeacon */ = {
+			isa = PBXGroup;
+			children = (
+				E3128D411E0D67C1007992A8 /* errors */,
+				E36737C01CF8802C00C2FD5A /* view models */,
+				E33C2E211CC8FA6600D77CD2 /* 3rd Party Manual Install */,
+				E37A35171CB92B3500AD10DE /* views */,
+				E3076B321CA5E99A000A8603 /* controllers */,
+				E30CDDB81C8297700062C885 /* view controllers */,
+				E3761B3D1C7A450100A6471A /* protocols */,
+				E3761B3C1C7A44B700A6471A /* models */,
+				E3761B3B1C7A449B00A6471A /* stores */,
+				E38865E71C78F5290026CC64 /* extensions */,
+				E39581321C18F3E500383010 /* utils */,
+				E3B979641B078434004FF250 /* services */,
+				E35F58DF1B07731D003D04DB /* AppDelegate.swift */,
+				E3AC8D3D1C832F0900E1FF70 /* Media.xcassets */,
+				E35F58DD1B07731D003D04DB /* Supporting Files */,
+				E3006EB71CFC45ED00EF1B23 /* LaunchScreen.storyboard */,
+				E3A828691DDF1ACE00010896 /* MainV1.storyboard */,
+			);
+			path = iBOfficeBeacon;
+			sourceTree = "<group>";
+		};
+		E35F58DD1B07731D003D04DB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E35F58DE1B07731D003D04DB /* Info.plist */,
+				E3B979701B07A20C004FF250 /* ObjCBridge.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E35F58F21B07731D003D04DB /* iBOfficeBeaconTests */ = {
+			isa = PBXGroup;
+			children = (
+				E36737C31CF898FE00C2FD5A /* view models */,
+				E341C86C1C76820D00D80FD6 /* helpers */,
+				E31A0E9D1C5EA8E400BD020D /* doubles */,
+				E39581421C1CA4FF00383010 /* builders */,
+				E38A521A1C18494B00A93692 /* Integration */,
+				E3B979651B078445004FF250 /* Unit */,
+				E35F58F31B07731D003D04DB /* Supporting Files */,
+			);
+			path = iBOfficeBeaconTests;
+			sourceTree = "<group>";
+		};
+		E35F58F31B07731D003D04DB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E35F58F41B07731D003D04DB /* Info.plist */,
+				E338DF871B07AA0B00DF3286 /* ObjCBridge.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E3649EDE1D7459C1003E1F51 /* error handling service */ = {
+			isa = PBXGroup;
+			children = (
+				E3CA95EF1D773C1900443702 /* GoogleAuthorizationErrorHandler.swift */,
+				E3649EDF1D7459E6003E1F51 /* ErrorHandlingServiceProtocol.swift */,
+			);
+			name = "error handling service";
+			sourceTree = "<group>";
+		};
+		E36737C01CF8802C00C2FD5A /* view models */ = {
+			isa = PBXGroup;
+			children = (
+				E36737C11CF8805500C2FD5A /* RoomScheduleViewModel.swift */,
+			);
+			name = "view models";
+			sourceTree = "<group>";
+		};
+		E36737C31CF898FE00C2FD5A /* view models */ = {
+			isa = PBXGroup;
+			children = (
+				E36737C61CF8992D00C2FD5A /* RoomScheduleViewModelTest.swift */,
+			);
+			name = "view models";
+			sourceTree = "<group>";
+		};
+		E36737CF1CF906A600C2FD5A /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				E36737D01CF906D100C2FD5A /* CLLocationManagerStub.swift */,
+				E36681811D0795A500B88DEA /* CBPeripheralManager Stub.swift */,
+			);
+			name = Stubs;
+			sourceTree = "<group>";
+		};
+		E3761B3B1C7A449B00A6471A /* stores */ = {
+			isa = PBXGroup;
+			children = (
+				E3D58E7C1CC421E2009C0BCC /* BeaconAddressStore.swift */,
+				E3600D751CC926A00063AC48 /* BeaconAddressMapper.swift */,
+				E3E404951CC7973E00FE2BB9 /* BeaconAddressLoader.swift */,
+			);
+			name = stores;
+			sourceTree = "<group>";
+		};
+		E3761B3C1C7A44B700A6471A /* models */ = {
+			isa = PBXGroup;
+			children = (
+				E3D58E871CC51A03009C0BCC /* InsertEventRequest.swift */,
+				E3DBD8561C947F6D00BDB79C /* Schedule.swift */,
+				E36AA8851C14E00200DA4A9D /* OfficeRoom.swift */,
+				E3D58EEC1CA72788007F6860 /* CalendarEvent.swift */,
+				E3E404931CC7942100FE2BB9 /* OfficeAddress.swift */,
+				E3163B5B1D3B09B2005FCFE4 /* FileMetadata.swift */,
+				E34CE0141E3CC3B000BF549B /* FreeTimeslot.swift */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		E3761B3D1C7A450100A6471A /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6EEB8F5F1C681AD500DC623E /* BeaconEventDelegate.swift */,
+				E3761B3F1C7A452900A6471A /* TWBeaconServiceProtocol.swift */,
+				E3163B611D3B0A85005FCFE4 /* RemoteFileServiceProtocol.swift */,
+			);
+			name = protocols;
+			sourceTree = "<group>";
+		};
+		E3761B451C7A475900A6471A /* services */ = {
+			isa = PBXGroup;
+			children = (
+				E3163B661D3BDD29005FCFE4 /* file service */,
+				E399446D1CC6763700344681 /* google drive services */,
+				E3B979661B07844B004FF250 /* beacon services */,
+				E39DA3321CA81CB400BAD76D /* calendar services */,
+			);
+			name = services;
+			sourceTree = "<group>";
+		};
+		E37A35171CB92B3500AD10DE /* views */ = {
+			isa = PBXGroup;
+			children = (
+				E33F68251CF9D9C100CD3ADC /* GradientView */,
+				E37A35181CB92BA500AD10DE /* UIBorderedButton.swift */,
+				E33F682C1CFA084B00CD3ADC /* UIBlurredBorderedButton.swift */,
+				E37A351A1CB933E600AD10DE /* UIBlurredLabel.swift */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		E38865E71C78F5290026CC64 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E38865E81C78F5420026CC64 /* CLBeaconRegionExtension.swift */,
+				E3DBD8601C94942400BDB79C /* NSDateExtension.swift */,
+				E39A6AB91C81D35D001A5588 /* AppDelegateBeaconManagerHandlerExtensions.swift */,
+				E30CD8ED1CF6171A00BF79BA /* AppDelegateHockeyAppExtensions.swift */,
+				E3A569B91DE85E26001AE96A /* NSThreadExtension.swift */,
+			);
+			name = extensions;
+			sourceTree = "<group>";
+		};
+		E38A521A1C18494B00A93692 /* Integration */ = {
+			isa = PBXGroup;
+			children = (
+				E3B37E7C1C2CC72700495C7B /* TWBeaconServiceIntegrationTest.swift */,
+				E3DBD8541C947DC100BDB79C /* CalendarServiceIntegrationTest.swift */,
+				E3E404971CC79A6000FE2BB9 /* BeaconAddressLoaderIntegrationTest.swift */,
+				E32C54981CC98E4800135073 /* BeaconAddressStoreIntegrationTest.swift */,
+				E3E540B21D438A810085B594 /* SpreadsheetAPIIntegrationTest.swift */,
+				E3649EE31D745C99003E1F51 /* GoogleAuthorizationErrorHandlerTest.swift */,
+			);
+			name = Integration;
+			sourceTree = "<group>";
+		};
+		E39581321C18F3E500383010 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				E3076B361CA5E9DA000A8603 /* settings */,
+				E3761B391C79F06C00A6471A /* UserAuthorisationRequests.swift */,
+				E39581331C18F3F700383010 /* Wiring.swift */,
+				E3BE944E1C33FFB5005D6FE0 /* AppColours.swift */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		E39581421C1CA4FF00383010 /* builders */ = {
+			isa = PBXGroup;
+			children = (
+				E3A54F9E1CA96FC3008B0343 /* GTLEventsBuilder.swift */,
+				E3A00D211DBE5A1D00E926DE /* NSErrorBuilder.swift */,
+				E31405DF1DC1035A0071DAC4 /* NavigationControllerBuilder.swift */,
+				E34CE00F1E3CC26000BF549B /* CalendarEventBuilder.swift */,
+				E34CE0111E3CC27900BF549B /* RoomScheduleBuilder.swift */,
+			);
+			name = builders;
+			sourceTree = "<group>";
+		};
+		E399446C1CC6700800344681 /* google drive services */ = {
+			isa = PBXGroup;
+			children = (
+				E3163B5E1D3B0A2E005FCFE4 /* SheetDriveWrapper.swift */,
+				E3163B7B1D3C5313005FCFE4 /* SpreadsheetAPI.swift */,
+			);
+			name = "google drive services";
+			sourceTree = "<group>";
+		};
+		E399446D1CC6763700344681 /* google drive services */ = {
+			isa = PBXGroup;
+			children = (
+				E341AA9C1D3990E8004E0AEC /* SheetDriveWrapperTest.swift */,
+				E3163B731D3C4B3B005FCFE4 /* SpreadsheetAPITest.swift */,
+			);
+			name = "google drive services";
+			sourceTree = "<group>";
+		};
+		E39DA3321CA81CB400BAD76D /* calendar services */ = {
+			isa = PBXGroup;
+			children = (
+				E3B4B5BB1CA71A960057BB4A /* CalendarEventsProcessorUnitTest.swift */,
+				E359449D1CA9AC2200E1F1A2 /* CalendarClientUnitTest.swift */,
+				E39DA3331CA81CCC00BAD76D /* CalendarQueryFactoryUnitTest.swift */,
+				E3ECDE8A1CA8782C002762E6 /* RoomScheduleCoordinatorUnitTest.swift */,
+				E34CE00C1E3BE2B200BF549B /* FreeTimeslotCalculatorTest.swift */,
+			);
+			name = "calendar services";
+			sourceTree = "<group>";
+		};
+		E3B979641B078434004FF250 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				E3C726A01CA56732007B8173 /* beacon services */,
+				E3C7269F1CA56702007B8173 /* calendar services */,
+				E399446C1CC6700800344681 /* google drive services */,
+				E3163B691D3BE8E2005FCFE4 /* file services */,
+				E3649EDE1D7459C1003E1F51 /* error handling service */,
+				E3761B431C7A470D00A6471A /* LocalNotificationService.swift */,
+			);
+			name = services;
+			sourceTree = "<group>";
+		};
+		E3B979651B078445004FF250 /* Unit */ = {
+			isa = PBXGroup;
+			children = (
+				E3163B641D3BA740005FCFE4 /* utils */,
+				E3D58E831CC42A2B009C0BCC /* stores */,
+				E304C9A71CA9BFAA0022323A /* controllers */,
+				E3761B451C7A475900A6471A /* services */,
+				E304C9A61CA9BC760022323A /* models */,
+			);
+			name = Unit;
+			sourceTree = "<group>";
+		};
+		E3B979661B07844B004FF250 /* beacon services */ = {
+			isa = PBXGroup;
+			children = (
+				E39581351C18F6DF00383010 /* BeaconManagerUnitTest.swift */,
+				E3761B481C7A479E00A6471A /* BackgroundBeaconServiceUnitTest.swift */,
+				E38865E51C78B3370026CC64 /* TWBeaconServiceUnitTest.swift */,
+			);
+			name = "beacon services";
+			sourceTree = "<group>";
+		};
+		E3C7269F1CA56702007B8173 /* calendar services */ = {
+			isa = PBXGroup;
+			children = (
+				E3DBD85D1C94839D00BDB79C /* CalendarClient.swift */,
+				E3ECDE8C1CA8786B002762E6 /* RoomScheduleCoordinator.swift */,
+				E39DA32F1CA81C9B00BAD76D /* CalendarQueryFactory.swift */,
+				E3B4B5B81CA7183B0057BB4A /* CalendarEventsProcessor.swift */,
+				E3DBD84F1C947C9800BDB79C /* CalendarService.swift */,
+				E34CE0081E3BE1DF00BF549B /* FreeTimeslotCalculator.swift */,
+			);
+			name = "calendar services";
+			sourceTree = "<group>";
+		};
+		E3C726A01CA56732007B8173 /* beacon services */ = {
+			isa = PBXGroup;
+			children = (
+				E3B37E791C2C9B0D00495C7B /* TWBeaconService.swift */,
+				E3761B411C7A45FE00A6471A /* BackgroundBeaconService.swift */,
+				E37047211CCCF5D600250178 /* BeaconManager.swift */,
+			);
+			name = "beacon services";
+			sourceTree = "<group>";
+		};
+		E3D58E831CC42A2B009C0BCC /* stores */ = {
+			isa = PBXGroup;
+			children = (
+				E3600D771CC9285F0063AC48 /* BeaconAddressMapperUnitTest.swift */,
+			);
+			name = stores;
+			sourceTree = "<group>";
+		};
+		E3D7FF631CF6632900A17578 /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+				E3CA95ED1D7737ED00443702 /* AuthControllerSpy.swift */,
+				E3D7FF611CF6632600A17578 /* UpdateManagerSpy.swift */,
+				E366817C1D07943C00B88DEA /* ViewControllerSpy.swift */,
+				E3163B7E1D402C48005FCFE4 /* SpreadsheetAPIDelegateSpy.swift */,
+				E30D4D781DAA721D002F643D /* NavigationControllerSpy.swift */,
+				E3E18ABA1DCA6ED000E70333 /* ErrorHandlerSpy.swift */,
+				E38129091DE9BBA3007ABEA1 /* FileServiceSpy.swift */,
+			);
+			name = Spies;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E35F58D91B07731D003D04DB /* iBOfficeBeacon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E35F58F91B07731D003D04DB /* Build configuration list for PBXNativeTarget "iBOfficeBeacon" */;
+			buildPhases = (
+				204165158F15B9AC1497FE81 /* 📦 Check Pods Manifest.lock */,
+				E35F58D61B07731D003D04DB /* Sources */,
+				E35F58D71B07731D003D04DB /* Frameworks */,
+				E35F58D81B07731D003D04DB /* Resources */,
+				E39AA1F91C88664B00523CE2 /* HokeyApp Run Script */,
+				D008ECF44352E14A8FCEB956 /* 📦 Embed Pods Frameworks */,
+				CE381020CBE21509ADEA4845 /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iBOfficeBeacon;
+			productName = iBOfficeBeacon;
+			productReference = E35F58DA1B07731D003D04DB /* iBOfficeBeacon.dev.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E35F58EE1B07731D003D04DB /* iBOfficeBeaconTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E35F58FC1B07731D003D04DB /* Build configuration list for PBXNativeTarget "iBOfficeBeaconTests" */;
+			buildPhases = (
+				275366ADC111396BB070E50B /* 📦 Check Pods Manifest.lock */,
+				E35F58EB1B07731D003D04DB /* Sources */,
+				E35F58EC1B07731D003D04DB /* Frameworks */,
+				E35F58ED1B07731D003D04DB /* Resources */,
+				8224236ACBC3A5C079E7B5A5 /* 📦 Embed Pods Frameworks */,
+				BBC0E6E2F02FDFC7C5213DC0 /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E35F58F11B07731D003D04DB /* PBXTargetDependency */,
+			);
+			name = iBOfficeBeaconTests;
+			productName = iBOfficeBeaconTests;
+			productReference = E35F58EF1B07731D003D04DB /* iBOfficeBeaconTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E35F58D21B07731D003D04DB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = Binsabbar;
+				TargetAttributes = {
+					E35F58D91B07731D003D04DB = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = YFWXADMX4E;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
+					};
+					E35F58EE1B07731D003D04DB = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 2DJKLJFV99;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
+						TestTargetID = E35F58D91B07731D003D04DB;
+					};
+				};
+			};
+			buildConfigurationList = E35F58D51B07731D003D04DB /* Build configuration list for PBXProject "iBOfficeBeacon" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E35F58D11B07731D003D04DB;
+			productRefGroup = E35F58DB1B07731D003D04DB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E35F58D91B07731D003D04DB /* iBOfficeBeacon */,
+				E35F58EE1B07731D003D04DB /* iBOfficeBeaconTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E35F58D81B07731D003D04DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3A828671DDF1ACE00010896 /* MainV1.storyboard in Resources */,
+				E3006EB81CFC45ED00EF1B23 /* LaunchScreen.storyboard in Resources */,
+				E3AC8D3E1C832F0900E1FF70 /* Media.xcassets in Resources */,
+				E33F68291CF9DA5800CD3ADC /* GradientView.xib in Resources */,
+				E31EDEE41E246B4400A65B15 /* LICENSE in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E35F58ED1B07731D003D04DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		204165158F15B9AC1497FE81 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		275366ADC111396BB070E50B /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8224236ACBC3A5C079E7B5A5 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iBOfficeBeaconTests/Pods-iBOfficeBeaconTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBC0E6E2F02FDFC7C5213DC0 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iBOfficeBeaconTests/Pods-iBOfficeBeaconTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE381020CBE21509ADEA4845 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iBOfficeBeacon/Pods-iBOfficeBeacon-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D008ECF44352E14A8FCEB956 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iBOfficeBeacon/Pods-iBOfficeBeacon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E39AA1F91C88664B00523CE2 /* HokeyApp Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "HokeyApp Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E35F58D61B07731D003D04DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E34CE0151E3CC3B000BF549B /* FreeTimeslot.swift in Sources */,
+				E3E404941CC7942100FE2BB9 /* OfficeAddress.swift in Sources */,
+				E39DA3301CA81C9B00BAD76D /* CalendarQueryFactory.swift in Sources */,
+				E3197EA91CB9CC4800910C8C /* SettingsViewController.swift in Sources */,
+				E3D58E881CC51A03009C0BCC /* InsertEventRequest.swift in Sources */,
+				E33C2E241CC8FAAC00D77CD2 /* CSV.swift in Sources */,
+				E37A35191CB92BA500AD10DE /* UIBorderedButton.swift in Sources */,
+				E3163B761D3C52C6005FCFE4 /* FakeSheetDriveWrapper.swift in Sources */,
+				E3A569BA1DE85E26001AE96A /* NSThreadExtension.swift in Sources */,
+				6EEB8F601C681AD500DC623E /* BeaconEventDelegate.swift in Sources */,
+				E37047221CCCF5D600250178 /* BeaconManager.swift in Sources */,
+				E3CA95F01D773C1900443702 /* GoogleAuthorizationErrorHandler.swift in Sources */,
+				E33C2E281CC8FAE000D77CD2 /* ParserHelpers.swift in Sources */,
+				E33F682B1CF9F50700CD3ADC /* GradientLayer.swift in Sources */,
+				E3649EE01D7459E6003E1F51 /* ErrorHandlingServiceProtocol.swift in Sources */,
+				E3163B6B1D3BE8F4005FCFE4 /* UTF8DataWriterService.swift in Sources */,
+				E34CE0091E3BE1DF00BF549B /* FreeTimeslotCalculator.swift in Sources */,
+				E3DBD8501C947C9800BDB79C /* CalendarService.swift in Sources */,
+				E3761B3A1C79F06C00A6471A /* UserAuthorisationRequests.swift in Sources */,
+				E3ECDE8D1CA8786B002762E6 /* RoomScheduleCoordinator.swift in Sources */,
+				E3B4B5B91CA7183B0057BB4A /* CalendarEventsProcessor.swift in Sources */,
+				E3163B5C1D3B09B2005FCFE4 /* FileMetadata.swift in Sources */,
+				E33C2E2C1CC8FB1C00D77CD2 /* Parser.swift in Sources */,
+				E39581341C18F3F700383010 /* Wiring.swift in Sources */,
+				E366817B1D07918A00B88DEA /* BluetoothController.swift in Sources */,
+				E3634BCB1E0603C20087B01B /* AppSettings.swift in Sources */,
+				E36AA8861C14E00200DA4A9D /* OfficeRoom.swift in Sources */,
+				E3D58EED1CA72788007F6860 /* CalendarEvent.swift in Sources */,
+				E3B37E7A1C2C9B0D00495C7B /* TWBeaconService.swift in Sources */,
+				E3163B5F1D3B0A2E005FCFE4 /* SheetDriveWrapper.swift in Sources */,
+				E3163B791D3C52EA005FCFE4 /* FakeFileService.swift in Sources */,
+				E3BE944F1C33FFB5005D6FE0 /* AppColours.swift in Sources */,
+				E3761B421C7A45FE00A6471A /* BackgroundBeaconService.swift in Sources */,
+				E3163B621D3B0A85005FCFE4 /* RemoteFileServiceProtocol.swift in Sources */,
+				E3D58E7D1CC421E2009C0BCC /* BeaconAddressStore.swift in Sources */,
+				E3163B7C1D3C5313005FCFE4 /* SpreadsheetAPI.swift in Sources */,
+				E3163B711D3BF009005FCFE4 /* FileService.swift in Sources */,
+				E30CD8EE1CF6171A00BF79BA /* AppDelegateHockeyAppExtensions.swift in Sources */,
+				E33C2E2A1CC8FAF000D77CD2 /* Description.swift in Sources */,
+				E3DBD8611C94942400BDB79C /* NSDateExtension.swift in Sources */,
+				E3DBD8571C947F6D00BDB79C /* Schedule.swift in Sources */,
+				E37A35161CB8618B00AD10DE /* LoginViewController.swift in Sources */,
+				E3F7A4371DDF2AD50049DE9B /* MainViewController.swift in Sources */,
+				E38865E91C78F5420026CC64 /* CLBeaconRegionExtension.swift in Sources */,
+				E3E2F6781D10EC590063A4AA /* ErrorHandlerAlert.swift in Sources */,
+				E3B49C351CA56AF900C9D97F /* AuthController.swift in Sources */,
+				E33F682D1CFA084B00CD3ADC /* UIBlurredBorderedButton.swift in Sources */,
+				E36737C21CF8805500C2FD5A /* RoomScheduleViewModel.swift in Sources */,
+				E3128D431E0D67F4007992A8 /* MalformedBeaconUUIDError.swift in Sources */,
+				E39A6ABA1C81D35D001A5588 /* AppDelegateBeaconManagerHandlerExtensions.swift in Sources */,
+				E3761B441C7A470D00A6471A /* LocalNotificationService.swift in Sources */,
+				E3D7FF5D1CF661F600A17578 /* AppUpdateController.swift in Sources */,
+				E36737CB1CF8F2FD00C2FD5A /* LocationServiceAuthController.swift in Sources */,
+				E3E404961CC7973E00FE2BB9 /* BeaconAddressLoader.swift in Sources */,
+				E3DBD85E1C94839D00BDB79C /* CalendarClient.swift in Sources */,
+				E33F68271CF9DA2000CD3ADC /* GradientView.swift in Sources */,
+				E384A7991DDFC9990025F087 /* RoomScheduleViewController.swift in Sources */,
+				E3600D761CC926A00063AC48 /* BeaconAddressMapper.swift in Sources */,
+				E3761B4C1C7A4ACD00A6471A /* TWBeaconServiceProtocol.swift in Sources */,
+				E33C2E261CC8FACC00D77CD2 /* String+Lines.swift in Sources */,
+				E3076B341CA5E9D5000A8603 /* GoogleSettings.swift in Sources */,
+				E37A351B1CB933E600AD10DE /* UIBlurredLabel.swift in Sources */,
+				E38129051DE9B6A3007ABEA1 /* LogoutController.swift in Sources */,
+				E35F58E01B07731D003D04DB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E35F58EB1B07731D003D04DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3600D791CC928CA0063AC48 /* OfficeAddress.swift in Sources */,
+				E3128D441E0D6B66007992A8 /* MalformedBeaconUUIDError.swift in Sources */,
+				E3761B491C7A479E00A6471A /* BackgroundBeaconServiceUnitTest.swift in Sources */,
+				E38865EB1C78F8860026CC64 /* CLBeaconRegionExtension.swift in Sources */,
+				E341AA9D1D3990E8004E0AEC /* SheetDriveWrapperTest.swift in Sources */,
+				E3DBD8551C947DC100BDB79C /* CalendarServiceIntegrationTest.swift in Sources */,
+				E36737C71CF8992D00C2FD5A /* RoomScheduleViewModelTest.swift in Sources */,
+				E33C2E301CC91B5900D77CD2 /* Description.swift in Sources */,
+				E336EE8A1E06D47D00E5A628 /* FakeAppSettings.swift in Sources */,
+				E366817F1D07946B00B88DEA /* BluetoothControllerUnitTest.swift in Sources */,
+				E3B4B5B71CA6A8350057BB4A /* AuthControllerUnitTest.swift in Sources */,
+				E3E18ABB1DCA6ED000E70333 /* ErrorHandlerSpy.swift in Sources */,
+				E31405E21DC107F30071DAC4 /* DummyErrorHandler.swift in Sources */,
+				E3826D631C5ECF0200F618A7 /* CLBeaconStub.swift in Sources */,
+				E3CA95EC1D77320300443702 /* ErrorHandlingServiceProtocol.swift in Sources */,
+				E31A0E9C1C5EA88300BD020D /* FakeESTBeaconManager.swift in Sources */,
+				E3B9796F1B078AFD004FF250 /* CLBeaconRegionStub.swift in Sources */,
+				E38129081DE9B876007ABEA1 /* LogoutController.swift in Sources */,
+				E39581361C18F6DF00383010 /* BeaconManagerUnitTest.swift in Sources */,
+				E30D4D791DAA721D002F643D /* NavigationControllerSpy.swift in Sources */,
+				E34CE0101E3CC26000BF549B /* CalendarEventBuilder.swift in Sources */,
+				E3D7FF5E1CF661F900A17578 /* AppUpdateController.swift in Sources */,
+				E3CA95F11D773C1900443702 /* GoogleAuthorizationErrorHandler.swift in Sources */,
+				E36681821D0795A500B88DEA /* CBPeripheralManager Stub.swift in Sources */,
+				E3D7FF601CF6620C00A17578 /* AppUpdateControllerUnitTest.swift in Sources */,
+				E39DA32E1CA7286000BAD76D /* CalendarEvent.swift in Sources */,
+				E368CE6A1D13760500BDB9A8 /* ErrorHandlerAlert.swift in Sources */,
+				E39DA3341CA81CCC00BAD76D /* CalendarQueryFactoryUnitTest.swift in Sources */,
+				E3163B721D3BF009005FCFE4 /* FileService.swift in Sources */,
+				E34CE00D1E3BE2B200BF549B /* FreeTimeslotCalculatorTest.swift in Sources */,
+				E3634BCD1E0603FD0087B01B /* AppSettingsTest.swift in Sources */,
+				E36737CC1CF900CC00C2FD5A /* LocationServiceAuthController.swift in Sources */,
+				E36981C71CC773610027C1D7 /* FileUtils.swift in Sources */,
+				E3F5AC101D5F42A90005C4A1 /* ServiceDriveMockHelpers.swift in Sources */,
+				E359449E1CA9AC2200E1F1A2 /* CalendarClientUnitTest.swift in Sources */,
+				E368CE691D1375F300BDB9A8 /* ErrorHandlerAlertUnitTest.swift in Sources */,
+				E3163B631D3B0A85005FCFE4 /* RemoteFileServiceProtocol.swift in Sources */,
+				E3EABD241C6F5E76001994B4 /* BeaconEventDelegate.swift in Sources */,
+				E38129071DE9B83A007ABEA1 /* LogoutControllerUnitTest.swift in Sources */,
+				E3DBD8621C94942400BDB79C /* NSDateExtension.swift in Sources */,
+				E36737D11CF906D100C2FD5A /* CLLocationManagerStub.swift in Sources */,
+				E32C54991CC98E4800135073 /* BeaconAddressStoreIntegrationTest.swift in Sources */,
+				E39944731CC697F700344681 /* GoogleFakeServices.swift in Sources */,
+				E38865E61C78B3370026CC64 /* TWBeaconServiceUnitTest.swift in Sources */,
+				E36AA8891C14EF0300DA4A9D /* OfficeRoom.swift in Sources */,
+				E3E540B31D438A810085B594 /* SpreadsheetAPIIntegrationTest.swift in Sources */,
+				E3163B681D3BDD48005FCFE4 /* UTF8DataWriterServiceTest.swift in Sources */,
+				E3A00D221DBE5A1D00E926DE /* NSErrorBuilder.swift in Sources */,
+				E3CA95EE1D7737ED00443702 /* AuthControllerSpy.swift in Sources */,
+				E3ECDE8B1CA8782C002762E6 /* RoomScheduleCoordinatorUnitTest.swift in Sources */,
+				E366817D1D07943C00B88DEA /* ViewControllerSpy.swift in Sources */,
+				E3761B4D1C7A4AF700A6471A /* TWBeaconServiceProtocol.swift in Sources */,
+				E36681801D0794E200B88DEA /* BluetoothController.swift in Sources */,
+				E36737C81CF899BF00C2FD5A /* RoomScheduleViewModel.swift in Sources */,
+				E3163B5D1D3B09CE005FCFE4 /* FileMetadata.swift in Sources */,
+				E3B4B5BA1CA7183B0057BB4A /* CalendarEventsProcessor.swift in Sources */,
+				E3600D7A1CC929F50063AC48 /* BeaconAddressMapper.swift in Sources */,
+				E3761B4B1C7A47DB00A6471A /* LocalNotificationService.swift in Sources */,
+				E3E404991CC79A8900FE2BB9 /* BeaconAddressLoader.swift in Sources */,
+				E3163B7A1D3C52EA005FCFE4 /* FakeFileService.swift in Sources */,
+				E3163B6E1D3BE976005FCFE4 /* FileServiceTest.swift in Sources */,
+				E3A54F9F1CA96FC3008B0343 /* GTLEventsBuilder.swift in Sources */,
+				E3163B741D3C4B3B005FCFE4 /* SpreadsheetAPITest.swift in Sources */,
+				E3D58E891CC51A18009C0BCC /* InsertEventRequest.swift in Sources */,
+				E3ECDE8E1CA8786B002762E6 /* RoomScheduleCoordinator.swift in Sources */,
+				E35944A21CA9B6D500E1F1A2 /* FakeGoogleSettings.swift in Sources */,
+				6EEC0CB61C67E83300ADA7AE /* TestHelpers.swift in Sources */,
+				E3D7FF621CF6632600A17578 /* UpdateManagerSpy.swift in Sources */,
+				E3DBD85F1C94839D00BDB79C /* CalendarClient.swift in Sources */,
+				E3B49C361CA5777200C9D97F /* AuthController.swift in Sources */,
+				E3163B6C1D3BE8F4005FCFE4 /* UTF8DataWriterService.swift in Sources */,
+				E3600D781CC9285F0063AC48 /* BeaconAddressMapperUnitTest.swift in Sources */,
+				E34CE0161E3CC3B000BF549B /* FreeTimeslot.swift in Sources */,
+				E3E404981CC79A6000FE2BB9 /* BeaconAddressLoaderIntegrationTest.swift in Sources */,
+				E3B37E7D1C2CC72700495C7B /* TWBeaconServiceIntegrationTest.swift in Sources */,
+				E3D58E7E1CC42539009C0BCC /* BeaconAddressStore.swift in Sources */,
+				E31405E01DC1035A0071DAC4 /* NavigationControllerBuilder.swift in Sources */,
+				E3DBD8511C947C9800BDB79C /* CalendarService.swift in Sources */,
+				E36737CE1CF9034500C2FD5A /* LocationServiceAuthzControllerUnitTest.swift in Sources */,
+				E304C9A51CA9BC030022323A /* FakeNotificationService.swift in Sources */,
+				E33C2E2F1CC91B5900D77CD2 /* ParserHelpers.swift in Sources */,
+				E33C2E2D1CC91B5900D77CD2 /* CSV.swift in Sources */,
+				E3163B7D1D3C5313005FCFE4 /* SpreadsheetAPI.swift in Sources */,
+				E33C2E311CC91B5900D77CD2 /* Parser.swift in Sources */,
+				E36737C91CF89E0700C2FD5A /* AppColours.swift in Sources */,
+				E33C2E2E1CC91B5900D77CD2 /* String+Lines.swift in Sources */,
+				E341C86B1C76820800D80FD6 /* IBeaconEventSimulator.swift in Sources */,
+				E3761B4A1C7A47D800A6471A /* BackgroundBeaconService.swift in Sources */,
+				E34CE0121E3CC27900BF549B /* RoomScheduleBuilder.swift in Sources */,
+				E39DA3311CA81C9B00BAD76D /* CalendarQueryFactory.swift in Sources */,
+				E34CE00E1E3C0A7F00BF549B /* FreeTimeslotCalculator.swift in Sources */,
+				E3163B7F1D402C48005FCFE4 /* SpreadsheetAPIDelegateSpy.swift in Sources */,
+				E3B37E7B1C2C9B0D00495C7B /* TWBeaconService.swift in Sources */,
+				E3076B351CA5E9D5000A8603 /* GoogleSettings.swift in Sources */,
+				E376C4B11CCD42B9008AE799 /* BeaconManager.swift in Sources */,
+				E3163B601D3B0A67005FCFE4 /* SheetDriveWrapper.swift in Sources */,
+				E3DBD8581C947F9500BDB79C /* Schedule.swift in Sources */,
+				E39581371C18F9BE00383010 /* Wiring.swift in Sources */,
+				E3A54F9D1CA96372008B0343 /* CalendarEventUnitTest.swift in Sources */,
+				E3163B771D3C52C6005FCFE4 /* FakeSheetDriveWrapper.swift in Sources */,
+				E3634BCE1E0604010087B01B /* AppSettings.swift in Sources */,
+				E3B4B5BC1CA71A960057BB4A /* CalendarEventsProcessorUnitTest.swift in Sources */,
+				E381290A1DE9BBA3007ABEA1 /* FileServiceSpy.swift in Sources */,
+				E3649EE41D745C99003E1F51 /* GoogleAuthorizationErrorHandlerTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E35F58F11B07731D003D04DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E35F58D91B07731D003D04DB /* iBOfficeBeacon */;
+			targetProxy = E35F58F01B07731D003D04DB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E3A828691DDF1ACE00010896 /* MainV1.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E3A828681DDF1ACE00010896 /* Base */,
+			);
+			name = MainV1.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E3240AD01CAB3714009FEFDE /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mohammed BinSabbar (2DJKLJFV99)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mohammed BinSabbar (2DJKLJFV99)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = Binsabbar.iBOfficeBeacon;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Beta;
+		};
+		E3240AD11CAB3714009FEFDE /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90F6EF50CA6268AF4884E716 /* Pods-iBOfficeBeacon.beta.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_ENVIRONMENT = test;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mohammed BinSabbar (2DJKLJFV99)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mohammed BinSabbar (2DJKLJFV99)";
+				DEVELOPMENT_TEAM = 2DJKLJFV99;
+				ENABLE_BITCODE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"$(inherited)",
+					"BITHOCKEY_VERSION=\"@\\\"3.8.6\\\"\"",
+					"BITHOCKEY_C_VERSION=\"\\\"3.8.6\\\"\"",
+					"BITHOCKEY_BUILD=\"@\\\"57\\\"\"",
+					"BITHOCKEY_C_BUILD=\"\\\"57\\\"\"",
+				);
+				INFOPLIST_FILE = iBOfficeBeacon/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.binsabbar.iBOfficeBeacon.dev;
+				PRODUCT_NAME = "$(TARGET_NAME).beta";
+				PROVISIONING_PROFILE = "1b8c5627-9fc4-4cfc-9d65-47db123d7ef1";
+				PROVISIONING_PROFILE_SPECIFIER = "TW Test Beta Setup";
+				SWIFT_OBJC_BRIDGING_HEADER = iBOfficeBeacon/ObjCBridge.h;
+				SWIFT_VERSION = 2.3;
+			};
+			name = Beta;
+		};
+		E3240AD21CAB3714009FEFDE /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50905EC6D56D002F300D108B /* Pods-iBOfficeBeaconTests.beta.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2DJKLJFV99;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = iBOfficeBeaconTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Binsabbar.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = iBOfficeBeaconTests/ObjCBridge.h;
+				SWIFT_VERSION = 2.3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iBOfficeBeacon.beta.app/iBOfficeBeacon.beta";
+			};
+			name = Beta;
+		};
+		E35F58F71B07731D003D04DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: binsabbar@me.com (VG9QD9PJSY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: binsabbar@me.com (VG9QD9PJSY)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = Binsabbar.iBOfficeBeacon;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E35F58F81B07731D003D04DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ThoughtWorks Inc";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.binsabbar.iBOfficeBeacon;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E35F58FA1B07731D003D04DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8789170B7A00812EA3216033 /* Pods-iBOfficeBeacon.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_ENVIRONMENT = dev;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: binsabbar@me.com (VG9QD9PJSY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2DJKLJFV99;
+				ENABLE_BITCODE = YES;
+				ENABLE_TESTABILITY = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"$(inherited)",
+					"BITHOCKEY_VERSION=\"@\\\"3.8.6\\\"\"",
+					"BITHOCKEY_C_VERSION=\"\\\"3.8.6\\\"\"",
+					"BITHOCKEY_BUILD=\"@\\\"57\\\"\"",
+					"BITHOCKEY_C_BUILD=\"\\\"57\\\"\"",
+				);
+				INFOPLIST_FILE = iBOfficeBeacon/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.binsabbar.iBOfficeBeacon.dev;
+				PRODUCT_NAME = "$(TARGET_NAME).dev";
+				PROVISIONING_PROFILE = "f2bf6b63-41d5-4816-a419-83ad59ac381b";
+				PROVISIONING_PROFILE_SPECIFIER = "iOS 10 Provision Profile";
+				SWIFT_OBJC_BRIDGING_HEADER = iBOfficeBeacon/ObjCBridge.h;
+				SWIFT_VERSION = 2.3;
+			};
+			name = Debug;
+		};
+		E35F58FB1B07731D003D04DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 031BDF8FEBEC7AA0C81D16F3 /* Pods-iBOfficeBeacon.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_ENVIRONMENT = prod;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ThoughtWorks Inc";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ThoughtWorks Inc";
+				DEVELOPMENT_TEAM = YFWXADMX4E;
+				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"$(inherited)",
+					"BITHOCKEY_VERSION=\"@\\\"3.8.6\\\"\"",
+					"BITHOCKEY_C_VERSION=\"\\\"3.8.6\\\"\"",
+					"BITHOCKEY_BUILD=\"@\\\"57\\\"\"",
+					"BITHOCKEY_C_BUILD=\"\\\"57\\\"\"",
+				);
+				INFOPLIST_FILE = iBOfficeBeacon/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.binsabbar.iBOfficeBeacon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "aceed285-04f5-47c8-9d68-7c0aec3dd670";
+				PROVISIONING_PROFILE_SPECIFIER = "iBOfficeBeacon Prod Profile";
+				"SDKROOT[arch=*]" = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = iBOfficeBeacon/ObjCBridge.h;
+				SWIFT_VERSION = 2.3;
+			};
+			name = Release;
+		};
+		E35F58FD1B07731D003D04DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68070009C9D60BB87813D1E1 /* Pods-iBOfficeBeaconTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2DJKLJFV99;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = iBOfficeBeaconTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Binsabbar.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = iBOfficeBeaconTests/ObjCBridge.h;
+				SWIFT_VERSION = 2.3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iBOfficeBeacon.dev.app/iBOfficeBeacon.dev";
+			};
+			name = Debug;
+		};
+		E35F58FE1B07731D003D04DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD76D6A8031FEE8C0FE72754 /* Pods-iBOfficeBeaconTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2DJKLJFV99;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = iBOfficeBeaconTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.binsabbar.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = iBOfficeBeaconTests/ObjCBridge.h;
+				SWIFT_VERSION = 2.3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iBOfficeBeacon.app/iBOfficeBeacon";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E35F58D51B07731D003D04DB /* Build configuration list for PBXProject "iBOfficeBeacon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E35F58F71B07731D003D04DB /* Debug */,
+				E3240AD01CAB3714009FEFDE /* Beta */,
+				E35F58F81B07731D003D04DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E35F58F91B07731D003D04DB /* Build configuration list for PBXNativeTarget "iBOfficeBeacon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E35F58FA1B07731D003D04DB /* Debug */,
+				E3240AD11CAB3714009FEFDE /* Beta */,
+				E35F58FB1B07731D003D04DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E35F58FC1B07731D003D04DB /* Build configuration list for PBXNativeTarget "iBOfficeBeaconTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E35F58FD1B07731D003D04DB /* Debug */,
+				E3240AD21CAB3714009FEFDE /* Beta */,
+				E35F58FE1B07731D003D04DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E35F58D21B07731D003D04DB /* Project object */;
+}
