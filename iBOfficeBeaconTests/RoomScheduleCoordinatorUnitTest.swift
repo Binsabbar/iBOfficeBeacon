@@ -10,7 +10,7 @@ import XCTest
 
 class RoomScheduleCoordinatorUnitTest: XCTestCase {
     
-    var subject = RoomScheduleCoordinator()
+    var subject = RoomScheduleCoordinator(timeslotsCalculator: FreeTimeslotCalculator())
     let eventTitle = "Unit testing"
     let now = NSDate()
 

@@ -154,7 +154,7 @@ class Wiring: NSObject {
     }
     
     func roomScheduleCoordinator() -> RoomScheduleCoordinator {
-        return RoomScheduleCoordinator()
+        return RoomScheduleCoordinator(timeslotsCalculator: FreeTimeslotCalculator())
     }
     
     func authorizationController() -> AuthController {

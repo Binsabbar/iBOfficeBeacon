@@ -11,6 +11,11 @@ import Foundation
 class RoomScheduleCoordinator {
 
     var datetimeNow: NSDate!
+    let timeslotsCalculator: FreeTimeslotCalculator
+    
+    init(timeslotsCalculator: FreeTimeslotCalculator) {
+        self.timeslotsCalculator = timeslotsCalculator
+    }
     
     func findCurrentRoomScheduleFromEvents(events: [CalendarEvent]) -> RoomSchedule {
         datetimeNow = NSDate()
@@ -23,7 +28,7 @@ class RoomScheduleCoordinator {
             schedule = RoomSchedule.createFreeRoomSchedule()
         }
         
-        schedule.availableTimeSlots = FreeTimeslotCalculator().calculateFreeTimeslotsIn(schedule)
+        schedule.availableTimeSlots = timeslotsCalculator.calculateFreeTimeslotsIn(schedule)
         
         return schedule
     }
