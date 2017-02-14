@@ -44,8 +44,8 @@ class FreeTimeslotCalculatorTest: XCTestCase {
         let result: [FreeTimeslot] = subject.calculateFreeTimeslotsIn(schedule)
         
         XCTAssertTrue(result.count == 2)
-        XCTAssertEqual(result.first!.duration, FreeTimeslotDuration.halfAnHour)
-        XCTAssertEqual(result.last!.duration, FreeTimeslotDuration.oneHour)
+        XCTAssertEqual(result.last!.duration, FreeTimeslotDuration.halfAnHour)
+        XCTAssertEqual(result.first!.duration, FreeTimeslotDuration.oneHour)
     }
     
     func testItReturnsThreeTimeslotIfRoomIsAvailableForMoreThanTwoHours() {
@@ -54,8 +54,8 @@ class FreeTimeslotCalculatorTest: XCTestCase {
         let result: [FreeTimeslot] = subject.calculateFreeTimeslotsIn(schedule)
         
         XCTAssertTrue(result.count == 3)
-        XCTAssertEqual(result[0].duration, FreeTimeslotDuration.halfAnHour)
+        XCTAssertEqual(result[2].duration, FreeTimeslotDuration.halfAnHour)
         XCTAssertEqual(result[1].duration, FreeTimeslotDuration.oneHour)
-        XCTAssertEqual(result[2].duration, FreeTimeslotDuration.twoHours)
+        XCTAssertEqual(result[0].duration, FreeTimeslotDuration.twoHours)
     }
 }

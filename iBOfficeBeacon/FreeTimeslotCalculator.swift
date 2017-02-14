@@ -10,48 +10,52 @@ import Foundation
 
 class FreeTimeslotCalculator {
     
+    let TWO_HOURS = Double(Duration.twoHours.minutes())
+    let HALF_AN_HOUR = Double(Duration.halfAnHour.minutes())
+    
     typealias Duration = FreeTimeslotDuration
+    
     func calculateFreeTimeslotsIn(schedule: RoomSchedule) -> [FreeTimeslot]{
-        var timeslots = [FreeTimeslot]()
-        
         if !schedule.isBusyNow {
-            let minuteSlot = 30
-            var availableMinutes = schedule.minutesTillNextEvent!
-            
-            if availableMinutes < 30 {
-                let start = NSDate()
-                let doubleMinutes = Double(availableMinutes)
-                let end = start.dateByAddingTimeInterval(doubleMinutes * 60)
-                let timeslot = FreeTimeslot(duration: .lessThanHalfAnHour(minutes: availableMinutes),
-                                            from: start, to: end)
-                timeslots.append(timeslot)
-            }
-            
-            if availableMinutes >= Duration.halfAnHour.minutes() {
-                let start = NSDate()
-                let end = start.dateByAddingTimeInterval(30 * 60)
-                let timeslot = FreeTimeslot(duration: .halfAnHour, from: start, to: end)
-                timeslots.append(timeslot)
-            }
-            
-            availableMinutes = availableMinutes - (2 * minuteSlot)
-            if availableMinutes > 0 {
-                let start = NSDate()
-                let end = start.dateByAddingTimeInterval(60 * 60)
-                let timeslot = FreeTimeslot(duration: .oneHour, from: start, to: end)
-                timeslots.append(timeslot)
-            }
-            
-            availableMinutes = availableMinutes - (2 * minuteSlot)
-            if availableMinutes > 0 {
-                let start = NSDate()
-                let end = start.dateByAddingTimeInterval(120 * 60)
-                let timeslot = FreeTimeslot(duration: .twoHours, from: start, to: end)
-                timeslots.append(timeslot)
-            }
+            return buildTimeslots(from: schedule.minutesTillNextEvent!)
+        }
+        return [FreeTimeslot]()
+    }
+    
+    private func buildTimeslots(from availableTime: Int) -> [FreeTimeslot] {
+        let timeSlots: [FreeTimeslot]
+        var durations = [Duration]()
+        
+        switch true {
+            case availableTime >= Duration.twoHours.minutes():
+                durations = [.twoHours, .oneHour, .halfAnHour]
+                timeSlots = makeTimelotsFrom(durations)
+                break
+            case availableTime >= Duration.oneHour.minutes():
+                durations = [.oneHour, .halfAnHour]
+                timeSlots = makeTimelotsFrom(durations)
+            break
+            case availableTime >= Duration.halfAnHour.minutes():
+                durations = [.halfAnHour]
+                timeSlots = makeTimelotsFrom(durations)
+            break
+            default:
+                durations = [.lessThanHalfAnHour(minutes: availableTime)]
+                timeSlots = makeTimelotsFrom(durations)
+                break
         }
         
-        
-        return timeslots
+        return timeSlots
+    }
+    
+    private func makeTimelotsFrom(durations: [Duration]) -> [FreeTimeslot] {
+        let start = NSDate()
+        var timeSlots = [FreeTimeslot]()
+        durations.forEach({
+            let end = start.dateByAddingTimeInterval(Double($0.minutes() * 60))
+            let timeSlot = FreeTimeslot(duration: $0, from: start, to: end)
+            timeSlots.append(timeSlot)
+        })
+        return timeSlots
     }
 }
