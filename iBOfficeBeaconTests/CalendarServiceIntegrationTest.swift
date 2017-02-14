@@ -23,7 +23,7 @@ class CalendarServiceIntegrationTest: XCTestCase {
         super.setUp()
         service = GTLRCalendarService()
         eventProcessor = CalendarEventsProcessor()
-        coordinator = RoomScheduleCoordinator()
+        coordinator = RoomScheduleCoordinator(timeslotsCalculator: FreeTimeslotCalculator())
         calendarClient = CalendarClient(withGoogleService: service, errorHandler: ErrorHandlerSpy())
         officeRoom = OfficeRoom(withName: "", calendarID: calendarID, minor: 12)
         subject = CalendarService(calendarClient: calendarClient,
