@@ -9,7 +9,7 @@
 import Foundation
 
 
-class FreeTimeslot {
+class FreeTimeslot: Hashable {
 
     let duration: FreeTimeslotDuration
     let from: NSDate
@@ -20,6 +20,16 @@ class FreeTimeslot {
         self.from = from
         self.to = to
     }
+    
+    var hashValue: Int {
+        return "\(to),\(from),\(duration))".hashValue
+    }
+}
+
+func ==(lhs: FreeTimeslot, rhs: FreeTimeslot) -> Bool {
+    return lhs.duration == rhs.duration &&
+        lhs.from.isEqualToDate(rhs.from) &&
+        lhs.to.isEqualToDate(rhs.to)
 }
 
 enum FreeTimeslotDuration: Hashable {

@@ -8,19 +8,13 @@
 
 import Foundation
 
-enum Timeslots:Int {
-    case lessThanHalf=1
-    case halfAnHour=2
-    case oneHour=3
-    case twoHours=4
-}
-
 class RoomSchedule:NSObject {
+    
     var isBusyNow = false
-    var nextAvailable: NSDate?
     var minutesTillNextEvent:Int?
+    var availableTimeSlots = Set<FreeTimeslot>()
+    var nextAvailable: NSDate?
     var currentEvent: CalendarEvent?
-    var availableTimeSlots = Set<Timeslots>()
 
     class func createFreeRoomSchedule() -> RoomSchedule {
         let roomSchedule = RoomSchedule()
