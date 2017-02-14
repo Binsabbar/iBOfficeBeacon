@@ -16,14 +16,14 @@ class RoomScheduleViewModelTest: XCTestCase {
     func testItSetsTheViewModelForBusyRoomSchedule() {
         let busySchedule = createBusySchedule()
 
-        let expectedDetails = "Booked until\n\n\(dateToString(busySchedule.nextAvailable!))"
+        let expectedDetails = "Booked until\n\n\(dateToString(busySchedule.nextAvailable))"
         
         subject = RoomScheduleViewModel(model: busySchedule, room: anyRoom)
         
         XCTAssertTrue(subject.shouldHideBookButton)
         XCTAssertTrue(subject.statusLabelBackgroundColor.isEqual(AppColours.red))
         XCTAssertTrue(isString(firstString: subject.statusLabelTitle, equalsToOtherString: "Room is busy", ignoreCase: false))
-        XCTAssertTrue(subject.scheduleLabelTitle == busySchedule.currentEvent?.title)
+        XCTAssertTrue(subject.scheduleLabelTitle == busySchedule.currentEvent.title)
         XCTAssertTrue(isString(firstString: subject.scheduleTimeInfoAttributedString.string, equalsToOtherString: expectedDetails, ignoreCase: true))
     }
     
@@ -79,7 +79,7 @@ class RoomScheduleViewModelTest: XCTestCase {
         XCTAssertTrue(subject.shouldHideBookButton)
         XCTAssertTrue(subject.statusLabelBackgroundColor.isEqual(AppColours.red))
         XCTAssertTrue(isString(firstString: subject.statusLabelTitle, equalsToOtherString: "Room is busy", ignoreCase: false))
-        XCTAssertTrue(subject.scheduleLabelTitle == busySchedule.currentEvent?.title)
+        XCTAssertTrue(subject.scheduleLabelTitle == busySchedule.currentEvent.title)
         XCTAssertTrue(isString(firstString: subject.scheduleTimeInfoAttributedString.string, equalsToOtherString: expectedDetails, ignoreCase: true))
     }
     
@@ -93,33 +93,21 @@ class RoomScheduleViewModelTest: XCTestCase {
         XCTAssertTrue(model.shouldHideBookButton)
     }
     
-    private func createBusyScheduleWithAllDayEvent() -> RoomSchedule {
-        let busySchedule = RoomSchedule()
-        busySchedule.isBusyNow = true
-        busySchedule.minutesTillNextEvent = 0
-        busySchedule.nextAvailable = NSDate().dateByAddingTimeInterval(oneHour)
+    private func createBusyScheduleWithAllDayEvent() -> BusySchedule {
         let start = NSDate().beginningOfDay()
         let end = start.tomorrow()
-        busySchedule.currentEvent = CalendarEvent(start: start, end: end, title: "Testing RoomScheduleVM")
-        return busySchedule
+        let currentEvent = CalendarEvent(start: start, end: end, title: "Testing RoomScheduleVM")
+        return BusySchedule(with: currentEvent, nextAvailable: end)
     }
     
-    private func createFreeScheduleWithFreeTill(minutes: Int) -> RoomSchedule {
-        let freeSchedule = RoomSchedule()
-        freeSchedule.isBusyNow = false
-        freeSchedule.minutesTillNextEvent = minutes
-        freeSchedule.nextAvailable = nil
-        freeSchedule.currentEvent = nil
-        return freeSchedule
+    private func createFreeScheduleWithFreeTill(minutes: Int) -> FreeSchedule {
+        return FreeSchedule(for: minutes, with: Set())
     }
     
-    private func createBusySchedule() -> RoomSchedule {
-        let busySchedule = RoomSchedule()
-        busySchedule.isBusyNow = true
-        busySchedule.minutesTillNextEvent = 0
-        busySchedule.nextAvailable = NSDate().dateByAddingTimeInterval(oneHour)
-        busySchedule.currentEvent = CalendarEvent(start: NSDate(), end: NSDate(), title: "Testing RoomScheduleVM")
-        return busySchedule
+    private func createBusySchedule() -> BusySchedule {
+        let scheduleEndsAt = NSDate().dateByAddingTimeInterval(oneHour)
+        let event = CalendarEvent(start: NSDate(), end: NSDate(), title: "Testing RoomScheduleVM")
+        return BusySchedule(with: event, nextAvailable: scheduleEndsAt)
     }
     
     private func dateToString(date: NSDate) -> String {

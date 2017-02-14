@@ -12,30 +12,27 @@ class RoomScheduleCoordinator {
 
     var datetimeNow: NSDate!
     let timeslotsCalculator: FreeTimeslotCalculator
+    let MAX_TIMESLOT_MINUTES = 120
     
     init(timeslotsCalculator: FreeTimeslotCalculator) {
         self.timeslotsCalculator = timeslotsCalculator
     }
     
-    func findCurrentRoomScheduleFromEvents(events: [CalendarEvent]) -> RoomSchedule {
+    func findCurrentRoomScheduleFromEvents(events: [CalendarEvent]) -> ScheduleProtocol {
         datetimeNow = NSDate()
-        var schedule: RoomSchedule
+        
         let sortedEvents = sortEventsInAscendingOrder(filterOutPastEvents(events))
         
         if sortedEvents.count > 0 {
-            schedule = self.processMultipleEvents(sortedEvents)
+            return self.processEvents(sortedEvents)
         } else {
-            schedule = RoomSchedule.createFreeRoomSchedule()
+            let freeTimeslots = timeslotsCalculator.calculateFreeTimeslotsFrom(minutes: MAX_TIMESLOT_MINUTES)
+            return FreeSchedule(for: 0, with: freeTimeslots)
         }
-        
-        schedule.availableTimeSlots = timeslotsCalculator.calculateFreeTimeslotsIn(schedule)
-        
-        return schedule
     }
     
-    private func processMultipleEvents(events: [CalendarEvent]) ->  RoomSchedule {
+    private func processEvents(events: [CalendarEvent]) ->  ScheduleProtocol {
         let firstEvent = events.first!
-        let schedule = processSingleEvent(firstEvent)
         
         if isACurrentEvent(firstEvent) {
             var previousEvent = firstEvent
@@ -44,14 +41,15 @@ class RoomScheduleCoordinator {
                 if events[i].isConsecutiveToAnotherEvent(previousEvent) {
                     previousEvent = events[i]
                     endDatetimeOfLastConsecutiveEvent = previousEvent.endDatetime
-                } else {
-                    break
-                }
+                } else { break }
             }
-            schedule.nextAvailable = endDatetimeOfLastConsecutiveEvent
+            return BusySchedule(with: firstEvent,
+                                nextAvailable: endDatetimeOfLastConsecutiveEvent)
         }
         
-        return schedule
+        let minutesTillNextEvent = timeIntervalInMinutesFromDate(firstEvent.startDatetime)
+        let freeTimeslots = timeslotsCalculator.calculateFreeTimeslotsFrom(minutes: minutesTillNextEvent)
+        return FreeSchedule(for: minutesTillNextEvent, with: freeTimeslots)
     }
     
 
@@ -65,21 +63,6 @@ class RoomScheduleCoordinator {
         return events.sort { (event, anotherEvent) -> Bool in
             return event.startDatetime.isEarlierThanDate(anotherEvent.startDatetime)
         }
-    }
-    
-    private func processSingleEvent(event: CalendarEvent) -> RoomSchedule {
-        let schedule = RoomSchedule()
-        
-        schedule.isBusyNow = isACurrentEvent(event)
-        
-        if schedule.isBusyNow {
-            schedule.nextAvailable = event.endDatetime
-            schedule.currentEvent = event
-        } else if event.startDatetime.isLaterThanDate(datetimeNow){
-            schedule.minutesTillNextEvent = timeIntervalInMinutesFromDate(event.startDatetime)
-        }
-        
-        return schedule
     }
     
     private func timeIntervalInMinutesFromDate(date: NSDate) -> Int {

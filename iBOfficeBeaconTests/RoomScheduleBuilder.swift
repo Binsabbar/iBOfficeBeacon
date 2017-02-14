@@ -9,38 +9,49 @@
 import Foundation
 
 class RoomScheduleBuilder {
-    
-    var roomSchedule: RoomSchedule
-    var minutesTillNextEvent: Int?
+
+    private let isBusy: Bool
+    private var minutesTillNextEvent: Int = 0
+    private var timeslots = Set<FreeTimeslot>()
+    private var event: CalendarEvent?
+    private var availableAt = NSDate()
     
     typealias EventBuilder = CalendarEventBuilder
-    private init(schedule: RoomSchedule) {
-        self.roomSchedule = schedule
+    
+    private init(timeslots: Set<FreeTimeslot>) {
+        isBusy = false
+        self.timeslots = timeslots
     }
     
-    class func freeRoomSchedule () -> RoomScheduleBuilder {
-        let freeSchedule = RoomSchedule.createFreeRoomSchedule()
-        return RoomScheduleBuilder(schedule: freeSchedule)
+    private init(event: CalendarEvent) {
+        isBusy = true
+        availableAt = event.endDatetime
+        self.event = event
     }
     
-    func withNextEventStartsIn(minutes: Int) -> RoomScheduleBuilder {
+    class func free(with timeslots: Set<FreeTimeslot>) -> RoomScheduleBuilder {
+        return RoomScheduleBuilder(timeslots: timeslots)
+    }
+    
+    class func busy(with event: CalendarEvent) -> RoomScheduleBuilder {
+        return RoomScheduleBuilder(event: event)
+    }
+    
+    func withAvailableAt(availableAt: NSDate) -> RoomScheduleBuilder {
+        self.availableAt = availableAt
+        return self
+    }
+    
+    func withNextEvent(startsIn minutes: Int) -> RoomScheduleBuilder {
         minutesTillNextEvent = minutes
         return self
     }
     
-    func build() -> RoomSchedule {
-        let schedule = RoomSchedule()
-        schedule.isBusyNow = roomSchedule.isBusyNow
-        if schedule.isBusyNow {
-            schedule.currentEvent =
-                EventBuilder
-                    .currentCalendarEvents(withLength: oneHour)
-                    .build()
-            schedule.nextAvailable = schedule.currentEvent?.endDatetime
+    func build() -> ScheduleProtocol {
+        if isBusy {
+         return FreeSchedule(for: minutesTillNextEvent, with: timeslots)
         } else {
-            schedule.minutesTillNextEvent = minutesTillNextEvent
+            return BusySchedule(with: event!, nextAvailable: availableAt)
         }
-        
-        return schedule
     }
 }

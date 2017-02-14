@@ -26,11 +26,11 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         let end = start.dateByAddingTimeInterval(oneHour)
         let events = [CalendarEvent(start: start, end: end, title: eventTitle)]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events)
+        let result = subject.findCurrentRoomScheduleFromEvents(events) as! BusySchedule
         
-        XCTAssertTrue(result.isBusyNow)
+        XCTAssertTrue(result.isBusy)
         XCTAssertTrue(result.nextAvailable == end)
-        XCTAssertTrue(result.currentEvent!.isEqualTo(events.first!))
+        XCTAssertTrue(result.currentEvent.isEqualTo(events.first!))
     }
 
     //MARK: The event is in the past
@@ -42,7 +42,7 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         
         let result = subject.findCurrentRoomScheduleFromEvents(events)
         
-        XCTAssertFalse(result.isBusyNow)
+        XCTAssertFalse(result.isBusy)
     }
     
     //MARK: The event is the future
@@ -55,7 +55,7 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         let result = subject.findCurrentRoomScheduleFromEvents(events)
         
         let minutesTillFree = ceil(start.timeIntervalSinceNow / 60)
-        XCTAssertFalse(result.isBusyNow)
+        XCTAssertFalse(result.isBusy)
         XCTAssertTrue(result.minutesTillNextEvent == Int(minutesTillFree))
     }
     
@@ -71,11 +71,11 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         
         let events = [firstEvent, secondEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events)
+        let result = subject.findCurrentRoomScheduleFromEvents(events) as! BusySchedule
         
-        XCTAssertTrue(result.isBusyNow)
+        XCTAssertTrue(result.isBusy)
         XCTAssertTrue(result.nextAvailable == _2ndEnd)
-        XCTAssertTrue(result.currentEvent!.isEqualTo(firstEvent))
+        XCTAssertTrue(result.currentEvent.isEqualTo(firstEvent))
     }
     
     //MARK: The 1st event is now, and  events are NOT consecutive
@@ -90,9 +90,9 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         
         let events = [firstEvent, secondEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events)
+        let result = subject.findCurrentRoomScheduleFromEvents(events) as! BusySchedule
         
-        XCTAssertTrue(result.isBusyNow)
+        XCTAssertTrue(result.isBusy)
         XCTAssertTrue(result.nextAvailable == end)
     }
     
@@ -109,7 +109,7 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         let result = subject.findCurrentRoomScheduleFromEvents(events)
         
         let minutesTillFree = ceil(start.timeIntervalSinceNow / 60)
-        XCTAssertFalse(result.isBusyNow)
+        XCTAssertFalse(result.isBusy)
         XCTAssertTrue(result.minutesTillNextEvent == Int(minutesTillFree))
     }
     
@@ -126,7 +126,7 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         
         let result = subject.findCurrentRoomScheduleFromEvents(events)
         
-        XCTAssertFalse(result.isBusyNow)
+        XCTAssertFalse(result.isBusy)
     }
     
     //MARK: The 1st event is in the past, and 2nd event in the future
@@ -144,7 +144,7 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         let result = subject.findCurrentRoomScheduleFromEvents(events)
         
         let minutesTillFree = ceil(_2ndStart.timeIntervalSinceNow / 60)
-        XCTAssertFalse(result.isBusyNow)
+        XCTAssertFalse(result.isBusy)
         XCTAssertTrue(result.minutesTillNextEvent == Int(minutesTillFree))
     }
     
@@ -163,11 +163,11 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         
         let events = [firstEvent, secondEvent, thirdEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events)
+        let result = subject.findCurrentRoomScheduleFromEvents(events) as! BusySchedule
         
-        XCTAssertTrue(result.isBusyNow)
+        XCTAssertTrue(result.isBusy)
         XCTAssertTrue(result.nextAvailable == _3rdEnd)
-        XCTAssertTrue(result.currentEvent!.isEqualTo(firstEvent))
+        XCTAssertTrue(result.currentEvent.isEqualTo(firstEvent))
     }
     
     //MARK: 1st and 2nd are consecutive, and now, but 3rd is future
@@ -185,9 +185,9 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         
         let events = [firstEvent, secondEvent, thirdEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events)
+        let result = subject.findCurrentRoomScheduleFromEvents(events) as! BusySchedule
         
-        XCTAssertTrue(result.isBusyNow)
+        XCTAssertTrue(result.isBusy)
         XCTAssertTrue(result.nextAvailable == _2ndEnd)
     }
     
@@ -205,11 +205,11 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         
         let events = [firstEvent, secondEvent, thirdEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events)
+        let result = subject.findCurrentRoomScheduleFromEvents(events) as! BusySchedule
         
-        XCTAssertTrue(result.isBusyNow)
+        XCTAssertTrue(result.isBusy)
         XCTAssertTrue(result.nextAvailable == _3rdEnd)
-        XCTAssertTrue(result.currentEvent!.isEqualTo(secondEvent))
+        XCTAssertTrue(result.currentEvent.isEqualTo(secondEvent))
     }
     
     //MARK: 1st and 2nd in the past, but 3rd is now and consecutive to 2nd
@@ -226,11 +226,11 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         
         let events = [firstEvent, secondEvent, thirdEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events)
+        let result = subject.findCurrentRoomScheduleFromEvents(events) as! BusySchedule
         
-        XCTAssertTrue(result.isBusyNow)
+        XCTAssertTrue(result.isBusy)
         XCTAssertTrue(result.nextAvailable == _3rdEnd)
-        XCTAssertTrue(result.currentEvent!.isEqualTo(thirdEvent))
+        XCTAssertTrue(result.currentEvent.isEqualTo(thirdEvent))
     }
     
     //MARK: 1st and 2nd in the past, but 3rd is future
@@ -249,8 +249,9 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         let events = [firstEvent, secondEvent, thirdEvent]
         
         let result = subject.findCurrentRoomScheduleFromEvents(events)
+        
         let minutesTill3rdEvent = ceil(_3rdStart.timeIntervalSinceNow / 60)
-        XCTAssertFalse(result.isBusyNow)
+        XCTAssertFalse(result.isBusy)
         XCTAssertTrue(result.minutesTillNextEvent == Int(minutesTill3rdEvent))
     }
     
@@ -262,7 +263,7 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         
         let events = [futureEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeSlots
+        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeslots
         
         
         XCTAssertTrue(result.contains{$0.duration == .halfAnHour})
@@ -279,7 +280,7 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         
         let events = [futureEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeSlots
+        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeslots
         
         XCTAssertTrue(result.count == 2)
         XCTAssertTrue(result.contains{$0.duration == .halfAnHour})
@@ -295,7 +296,7 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         
         let events = [futureEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeSlots
+        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeslots
         
         XCTAssertTrue(result.count == 1)
         XCTAssertTrue(result.contains{$0.duration == .halfAnHour})
@@ -309,7 +310,7 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         
         let events = [futureEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeSlots
+        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeslots
         
         XCTAssertTrue(result.count == 1)
         XCTAssertTrue(result.contains{$0.duration == .halfAnHour})
@@ -325,7 +326,7 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
         
         let events = [futureEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeSlots
+        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeslots
         
         XCTAssertTrue(result.count == 1)
         XCTAssertTrue(result.contains{$0.duration == .lessThanHalfAnHour(minutes: minutesTillNextEvent)})
