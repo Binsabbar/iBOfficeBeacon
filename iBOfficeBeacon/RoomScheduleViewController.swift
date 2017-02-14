@@ -23,7 +23,7 @@ class RoomScheduleViewController: UIViewController {
     private var gradientView: GradientView!
     
     var officeRoom: OfficeRoom?
-    var currentSchedule: RoomSchedule?
+    var currentSchedule: ScheduleProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,7 +105,7 @@ class RoomScheduleViewController: UIViewController {
     }
     
     //MARK: - UI Tasks
-    private func setupScheduleLabelsWithSchedule(schedule: RoomSchedule, room: OfficeRoom) {
+    private func setupScheduleLabelsWithSchedule(schedule: ScheduleProtocol, room: OfficeRoom) {
         let scheduleVM = RoomScheduleViewModel(model: schedule, room: room)
         
         roomStatusLabel.text = scheduleVM.statusLabelTitle

@@ -10,16 +10,16 @@ import Foundation
 
 class RoomScheduleViewModel {
     
-    let model: RoomSchedule
+    let model: ScheduleProtocol
     let room: OfficeRoom
     
-    init(model: RoomSchedule, room: OfficeRoom) {
+    init(model: ScheduleProtocol, room: OfficeRoom) {
         self.model = model
         self.room = room
     }
     
     var shouldHideBookButton: Bool {
-        return model.isBusyNow || room.calendarID.isEmpty
+        return model.isBusy || room.calendarID.isEmpty
     }
     
     var bookButtonBackgroundColor: UIColor {
@@ -35,15 +35,15 @@ class RoomScheduleViewModel {
     }
 
     var gradientViewTopColor: UIColor {
-        return model.isBusyNow ? AppColours.darkRed:AppColours.darkGreen
+        return model.isBusy ? AppColours.darkRed:AppColours.darkGreen
     }
     
     var gradientViewMiddleColor: UIColor {
-        return model.isBusyNow ? AppColours.mediumRed:AppColours.mediumGreen
+        return model.isBusy ? AppColours.mediumRed:AppColours.mediumGreen
     }
     
     var gradientViewBottomColor: UIColor {
-        return model.isBusyNow ? AppColours.lightRed:AppColours.lightGreen
+        return model.isBusy ? AppColours.lightRed:AppColours.lightGreen
     }
 
     var scheduleTimeInfoBackgroundColor: UIColor {
@@ -51,17 +51,16 @@ class RoomScheduleViewModel {
     }
     
     var statusLabelTitle: String {
-        return model.isBusyNow ? "Room is busy":"Room is free"
+        return model.isBusy ? "Room is busy":"Room is free"
     }
     
     var statusLabelBackgroundColor: UIColor {
-        return model.isBusyNow ? AppColours.red:AppColours.green
+        return model.isBusy ? AppColours.red:AppColours.green
     }
     
     var scheduleLabelTitle: String {
-        if model.isBusyNow,
-        let event = model.currentEvent {
-            return event.title as String
+        if let busySchedule = model as? BusySchedule {
+            return busySchedule.currentEvent.title as String
         }
         return ""
     }
@@ -70,16 +69,17 @@ class RoomScheduleViewModel {
         let attrs = [NSFontAttributeName: UIFont.boldSystemFontOfSize(30),
                      NSForegroundColorAttributeName: UIColor.whiteColor()]
         let attributedText = NSMutableAttributedString()
-        if model.isBusyNow {
-            if let event = model.currentEvent where event.isAllDayEvent() {
+        if let model = model as? BusySchedule {
+            if model.currentEvent.isAllDayEvent() {
                 attributedText.appendAttributedString(NSAttributedString(string: "Booked all day"))
-            } else if let date = model.nextAvailable {
+            } else {
+                let date = model.nextAvailable
                 attributedText.appendAttributedString(NSAttributedString(string: "Booked until\n\n"))
                 attributedText.appendAttributedString(NSAttributedString(string: dateToString(date), attributes: attrs))
             }
             
-        } else if let minutes = model.minutesTillNextEvent {
-            let date = minutesToDate(minutes)
+        } else {
+            let date = minutesToDate(model.minutesTillNextEvent)
             attributedText.appendAttributedString(NSAttributedString(string: "Free until\n\n"))
             attributedText.appendAttributedString(NSAttributedString(string: dateToString(date), attributes: attrs))
         }

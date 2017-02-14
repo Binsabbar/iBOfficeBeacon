@@ -10,14 +10,14 @@ import Foundation
 
 class CalendarService: NSObject {
     
-    typealias onFoundScheduleHanlder = (RoomSchedule?) -> Void
+    typealias onFoundScheduleHandler = (ScheduleProtocol?) -> Void
     
     let calendarClient: CalendarClient
     let eventProcessor: CalendarEventsProcessor
     let coordinator: RoomScheduleCoordinator
     let dateFormatter = NSDateFormatter()
     
-    var handler: onFoundScheduleHanlder?
+    var handler: onFoundScheduleHandler?
     
     init(calendarClient: CalendarClient, eventProcessor: CalendarEventsProcessor,
          coordinator: RoomScheduleCoordinator) {
@@ -27,7 +27,7 @@ class CalendarService: NSObject {
         super.init()
     }
     
-    func findScheduleForRoom(room: OfficeRoom, onFoundHandler handler: onFoundScheduleHanlder) {
+    func findScheduleForRoom(room: OfficeRoom, onFoundHandler handler: onFoundScheduleHandler) {
         self.handler = handler
         calendarClient.fetchEventsForCalendarWithID(room.calendarID, onFetched:
             { events in
@@ -36,26 +36,23 @@ class CalendarService: NSObject {
                 self.handler?(schedule)
             },
             onFailur: {error in
-                self.handler?(RoomSchedule())
+                // display an alert
             })
     }
     
     typealias BookRoomCallBack = (Bool)->Void
-    func bookRoomAsync(room: OfficeRoom, withSchedule schedule: RoomSchedule, onCompeletion: BookRoomCallBack) {
+    func bookRoomAsync(room: OfficeRoom, withSchedule schedule: ScheduleProtocol, onCompeletion: BookRoomCallBack) {
         let endTime = calculateEndTimeForNewEventFromSchedule(schedule)
         let event = eventProcessor.eventStartsAt(NSDate(), endsAt: endTime, includesAttendees: [room.calendarID])
         calendarClient.insertEventAsync(event, onCompeletion: onCompeletion)
     }
     
-    private func calculateEndTimeForNewEventFromSchedule(schedule: RoomSchedule) -> NSDate {
+    private func calculateEndTimeForNewEventFromSchedule(schedule: ScheduleProtocol) -> NSDate {
         let maxMinutesForBookingEvent = 30
         var eventLength = 30
-        if let minutes = schedule.minutesTillNextEvent {
-            if minutes < maxMinutesForBookingEvent {
-                eventLength = minutes - 1
-            }
+        if schedule.minutesTillNextEvent < maxMinutesForBookingEvent {
+            eventLength = schedule.minutesTillNextEvent - 1
         }
-        
         return NSDate().dateByAddingTimeInterval(Double(eventLength * 60))
     }
 }

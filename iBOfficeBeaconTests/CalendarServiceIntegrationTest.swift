@@ -41,8 +41,8 @@ class CalendarServiceIntegrationTest: XCTestCase {
         }
         
         subject.findScheduleForRoom(officeRoom) { (result) in
-            XCTAssertTrue(result!.isBusyNow)
-            XCTAssertNotNil(result!.nextAvailable)
+            XCTAssertTrue(result!.isBusy)
+            XCTAssertNotNil(result as? BusySchedule)
             expectation.fulfill()
         }
         
@@ -67,7 +67,7 @@ class CalendarServiceIntegrationTest: XCTestCase {
         subject.findScheduleForRoom(officeRoom) { (result) in
             let minutes = ceil(futureDate.timeIntervalSinceNow/60)
             
-            XCTAssertFalse(result!.isBusyNow)
+            XCTAssertFalse(result!.isBusy)
             XCTAssertTrue(result!.minutesTillNextEvent == Int(minutes))
             expectation.fulfill()
         }
@@ -82,9 +82,7 @@ class CalendarServiceIntegrationTest: XCTestCase {
         let eventStartTime = NSDate()
         let eventEndTime = eventStartTime.dateByAddingTimeInterval(halfAnHour)
         
-        let currentSchedule = RoomSchedule()
-        currentSchedule.isBusyNow = false
-        currentSchedule.minutesTillNextEvent = 40
+        let currentSchedule = FreeSchedule(for: 40, with: Set())
         
         service.testBlock = {(ticket, testResponse) in
             let query = ticket.originalQuery as! GTLRCalendarQuery_EventsInsert
@@ -108,9 +106,7 @@ class CalendarServiceIntegrationTest: XCTestCase {
     func testItBooksARoomForWhateverRemainingMinutesAndCallsBackWithTrue() {
         let expectation = expectationWithDescription("Calendar Service Book Room")
         
-        let currentSchedule = RoomSchedule()
-        currentSchedule.isBusyNow = false
-        currentSchedule.minutesTillNextEvent = 20
+        let currentSchedule = FreeSchedule(for: 20, with: Set())
         let bookingLengthInMinutes:Double = 19
         
         let eventStartTime = NSDate()
@@ -134,10 +130,8 @@ class CalendarServiceIntegrationTest: XCTestCase {
     
     func testItCallsBackWithFalseIfBookingRoomFails() {
         let expectation = expectationWithDescription("Calendar Service Book Room")
-        let currentSchedule = RoomSchedule()
-        currentSchedule.isBusyNow = false
-        currentSchedule.minutesTillNextEvent = 20
         
+        let currentSchedule = FreeSchedule(for: 20, with: Set())
         
         service.testBlock = { (ticket, testResponse) in
             let dummyError = NSError(domain: "", code: 1, userInfo: nil)

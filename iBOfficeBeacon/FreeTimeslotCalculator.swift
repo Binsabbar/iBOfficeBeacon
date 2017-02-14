@@ -15,16 +15,16 @@ class FreeTimeslotCalculator {
     
     typealias Duration = FreeTimeslotDuration
     
-    func calculateFreeTimeslotsIn(schedule: RoomSchedule) -> Set<FreeTimeslot>{
-        if let minutes = schedule.minutesTillNextEvent where !schedule.isBusyNow{
-            let timeslots =  buildTimeslots(from: minutes)
-            return Set(timeslots.map {$0})
+    
+    func calculateFreeTimeslotsFrom(minutes minutes: Int) -> Set<FreeTimeslot>{
+        if minutes > 0{
+            return buildTimeslots(from: minutes)
         }
         return Set<FreeTimeslot>()
     }
     
-    private func buildTimeslots(from availableTime: Int) -> [FreeTimeslot] {
-        let timeSlots: [FreeTimeslot]
+    private func buildTimeslots(from availableTime: Int) -> Set<FreeTimeslot> {
+        let timeSlots: Set<FreeTimeslot>
         var durations = [Duration]()
         
         switch true {
@@ -49,13 +49,13 @@ class FreeTimeslotCalculator {
         return timeSlots
     }
     
-    private func makeTimelotsFrom(durations: [Duration]) -> [FreeTimeslot] {
+    private func makeTimelotsFrom(durations: [Duration]) -> Set<FreeTimeslot> {
         let start = NSDate()
-        var timeSlots = [FreeTimeslot]()
+        var timeSlots = Set<FreeTimeslot>()
         durations.forEach({
             let end = start.dateByAddingTimeInterval(Double($0.minutes() * 60))
             let timeSlot = FreeTimeslot(duration: $0, from: start, to: end)
-            timeSlots.append(timeSlot)
+            timeSlots.insert(timeSlot)
         })
         return timeSlots
     }

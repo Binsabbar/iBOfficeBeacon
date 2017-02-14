@@ -21,19 +21,15 @@ class FreeTimeslotCalculatorTest: XCTestCase {
     
     
     func testItReturnsLessHalfAnHourTimeslotIfRoomIsAvailableForLessThanHalfAnHour() {
-        let schedule = Builder.freeRoomSchedule().withNextEventStartsIn(29).build()
-        
-        let result: Set<FreeTimeslot> = subject.calculateFreeTimeslotsIn(schedule)
+        let result: Set<FreeTimeslot> = subject.calculateFreeTimeslotsFrom(minutes: 23)
         
         XCTAssertTrue(result.count == 1)
-        XCTAssertTrue(result.contains{$0.duration == .lessThanHalfAnHour(minutes: 29)})
+        XCTAssertTrue(result.contains{$0.duration == .lessThanHalfAnHour(minutes: 23)})
 
     }
     
     func testItReturnsHalfAnHourTimeslot() {
-        let schedule = Builder.freeRoomSchedule().withNextEventStartsIn(35).build()
-        
-        let result: Set<FreeTimeslot> = subject.calculateFreeTimeslotsIn(schedule)
+        let result: Set<FreeTimeslot> = subject.calculateFreeTimeslotsFrom(minutes: 35)
         
         XCTAssertTrue(result.count == 1)
         XCTAssertTrue(result.contains{$0.duration == .halfAnHour})
@@ -41,9 +37,8 @@ class FreeTimeslotCalculatorTest: XCTestCase {
     
     
     func testItReturnsTwoTimeslotIfRoomIsAvailableForMoreThanOneHour() {
-        let schedule = Builder.freeRoomSchedule().withNextEventStartsIn(65).build()
-        
-        let result: Set<FreeTimeslot> = subject.calculateFreeTimeslotsIn(schedule)
+        let result: Set<FreeTimeslot> = subject.calculateFreeTimeslotsFrom(minutes: 90)
+
         
         XCTAssertTrue(result.count == 2)
         
@@ -52,9 +47,8 @@ class FreeTimeslotCalculatorTest: XCTestCase {
     }
     
     func testItReturnsThreeTimeslotIfRoomIsAvailableForMoreThanTwoHours() {
-        let schedule = Builder.freeRoomSchedule().withNextEventStartsIn(125).build()
-        
-        let result: Set<FreeTimeslot> = subject.calculateFreeTimeslotsIn(schedule)
+        let result: Set<FreeTimeslot> = subject.calculateFreeTimeslotsFrom(minutes: 122)
+
         
         XCTAssertTrue(result.count == 3)
         XCTAssertTrue(result.contains{$0.duration == .halfAnHour})
