@@ -9,10 +9,11 @@
 import XCTest
 
 class RoomScheduleCoordinatorUnitTest: XCTestCase {
-
+    
     var subject = RoomScheduleCoordinator()
     let eventTitle = "Unit testing"
-    
+    let now = NSDate()
+
     override func setUp() {
         super.setUp()
     }
@@ -114,7 +115,6 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
     
     //MARK: Both events are in the past
     func testItSetsRoomScheduleToFreeWhenAllEventsAreInThePast() {
-        let now = NSDate()
         let start = now.dateByAddingTimeInterval(pastHour * 3)
         let end = now.dateByAddingTimeInterval(pastHour * 2)
         let firstEvent = CalendarEvent(start: start, end: end, title: eventTitle)
@@ -131,7 +131,6 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
     
     //MARK: The 1st event is in the past, and 2nd event in the future
     func testItSetsRoomScheduleToFreeWhenCurrentTimeLiesBetweenPastAndFutureEvents() {
-        let now = NSDate()
         let start = now.dateByAddingTimeInterval(pastHour * 3)
         let end = now.dateByAddingTimeInterval(pastHour * 2)
         let firstEvent = CalendarEvent(start: start, end: end, title: eventTitle)
@@ -194,7 +193,6 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
     
     //MARK: The 1st event is in the past, 2nd is now, and 3rd is consecutive event to 2nd
     func testItSetsRoomScheduleToBusyAndNextAvailableToTheEndOfLastConsecutiveEventV3() {
-        let now = NSDate()
         let start = now.dateByAddingTimeInterval(past2Hours)
         let end = now.dateByAddingTimeInterval(pastHour)
         let firstEvent = CalendarEvent(start: start, end: end, title: eventTitle)
@@ -216,7 +214,6 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
     
     //MARK: 1st and 2nd in the past, but 3rd is now and consecutive to 2nd
     func testItSetsRoomScheduleToBusyAndNextAvailableToTheEndOfLastConsecutiveEventV4() {
-        let now = NSDate()
         let start = now.dateByAddingTimeInterval(pastHour*2)
         let end = now.dateByAddingTimeInterval(pastHour)
         let firstEvent = CalendarEvent(start: start, end: end, title: eventTitle)
@@ -238,7 +235,6 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
     
     //MARK: 1st and 2nd in the past, but 3rd is future
     func testItSetsRoomScheduleToFreeWhenNoEventsIsCurrent() {
-        let now = NSDate()
         let start = now.dateByAddingTimeInterval(pastHour*2)
         let end = now.dateByAddingTimeInterval(pastHour)
         let firstEvent = CalendarEvent(start: start, end: end, title: eventTitle)
@@ -260,78 +256,78 @@ class RoomScheduleCoordinatorUnitTest: XCTestCase {
     
     // MARK: Set available time for booking 30 minnutes, 1 Hour and 2 Hours
     func testItSetsThreeAvailableTimeslotWhenRoomIsFreeForMoreThan2Hours() {
-        let now = NSDate()
         let start = now.dateByAddingTimeInterval(3*oneHour)
         let end = start.dateByAddingTimeInterval(3*oneHour)
         let futureEvent = CalendarEvent(start: start, end: end, title: eventTitle)
         
         let events = [futureEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events)
+        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeSlots
         
-        XCTAssertTrue(result.availableTimeSlots.contains(.halfAnHour))
-        XCTAssertTrue(result.availableTimeSlots.contains(.oneHour))
-        XCTAssertTrue(result.availableTimeSlots.contains(.twoHours))
+        
+        XCTAssertTrue(result.contains{$0.duration == .halfAnHour})
+        XCTAssertTrue(result.contains{$0.duration == .oneHour})
+        XCTAssertTrue(result.contains{$0.duration == .twoHours})
     }
     
     // MARK: Set available time for booking 30 minnutes, 1 Hour
     func testItSetsTwoAvailableTimeslotWhenRoomIsFreeForOneHourButNotMoreThanTwo() {
-        let now = NSDate()
-        let start = now.dateByAddingTimeInterval(4*halfAnHour)
+        let secondsTillNextEvent: Double = halfAnHour * 3
+        let start = now.dateByAddingTimeInterval(secondsTillNextEvent)
         let end = start.dateByAddingTimeInterval(oneHour)
         let futureEvent = CalendarEvent(start: start, end: end, title: eventTitle)
         
         let events = [futureEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events)
+        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeSlots
         
-        XCTAssertTrue(result.availableTimeSlots.count == 2)
-        XCTAssertTrue(result.availableTimeSlots.contains(.halfAnHour))
-        XCTAssertTrue(result.availableTimeSlots.contains(.oneHour))
+        XCTAssertTrue(result.count == 2)
+        XCTAssertTrue(result.contains{$0.duration == .halfAnHour})
+        XCTAssertTrue(result.contains{$0.duration == .oneHour})
     }
     
     // MARK: Set available time for booking 30 minnutes, 1 Hour
     func testItSetsAvailableTimeslotToHalfAnHourSlotWhenRoomIsFreeForLessThanOneHour() {
-        let now = NSDate()
-        let start = now.dateByAddingTimeInterval(oneHour)
+        let secondsTillNextEvent: Double = 60 * 50
+        let start = now.dateByAddingTimeInterval(secondsTillNextEvent)
         let end = start.dateByAddingTimeInterval(oneHour)
         let futureEvent = CalendarEvent(start: start, end: end, title: eventTitle)
         
         let events = [futureEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events)
+        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeSlots
         
-        XCTAssertTrue(result.availableTimeSlots.count == 1)
-        XCTAssertTrue(result.availableTimeSlots.contains(.halfAnHour))
+        XCTAssertTrue(result.count == 1)
+        XCTAssertTrue(result.contains{$0.duration == .halfAnHour})
     }
     
     // MARK: Set available time for booking 30 minnutes
     func testItSetsAvailableTimeslotToHalfAnHourSlotWhenRoomIsFreeForHalfAnHour() {
-        let now = NSDate()
         let start = now.dateByAddingTimeInterval(halfAnHour)
         let end = start.dateByAddingTimeInterval(oneHour)
         let futureEvent = CalendarEvent(start: start, end: end, title: eventTitle)
         
         let events = [futureEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events)
+        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeSlots
         
-        XCTAssertTrue(result.availableTimeSlots.count == 1)
-        XCTAssertTrue(result.availableTimeSlots.contains(.halfAnHour))
+        XCTAssertTrue(result.count == 1)
+        XCTAssertTrue(result.contains{$0.duration == .halfAnHour})
     }
     
     // MARK: Set available time for booking whatever remaining
     func testItSetsAvailableTimeslotToLessThanHalfIfRoomIsFreeForLessThanHalfAnHour() {
-        let now = NSDate()
-        let start = now.dateByAddingTimeInterval(halfAnHour - (60 * 4))
+        let minutesTillNextEvent = 25
+        let secondsTillNextEvent = Double(60 * minutesTillNextEvent)
+        let start = now.dateByAddingTimeInterval(secondsTillNextEvent)
         let end = start.dateByAddingTimeInterval(oneHour)
         let futureEvent = CalendarEvent(start: start, end: end, title: eventTitle)
         
         let events = [futureEvent]
         
-        let result = subject.findCurrentRoomScheduleFromEvents(events)
+        let result = subject.findCurrentRoomScheduleFromEvents(events).availableTimeSlots
         
-        XCTAssertTrue(result.availableTimeSlots.count == 1)
-        XCTAssertTrue(result.availableTimeSlots.contains(.lessThanHalf))
+        XCTAssertTrue(result.count == 1)
+        XCTAssertTrue(result.contains{$0.duration == .lessThanHalfAnHour(minutes: minutesTillNextEvent)})
     }
 }

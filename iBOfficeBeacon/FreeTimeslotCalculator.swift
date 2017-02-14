@@ -15,11 +15,12 @@ class FreeTimeslotCalculator {
     
     typealias Duration = FreeTimeslotDuration
     
-    func calculateFreeTimeslotsIn(schedule: RoomSchedule) -> [FreeTimeslot]{
-        if !schedule.isBusyNow {
-            return buildTimeslots(from: schedule.minutesTillNextEvent!)
+    func calculateFreeTimeslotsIn(schedule: RoomSchedule) -> Set<FreeTimeslot>{
+        if let minutes = schedule.minutesTillNextEvent where !schedule.isBusyNow{
+            let timeslots =  buildTimeslots(from: minutes)
+            return Set(timeslots.map {$0})
         }
-        return [FreeTimeslot]()
+        return Set<FreeTimeslot>()
     }
     
     private func buildTimeslots(from availableTime: Int) -> [FreeTimeslot] {

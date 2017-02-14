@@ -23,6 +23,8 @@ class RoomScheduleCoordinator {
             schedule = RoomSchedule.createFreeRoomSchedule()
         }
         
+        schedule.availableTimeSlots = FreeTimeslotCalculator().calculateFreeTimeslotsIn(schedule)
+        
         return schedule
     }
     
@@ -44,36 +46,10 @@ class RoomScheduleCoordinator {
             schedule.nextAvailable = endDatetimeOfLastConsecutiveEvent
         }
         
-        calculateTimeslots(schedule)
         return schedule
     }
     
-    private func calculateTimeslots(schedule: RoomSchedule) {
-        if !schedule.isBusyNow {
-            let minuteSlot = 30
-            var availableMinutes = schedule.minutesTillNextEvent!
-            
-            if schedule.minutesTillNextEvent < 30 {
-                schedule.availableTimeSlots.insert(.lessThanHalf)
-                return
-            }
-            
-            if availableMinutes >= 30 {
-                schedule.availableTimeSlots.insert(.halfAnHour)
-            }
-            
-            availableMinutes = availableMinutes - (2 * minuteSlot)
-            if availableMinutes > 0 {
-                schedule.availableTimeSlots.insert(.oneHour)
-            }
-            
-            availableMinutes = availableMinutes - (2 * minuteSlot)
-            if availableMinutes > 0 {
-                schedule.availableTimeSlots.insert(.twoHours)
-            }
-        }
-    }
-    
+
     private func filterOutPastEvents(events: [CalendarEvent]) -> [CalendarEvent] {
         return events.filter { (event) -> Bool in
             return datetimeNow.isEarlierThanDate(event.endDatetime)

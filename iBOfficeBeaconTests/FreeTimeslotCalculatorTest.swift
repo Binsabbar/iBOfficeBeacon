@@ -11,6 +11,7 @@ import XCTest
 class FreeTimeslotCalculatorTest: XCTestCase {
     
     typealias Builder = RoomScheduleBuilder
+    
     var subject: FreeTimeslotCalculator!
     
     override func setUp() {
@@ -22,40 +23,42 @@ class FreeTimeslotCalculatorTest: XCTestCase {
     func testItReturnsLessHalfAnHourTimeslotIfRoomIsAvailableForLessThanHalfAnHour() {
         let schedule = Builder.freeRoomSchedule().withNextEventStartsIn(29).build()
         
-        let result: [FreeTimeslot] = subject.calculateFreeTimeslotsIn(schedule)
+        let result: Set<FreeTimeslot> = subject.calculateFreeTimeslotsIn(schedule)
         
         XCTAssertTrue(result.count == 1)
-        XCTAssertEqual(result.first!.duration, FreeTimeslotDuration.lessThanHalfAnHour(minutes: 29))
+        XCTAssertTrue(result.contains{$0.duration == .lessThanHalfAnHour(minutes: 29)})
+
     }
     
     func testItReturnsHalfAnHourTimeslot() {
         let schedule = Builder.freeRoomSchedule().withNextEventStartsIn(35).build()
         
-        let result: [FreeTimeslot] = subject.calculateFreeTimeslotsIn(schedule)
+        let result: Set<FreeTimeslot> = subject.calculateFreeTimeslotsIn(schedule)
         
         XCTAssertTrue(result.count == 1)
-        XCTAssertEqual(result.first!.duration, FreeTimeslotDuration.halfAnHour)
+        XCTAssertTrue(result.contains{$0.duration == .halfAnHour})
     }
     
     
     func testItReturnsTwoTimeslotIfRoomIsAvailableForMoreThanOneHour() {
         let schedule = Builder.freeRoomSchedule().withNextEventStartsIn(65).build()
         
-        let result: [FreeTimeslot] = subject.calculateFreeTimeslotsIn(schedule)
+        let result: Set<FreeTimeslot> = subject.calculateFreeTimeslotsIn(schedule)
         
         XCTAssertTrue(result.count == 2)
-        XCTAssertEqual(result.last!.duration, FreeTimeslotDuration.halfAnHour)
-        XCTAssertEqual(result.first!.duration, FreeTimeslotDuration.oneHour)
+        
+        XCTAssertTrue(result.contains{$0.duration == .halfAnHour})
+        XCTAssertTrue(result.contains{$0.duration == .oneHour})
     }
     
     func testItReturnsThreeTimeslotIfRoomIsAvailableForMoreThanTwoHours() {
         let schedule = Builder.freeRoomSchedule().withNextEventStartsIn(125).build()
         
-        let result: [FreeTimeslot] = subject.calculateFreeTimeslotsIn(schedule)
+        let result: Set<FreeTimeslot> = subject.calculateFreeTimeslotsIn(schedule)
         
         XCTAssertTrue(result.count == 3)
-        XCTAssertEqual(result[2].duration, FreeTimeslotDuration.halfAnHour)
-        XCTAssertEqual(result[1].duration, FreeTimeslotDuration.oneHour)
-        XCTAssertEqual(result[0].duration, FreeTimeslotDuration.twoHours)
+        XCTAssertTrue(result.contains{$0.duration == .halfAnHour})
+        XCTAssertTrue(result.contains{$0.duration == .oneHour})
+        XCTAssertTrue(result.contains{$0.duration == .twoHours})
     }
 }
