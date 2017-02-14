@@ -8,6 +8,26 @@
 
 import Foundation
 
+enum FreeTimeslotDuration: Hashable {
+    
+    case lessThanHalfAnHour(minutes: Int), halfAnHour, oneHour, twoHours
+    
+    func minutes()-> Int {
+        switch self {
+        case let .lessThanHalfAnHour(minutes):
+            return minutes
+        case .halfAnHour:
+            return 30
+        case .oneHour:
+            return 60
+        case .twoHours:
+            return 120
+        }
+    }
+    
+    var hashValue: Int { return minutes() }
+}
+
 
 class FreeTimeslot: Hashable {
 
@@ -31,27 +51,6 @@ func ==(lhs: FreeTimeslot, rhs: FreeTimeslot) -> Bool {
         lhs.from.isEqualToDate(rhs.from) &&
         lhs.to.isEqualToDate(rhs.to)
 }
-
-enum FreeTimeslotDuration: Hashable {
-    
-    case lessThanHalfAnHour(minutes: Int), halfAnHour, oneHour, twoHours
-    
-    func minutes()-> Int {
-        switch self {
-        case let .lessThanHalfAnHour(minutes):
-            return minutes
-        case .halfAnHour:
-            return 30
-        case .oneHour:
-            return 60
-        case .twoHours:
-            return 120
-        }
-    }
-    
-    var hashValue: Int { return minutes() }
-}
-
 
 func == (lhs: FreeTimeslotDuration, rhs: FreeTimeslotDuration) -> Bool {
     return lhs.minutes() == rhs.minutes()

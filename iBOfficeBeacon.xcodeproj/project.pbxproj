@@ -14,6 +14,8 @@
 		CD6B7ABF6EFCEB25C026BD12 /* libPods-iBOfficeBeacon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D4B8BE21812288A40F8F8F /* libPods-iBOfficeBeacon.a */; };
 		DBABAA0DA416E30CD4208885 /* libPods-iBOfficeBeaconTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 883C7C582B8FFEE3E84B2144 /* libPods-iBOfficeBeaconTests.a */; };
 		E3006EB81CFC45ED00EF1B23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3006EB71CFC45ED00EF1B23 /* LaunchScreen.storyboard */; };
+		E302235C1E5321FB000938BA /* RoomSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E302235B1E5321FB000938BA /* RoomSchedule.swift */; };
+		E302235D1E534E5C000938BA /* RoomSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E302235B1E5321FB000938BA /* RoomSchedule.swift */; };
 		E304C9A51CA9BC030022323A /* FakeNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E304C9A41CA9BC030022323A /* FakeNotificationService.swift */; };
 		E306C25B1E2656CC00A5D60A /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E306C25A1E2656CC00A5D60A /* GameKit.framework */; };
 		E306C25D1E2656D600A5D60A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E306C25C1E2656D600A5D60A /* StoreKit.framework */; };
@@ -215,6 +217,7 @@
 		ABF0BADF2AFCCA055F4BD69B /* libPods-iBOfficeBeaconTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iBOfficeBeaconTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD76D6A8031FEE8C0FE72754 /* Pods-iBOfficeBeaconTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iBOfficeBeaconTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iBOfficeBeaconTests/Pods-iBOfficeBeaconTests.release.xcconfig"; sourceTree = "<group>"; };
 		E3006EB71CFC45ED00EF1B23 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E302235B1E5321FB000938BA /* RoomSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomSchedule.swift; sourceTree = "<group>"; };
 		E304C9A41CA9BC030022323A /* FakeNotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNotificationService.swift; sourceTree = "<group>"; };
 		E306C25A1E2656CC00A5D60A /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		E306C25C1E2656D600A5D60A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -674,13 +677,14 @@
 		E3761B3C1C7A44B700A6471A /* models */ = {
 			isa = PBXGroup;
 			children = (
-				E3D58E871CC51A03009C0BCC /* InsertEventRequest.swift */,
-				E3DBD8561C947F6D00BDB79C /* Schedule.swift */,
-				E36AA8851C14E00200DA4A9D /* OfficeRoom.swift */,
-				E3D58EEC1CA72788007F6860 /* CalendarEvent.swift */,
 				E3E404931CC7942100FE2BB9 /* OfficeAddress.swift */,
+				E36AA8851C14E00200DA4A9D /* OfficeRoom.swift */,
 				E3163B5B1D3B09B2005FCFE4 /* FileMetadata.swift */,
+				E3D58E871CC51A03009C0BCC /* InsertEventRequest.swift */,
+				E3D58EEC1CA72788007F6860 /* CalendarEvent.swift */,
+				E3DBD8561C947F6D00BDB79C /* Schedule.swift */,
 				E34CE0141E3CC3B000BF549B /* FreeTimeslot.swift */,
+				E302235B1E5321FB000938BA /* RoomSchedule.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -933,7 +937,7 @@
 				TargetAttributes = {
 					E35F58D91B07731D003D04DB = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = YFWXADMX4E;
+						DevelopmentTeam = 2DJKLJFV99;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -1125,6 +1129,7 @@
 				E3163B6B1D3BE8F4005FCFE4 /* UTF8DataWriterService.swift in Sources */,
 				E34CE0091E3BE1DF00BF549B /* FreeTimeslotCalculator.swift in Sources */,
 				E3DBD8501C947C9800BDB79C /* CalendarService.swift in Sources */,
+				E302235C1E5321FB000938BA /* RoomSchedule.swift in Sources */,
 				E3761B3A1C79F06C00A6471A /* UserAuthorisationRequests.swift in Sources */,
 				E3ECDE8D1CA8786B002762E6 /* RoomScheduleCoordinator.swift in Sources */,
 				E3B4B5B91CA7183B0057BB4A /* CalendarEventsProcessor.swift in Sources */,
@@ -1186,6 +1191,7 @@
 				E3DBD8551C947DC100BDB79C /* CalendarServiceIntegrationTest.swift in Sources */,
 				E36737C71CF8992D00C2FD5A /* RoomScheduleViewModelTest.swift in Sources */,
 				E33C2E301CC91B5900D77CD2 /* Description.swift in Sources */,
+				E302235D1E534E5C000938BA /* RoomSchedule.swift in Sources */,
 				E336EE8A1E06D47D00E5A628 /* FakeAppSettings.swift in Sources */,
 				E366817F1D07946B00B88DEA /* BluetoothControllerUnitTest.swift in Sources */,
 				E3B4B5B71CA6A8350057BB4A /* AuthControllerUnitTest.swift in Sources */,
