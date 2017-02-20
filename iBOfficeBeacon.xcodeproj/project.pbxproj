@@ -17,8 +17,6 @@
 		E302235C1E5321FB000938BA /* RoomSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E302235B1E5321FB000938BA /* RoomSchedule.swift */; };
 		E302235D1E534E5C000938BA /* RoomSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E302235B1E5321FB000938BA /* RoomSchedule.swift */; };
 		E304C9A51CA9BC030022323A /* FakeNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E304C9A41CA9BC030022323A /* FakeNotificationService.swift */; };
-		E306C25B1E2656CC00A5D60A /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E306C25A1E2656CC00A5D60A /* GameKit.framework */; };
-		E306C25D1E2656D600A5D60A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E306C25C1E2656D600A5D60A /* StoreKit.framework */; };
 		E3076B341CA5E9D5000A8603 /* GoogleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3076B331CA5E9D5000A8603 /* GoogleSettings.swift */; };
 		E3076B351CA5E9D5000A8603 /* GoogleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3076B331CA5E9D5000A8603 /* GoogleSettings.swift */; };
 		E30CD8EE1CF6171A00BF79BA /* AppDelegateHockeyAppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30CD8ED1CF6171A00BF79BA /* AppDelegateHockeyAppExtensions.swift */; };
@@ -358,9 +356,7 @@
 				E3B979741B07A320004FF250 /* CoreBluetooth.framework in Frameworks */,
 				E3B979721B07A31A004FF250 /* CoreLocation.framework in Frameworks */,
 				217E22F051FF18643A380DBF /* libPods-iBOfficeBeacon.a in Frameworks */,
-				E306C25D1E2656D600A5D60A /* StoreKit.framework in Frameworks */,
 				CD6B7ABF6EFCEB25C026BD12 /* libPods-iBOfficeBeacon.a in Frameworks */,
-				E306C25B1E2656CC00A5D60A /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
