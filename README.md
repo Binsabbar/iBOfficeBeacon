@@ -77,7 +77,7 @@ Before running the app in your iPhone, ensure that you have met the above [Requi
 	1. Select iBOfficeBeacon project from the Project Navigator.
 	2. Select iBOfficeBeacon Target from Targets.
 	3. In General under Identity, update the Bundle ID name to be unique to you (com.**NEW_NAME_HERE**.iBOfficeBeacon.dev)
-	4. In General, under Singing, tick the box for Automatically Manage Singing.
+	4. In General, under Singing, tick the box for Automatically Manage Signing.
 3. [Skip if you enabled Xcode to automatically manage signing] Select `iBOfficeBeaconDev schema`, and set the provision profile for it.
 	1. From Targets, select iBOfficeBeacon.
 	2. Under signing (Debug), select the provision profile you generated in step 1.
