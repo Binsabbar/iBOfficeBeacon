@@ -72,11 +72,15 @@ By default, HockeyApp integration is disabled, you will need to enable it and se
 ## Running the app in your iPhone for development: 
 Before running the app in your iPhone, ensure that you have met the above [Requirements](#requirements-to-run-on-a-physical-device), and done [Assigning app setting keys](#assigning-app-setting-keys).
 
-1. Login with your Apple Dev in Xcode.
+1. Login with your Apple Dev in Xcode (Create a free dev account from: https://developer.apple.com).
 2. Generate a provisioning profile using Xcode.
-3. Select `iBOfficeBeaconDev schema`, and set the provision profile for it.
+	1. Select iBOfficeBeacon project from the Project Navigator.
+	2. Select iBOfficeBeacon Target from Targets.
+	3. In General under Identity, update the Bundle ID name to be unique to you (com.**NEW_NAME_HERE**.iBOfficeBeacon.dev)
+	4. In General, under Singing, tick the box for Automatically Manage Singing.
+3. [Skip if you enabled Xcode to automatically manage signing] Select `iBOfficeBeaconDev schema`, and set the provision profile for it.
 	1. From Targets, select iBOfficeBeacon.
-	2. Under signing (Debug), select the provision profile you generated in step 2.
+	2. Under signing (Debug), select the provision profile you generated in step 1.
 4. Open `info.plist`, under `iBOfficeBeaconAppSettings`, fill in the required values for `dev` environment. More about [App Configuration here](#app-configurations).
 5. Connect your iPhone and run the app.
 6. If it is the first time running the app, the app will not run, but shows an alert instead. In your iPhone, go to Settings -> General -> Profile -> `YOUR_PROFILE` -> Trust Profile.
