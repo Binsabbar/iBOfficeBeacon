@@ -1367,8 +1367,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUILD_ENVIRONMENT = test;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mohammed BinSabbar (2DJKLJFV99)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mohammed BinSabbar (2DJKLJFV99)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mohammed BinSabbar (VG9QD9PJSY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mohammed BinSabbar (VG9QD9PJSY)";
 				DEVELOPMENT_TEAM = 2DJKLJFV99;
 				ENABLE_BITCODE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -1386,8 +1386,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.binsabbar.iBOfficeBeacon.dev;
 				PRODUCT_NAME = "$(TARGET_NAME).beta";
-				PROVISIONING_PROFILE = "1b8c5627-9fc4-4cfc-9d65-47db123d7ef1";
-				PROVISIONING_PROFILE_SPECIFIER = "TW Test Beta Setup";
+				PROVISIONING_PROFILE = "54e75cc3-7ea1-4564-ae36-4f8512694559";
+				PROVISIONING_PROFILE_SPECIFIER = "iOS 10 Provision Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = iBOfficeBeacon/ObjCBridge.h;
 				SWIFT_VERSION = 2.3;
 			};
