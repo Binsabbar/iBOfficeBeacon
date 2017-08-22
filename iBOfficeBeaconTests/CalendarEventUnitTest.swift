@@ -17,12 +17,12 @@ class CalendarEventUnitTest: XCTestCase {
     }
     
     func testItReturnsTrueWhenEventIsConsecutiveToAnother() {
-        let startTime = NSDate()
-        let endTime = startTime.dateByAddingTimeInterval(oneHour)
+        let startTime = Date()
+        let endTime = startTime.addingTimeInterval(oneHour)
         let event = CalendarEvent(start: startTime, end: endTime, title: eventTitle)
         
         let anotherStartTime = endTime
-        let anotherEndTime = anotherStartTime.dateByAddingTimeInterval(oneHour)
+        let anotherEndTime = anotherStartTime.addingTimeInterval(oneHour)
         let consecutiveEvent = CalendarEvent(start: anotherStartTime, end: anotherEndTime, title: eventTitle)
         
         let result = consecutiveEvent.isConsecutiveToAnotherEvent(event)
@@ -31,12 +31,12 @@ class CalendarEventUnitTest: XCTestCase {
     }
     
     func testItReturnsFalseWhenEventIsNotConsecutiveToAnother() {
-        let startTime = NSDate()
-        let endTime = startTime.dateByAddingTimeInterval(oneHour)
+        let startTime = Date()
+        let endTime = startTime.addingTimeInterval(oneHour)
         let event = CalendarEvent(start: startTime, end: endTime, title: eventTitle)
         
-        let anotherStartTime = endTime.dateByAddingTimeInterval(oneHour)
-        let anotherEndTime = anotherStartTime.dateByAddingTimeInterval(oneHour)
+        let anotherStartTime = endTime.addingTimeInterval(oneHour)
+        let anotherEndTime = anotherStartTime.addingTimeInterval(oneHour)
         let laterEvent = CalendarEvent(start: anotherStartTime, end: anotherEndTime, title: eventTitle)
         
         let result = laterEvent.isConsecutiveToAnotherEvent(event)
@@ -46,7 +46,7 @@ class CalendarEventUnitTest: XCTestCase {
     
     //MARK: isAllDayEvent
     func testItReturnsTrueForAllDayEventsWhenStartsAtMidnightAndEndsNextDayMidnight() {
-        let startTime = NSDate().beginningOfDay()
+        let startTime = Date().beginningOfDay()
         let endTime = startTime.tomorrow()
         
         let event = CalendarEvent(start: startTime, end: endTime, title: eventTitle)
@@ -55,8 +55,8 @@ class CalendarEventUnitTest: XCTestCase {
     }
     
     func testItReturnsFalseForAllDayEventsWhenStartsAndEndsInTheSameDay() {
-        let startTime = NSDate().beginningOfDay()
-        let endTime = startTime.dateByAddingTimeInterval(oneHour)
+        let startTime = Date().beginningOfDay()
+        let endTime = startTime.addingTimeInterval(oneHour)
         
         let event = CalendarEvent(start: startTime, end: endTime, title: eventTitle)
         

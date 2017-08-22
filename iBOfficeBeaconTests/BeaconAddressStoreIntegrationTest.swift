@@ -48,13 +48,13 @@ class BeaconAddressStoreIntegrationTest: XCTestCase {
     }
     
     func testItPostsNotificationWhenOfficesAreSetDuringSubjectInitialisation() {
-        let expectation = expectationWithDescription("BeaconAddressStoreTest")
+        let expectation = self.expectation(description: "BeaconAddressStoreTest")
         let serviceDrive = MockHelper.mockDriveFetchServiceWithRemoteData(self.fetchedData,
                                                                           forSheetID: self.sheetID)
         notificationIsFired = false
-        NSNotificationCenter.defaultCenter()
+        NotificationCenter.default
             .addObserver(self, selector: notificationSelector,
-                         name: BeaconAddressStore.OfficesUpdatedNotificationID,
+                         name: NSNotification.Name(rawValue: BeaconAddressStore.OfficesUpdatedNotificationID),
                          object: subject)
         
         
@@ -62,9 +62,9 @@ class BeaconAddressStoreIntegrationTest: XCTestCase {
         
         fullfillExpectation(expectation, withinTime: halfSecond)
     
-        waitForExpectationsWithTimeout(second) { _ in
+        waitForExpectations(timeout: second) { _ in
             XCTAssertTrue(self.notificationIsFired)
-            NSNotificationCenter.defaultCenter().removeObserver(self)
+            NotificationCenter.default.removeObserver(self)
         }
     }
     
@@ -73,15 +73,15 @@ class BeaconAddressStoreIntegrationTest: XCTestCase {
     }
     
     //MARK: helpers
-    private func waitForAddressesToLoad() {
-        let timeout = NSDate(timeIntervalSinceNow: second)
+    fileprivate func waitForAddressesToLoad() {
+        let timeout = Date(timeIntervalSinceNow: second)
         
-        while timeout.compareDateToSecondPrecision(NSDate()) == .OrderedDescending {
-            NSRunLoop.currentRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(hundredMs))
+        while timeout.compareDateToSecondPrecision(Date()) == .orderedDescending {
+            RunLoop.current.run(until: Date().addingTimeInterval(hundredMs))
         }
     }
     
-    private func setupSubjectWithServiceDrive(service: GTLRDriveService) {
+    fileprivate func setupSubjectWithServiceDrive(_ service: GTLRDriveService) {
         let spreadsheetFactoryBlock:
             BeaconAddressLoader.SpreadsheetApiFactoryBlock = { (delegate) in
                 let serviceDrive = service

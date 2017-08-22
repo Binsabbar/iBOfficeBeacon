@@ -9,18 +9,18 @@
 import Foundation
 
 protocol SpreadsheetAPIDelegate {
-    func localFile(localName: String, isUpToDateWithRequestedFile remoteName: String)
-    func requestedFile(remoteName: String, hasBeenSavedLocallyToFile localName: String)
-    func requestingRemoteFileFailedWithError(error: NSError)
-    func fetchingRemoteFileFailedWithError(error: NSError)
-    func fileCouldNotBeSavedTo(fileName: String)
+    func localFile(_ localName: String, isUpToDateWithRequestedFile remoteName: String)
+    func requestedFile(_ remoteName: String, hasBeenSavedLocallyToFile localName: String)
+    func requestingRemoteFileFailedWithError(_ error: NSError)
+    func fetchingRemoteFileFailedWithError(_ error: NSError)
+    func fileCouldNotBeSavedTo(_ fileName: String)
 }
 
 class SpreadsheetAPI : NSObject {
     
-    private let remoteFileClient: RemoteFileServiceProtocol
-    private let fileService: FileService
-    private let delegate: SpreadsheetAPIDelegate
+    fileprivate let remoteFileClient: RemoteFileServiceProtocol
+    fileprivate let fileService: FileService
+    fileprivate let delegate: SpreadsheetAPIDelegate
     
     init(remoteFileClient: RemoteFileServiceProtocol, fileService: FileService, delegate: SpreadsheetAPIDelegate) {
         self.remoteFileClient = remoteFileClient
@@ -29,15 +29,15 @@ class SpreadsheetAPI : NSObject {
     }
     
     //MARK: TODO - Rename the method
-    func saveRemoteSheetFileWithId(id: String, locallyToFile name: String) {
+    func saveRemoteSheetFileWithId(_ id: String, locallyToFile name: String) {
         remoteFileClient.requestFileMetadataForFileId(id) { (fileMeta, error) in
-            if let anError = error where fileMeta is NullFileMetadata {
+            if let anError = error, fileMeta is NullFileMetadata {
                 self.delegate.requestingRemoteFileFailedWithError(anError)
                 return
             }
             
             let lastModified = self.fileService.lastModifiedDateForFileName(name)
-            if lastModified.compareDateToSecondPrecision(fileMeta.modifiedAt) == .OrderedDescending {
+            if lastModified.compareDateToSecondPrecision(fileMeta.modifiedAt) == .orderedDescending {
                 self.delegate.localFile(name, isUpToDateWithRequestedFile: fileMeta.fileName)
                 return
             }
@@ -46,7 +46,7 @@ class SpreadsheetAPI : NSObject {
         }
     }
     
-    private func fetchFile(fileMeta: FileMetadata, andStoreItsContentTo localFileName: String) {
+    fileprivate func fetchFile(_ fileMeta: FileMetadata, andStoreItsContentTo localFileName: String) {
         self.remoteFileClient.fetchFile(fileMeta) { (data, error) in
             if let anError = error {
                 self.delegate.fetchingRemoteFileFailedWithError(anError)

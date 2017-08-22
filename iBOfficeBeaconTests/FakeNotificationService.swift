@@ -17,10 +17,10 @@ class FakeNotificationService:LocalNotificationService {
     
     init() {
         clearLastNotificationCounter = 0
-        super.init(application: UIApplication.sharedApplication())
+        super.init(application: UIApplication.shared)
     }
     
-    override func fireNotification(message: String) {
+    override func fireNotification(_ message: String) {
         fireNotificationCalled = true
         self.message = message
     }

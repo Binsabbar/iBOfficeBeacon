@@ -49,8 +49,8 @@ class AppSettingsTest: XCTestCase {
         
         let featureToggles = appSettings.featureToggles
         
-        XCTAssertTrue(featureToggles.contains({$0.0 == "localNotificationProximity"}))
-        XCTAssertTrue(featureToggles.contains({$0.0 == "hockeyAppIntegration"}))
+        XCTAssertTrue(featureToggles.contains(where: {$0.0 == "localNotificationProximity"}))
+        XCTAssertTrue(featureToggles.contains(where: {$0.0 == "hockeyAppIntegration"}))
     }
     
     func testItReturnsBuildEnvironment() {

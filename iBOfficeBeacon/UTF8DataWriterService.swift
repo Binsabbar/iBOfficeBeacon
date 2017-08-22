@@ -10,18 +10,18 @@ import Foundation
 
 class UTF8DataWriterService : NSObject {
     
-    private let directory: String
-    private let stringEncoding = NSUTF8StringEncoding
+    fileprivate let directory: String
+    fileprivate let stringEncoding = String.Encoding.utf8
     
     init(directoryToWriteIn: String) {
         directory = directoryToWriteIn
     }
     
-    func writeDataAsString(dataToWrite: NSData, inFileName fileName: String) -> Bool {
+    func writeDataAsString(_ dataToWrite: Data, inFileName fileName: String) -> Bool {
         if let dataAsString = String(data: dataToWrite, encoding: stringEncoding) {
-            let filePath = (directory as NSString).stringByAppendingPathComponent(fileName)
+            let filePath = (directory as NSString).appendingPathComponent(fileName)
             do {
-                try dataAsString.writeToFile(filePath, atomically: false, encoding: stringEncoding)
+                try dataAsString.write(toFile: filePath, atomically: false, encoding: stringEncoding)
                 return true
             }
             catch { }

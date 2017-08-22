@@ -10,7 +10,7 @@ import Foundation
 
 class NSErrorBuilder {
     
-    static func createNSErrorWithCode(errorCode: Int) -> NSError {
+    static func createNSErrorWithCode(_ errorCode: Int) -> NSError {
         return NSError(domain: "com.google.GTLJSONRPCErrorDomain", code: errorCode, userInfo: nil)
     }
     

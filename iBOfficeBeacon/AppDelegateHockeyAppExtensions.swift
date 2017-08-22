@@ -10,19 +10,18 @@ extension AppDelegate: BITUpdateManagerDelegate {
 
     func setupHockyApp() {
         let featureName = FeatureToggles.HockeyAppIntegration.rawValue
-        if let hockeyAppEnabled = wiring.settings().featureToggles[featureName]
-        where hockeyAppEnabled {
-            BITHockeyManager.sharedHockeyManager().configureWithIdentifier(wiring.settings().hockeyAppID, delegate: nil)
+        if let hockeyAppEnabled = wiring.settings().featureToggles[featureName], hockeyAppEnabled {
+            BITHockeyManager.shared().configure(withIdentifier: wiring.settings().hockeyAppID, delegate: nil)
             
-            BITHockeyManager.sharedHockeyManager().updateManager.updateSetting = .CheckManually
-            BITHockeyManager.sharedHockeyManager().updateManager.checkForUpdateOnLaunch = false
-            BITHockeyManager.sharedHockeyManager().updateManager.alwaysShowUpdateReminder = true
-            BITHockeyManager.sharedHockeyManager().updateManager.showDirectInstallOption = true
+            BITHockeyManager.shared().updateManager.updateSetting = .checkManually
+            BITHockeyManager.shared().updateManager.isCheckForUpdateOnLaunch = false
+            BITHockeyManager.shared().updateManager.alwaysShowUpdateReminder = true
+            BITHockeyManager.shared().updateManager.isShowingDirectInstallOption = true
             
-            BITHockeyManager.sharedHockeyManager().startManager()
+            BITHockeyManager.shared().start()
             
-            BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
-            BITHockeyManager.sharedHockeyManager().testIdentifier()
+            BITHockeyManager.shared().authenticator.authenticateInstallation()
+            BITHockeyManager.shared().testIdentifier()
         }
     }
     

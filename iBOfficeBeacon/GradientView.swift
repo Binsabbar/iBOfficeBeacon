@@ -21,7 +21,7 @@ import UIKit
     
     @IBInspectable var topColor: UIColor? {
         get {
-            return UIColor(CGColor: gradientLayer.colorTop)
+            return UIColor(cgColor: gradientLayer.colorTop)
         }
         set {
             _topColor = newValue
@@ -30,7 +30,7 @@ import UIKit
     
     @IBInspectable var middleColor: UIColor? {
         get {
-            return UIColor(CGColor: gradientLayer.colorMiddle)
+            return UIColor(cgColor: gradientLayer.colorMiddle)
         }
         set {
             _middleColor = newValue
@@ -39,7 +39,7 @@ import UIKit
     
     @IBInspectable var bottomColor: UIColor? {
         get {
-            return UIColor(CGColor: gradientLayer.colorBottom)
+            return UIColor(cgColor: gradientLayer.colorBottom)
         }
         set {
             _bottomColor = newValue
@@ -48,12 +48,12 @@ import UIKit
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
     }
     
 
@@ -63,22 +63,22 @@ import UIKit
         setupGradientColors()
         gradientLayer.gradient.frame = frame
         gradientLayer.gradient.masksToBounds = true
-        layer.insertSublayer(gradientLayer.gradient, atIndex: 0)
+        layer.insertSublayer(gradientLayer.gradient, at: 0)
     }
     
     
     // Keep it for refrence
-    private func loadFromNib() -> UIView {
-        let bundle = NSBundle(forClass: self.dynamicType)
+    fileprivate func loadFromNib() -> UIView {
+        let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: nibName, bundle: bundle)
-        let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         return view
     }
     
-    private func setupGradientColors() {
-        gradientLayer.colorTop = _topColor?.CGColor ?? (topColor?.CGColor)!
-        gradientLayer.colorMiddle = _middleColor?.CGColor ?? (middleColor?.CGColor)!
-        gradientLayer.colorBottom = _bottomColor?.CGColor ?? (bottomColor?.CGColor)!
+    fileprivate func setupGradientColors() {
+        gradientLayer.colorTop = _topColor?.cgColor ?? (topColor?.cgColor)!
+        gradientLayer.colorMiddle = _middleColor?.cgColor ?? (middleColor?.cgColor)!
+        gradientLayer.colorBottom = _bottomColor?.cgColor ?? (bottomColor?.cgColor)!
         gradientLayer.applyColors()
     }
 }

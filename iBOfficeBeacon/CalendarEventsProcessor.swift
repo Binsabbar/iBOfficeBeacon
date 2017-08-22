@@ -10,7 +10,7 @@ class CalendarEventsProcessor: NSObject {
 
     let responseAccepted = "accepted"
     
-    func processEvents(events: GTLRCalendar_Events, forCalendarWithID calendarID: String) -> [CalendarEvent] {
+    func processEvents(_ events: GTLRCalendar_Events, forCalendarWithID calendarID: String) -> [CalendarEvent] {
         var processedEvents = [CalendarEvent]()
 
         if let calendarEvents = events.items {
@@ -28,7 +28,7 @@ class CalendarEventsProcessor: NSObject {
         return processedEvents
     }
     
-    func eventStartsAt(date: NSDate, endsAt: NSDate, includesAttendees attendees: [String]) -> GTLRCalendar_Event {
+    func eventStartsAt(_ date: Date, endsAt: Date, includesAttendees attendees: [String]) -> GTLRCalendar_Event {
         var eventAttendees = Array<GTLRCalendar_EventAttendee>()
         attendees.forEach { (attendeeEmail) in
             let attendee = GTLRCalendar_EventAttendee()
@@ -47,8 +47,8 @@ class CalendarEventsProcessor: NSObject {
         return event
     }
 
-    typealias EventTime = (start: NSDate?, end: NSDate?)
-    private func setEventTime(event: GTLRCalendar_Event) -> EventTime {
+    typealias EventTime = (start: Date?, end: Date?)
+    fileprivate func setEventTime(_ event: GTLRCalendar_Event) -> EventTime {
         if isAllDayEvent(event) {
             return(event.start?.date?.date.beginningOfDayUTC(),
                    event.end?.date?.date.beginningOfDayUTC())
@@ -57,15 +57,14 @@ class CalendarEventsProcessor: NSObject {
         }
     }
     
-    private func isAllDayEvent(event: GTLRCalendar_Event) -> Bool {
+    fileprivate func isAllDayEvent(_ event: GTLRCalendar_Event) -> Bool {
         return event.start?.dateTime == nil && event.start?.date != nil
     }
     
-    private func hasCalendarID(calendarID: String, acceptedEvent event: GTLRCalendar_Event) -> Bool {
+    fileprivate func hasCalendarID(_ calendarID: String, acceptedEvent event: GTLRCalendar_Event) -> Bool {
         if let attendees = event.attendees {
             for attendee in attendees {
-                if let email = attendee.email, response = attendee.responseStatus
-                    where email == calendarID && response == responseAccepted {
+                if let email = attendee.email, let response = attendee.responseStatus, email == calendarID && response == responseAccepted {
                     return true
                 }
             }

@@ -11,7 +11,7 @@ import Foundation
 
 protocol RemoteFileServiceProtocol {
     
-    func requestFileMetadataForFileId(fileID: String, completionHandler: (FileMetadata, NSError?) -> ())
+    func requestFileMetadataForFileId(_ fileID: String, completionHandler: @escaping (FileMetadata, NSError?) -> ())
     
-    func fetchFile(file: FileMetadata, fetchCompletionHandler: (NSData?, NSError?)->())
+    func fetchFile(_ file: FileMetadata, fetchCompletionHandler: @escaping (Data?, NSError?)->())
 }

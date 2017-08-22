@@ -8,18 +8,14 @@
 
 import Foundation
 
-extension NSThread {
+extension Thread {
     
-    class func excuteAfterDelay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
+    class func excuteAfterDelay(_ delay:Double, closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(
+            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
     
-    class func synchronize(lockObj: AnyObject!, closure: ()->()){
+    class func synchronize(_ lockObj: AnyObject!, closure: ()->()){
         objc_sync_enter(lockObj)
         closure()
         objc_sync_exit(lockObj)

@@ -10,7 +10,7 @@ import Foundation
 
 class AuthControllerSpy: AuthController {
     
-    private(set) var isLogoutCalled: Bool!
+    fileprivate(set) var isLogoutCalled: Bool!
     
     init() {
         isLogoutCalled = false

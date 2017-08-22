@@ -12,36 +12,36 @@ import UIKit
 
 class Wiring: NSObject {
 
-    static let sharedWiring = Wiring(application: UIApplication.sharedApplication())
+    static let sharedWiring = Wiring(application: UIApplication.shared)
     
     var application: UIApplication
     
     // MARK: Private instances
-    private var _beaconClient: ESTBeaconManager!
-    private var _beaconClientForBackgroundManager: ESTBeaconManager!
-    private var _beaconAddressLoader: BeaconAddressLoader!
-    private var _beaconAddressMapper: BeaconAddressMapper!
-    private var _beaconAddressStore: BeaconAddressStore!
-    private var _beaconManager: BeaconManager!
+    fileprivate var _beaconClient: ESTBeaconManager!
+    fileprivate var _beaconClientForBackgroundManager: ESTBeaconManager!
+    fileprivate var _beaconAddressLoader: BeaconAddressLoader!
+    fileprivate var _beaconAddressMapper: BeaconAddressMapper!
+    fileprivate var _beaconAddressStore: BeaconAddressStore!
+    fileprivate var _beaconManager: BeaconManager!
     
-    private var _localNotificationService: LocalNotificationService!
-    private var _settings: AppSettings!
+    fileprivate var _localNotificationService: LocalNotificationService!
+    fileprivate var _settings: AppSettings!
     
-    private var _googleCalendarService: GTLRCalendarService!
-    private var _calendarService: CalendarService!
-    private var _calendarClient: CalendarClient!
+    fileprivate var _googleCalendarService: GTLRCalendarService!
+    fileprivate var _calendarService: CalendarService!
+    fileprivate var _calendarClient: CalendarClient!
     
-    private var _googleDriveService: GTLRDriveService!
-    private var _fileService: FileService!
+    fileprivate var _googleDriveService: GTLRDriveService!
+    fileprivate var _fileService: FileService!
     
-    private var _authController: AuthController!
-    private var _appUpdateController: AppUpdateController!
-    private var _locationServiceAuthzController: LocationServiceAuthzController!
-    private var _bluetoothController: BluetoothController!
-    private var _bluetoothManager: CBPeripheralManager!
-    private var _errorAlertController: ErrorAlertController!
-    private var _googleAuthorizationErrorHandler: GoogleAuthorizationErrorHandler!
-    private var _logoutController: LogoutController!
+    fileprivate var _authController: AuthController!
+    fileprivate var _appUpdateController: AppUpdateController!
+    fileprivate var _locationServiceAuthzController: LocationServiceAuthzController!
+    fileprivate var _bluetoothController: BluetoothController!
+    fileprivate var _bluetoothManager: CBPeripheralManager!
+    fileprivate var _errorAlertController: ErrorAlertController!
+    fileprivate var _googleAuthorizationErrorHandler: GoogleAuthorizationErrorHandler!
+    fileprivate var _logoutController: LogoutController!
     
     // MARK: Public Function
     init(application: UIApplication) {
@@ -85,14 +85,14 @@ class Wiring: NSObject {
         return _beaconAddressLoader
     }
     
-    private func fileService() -> FileService {
+    fileprivate func fileService() -> FileService {
         if _fileService == nil {
             _fileService = FileService()
         }
         return _fileService
     }
     
-    private func SpreadsheetAPIFactoryBlock() -> BeaconAddressLoader.SpreadsheetApiFactoryBlock {
+    fileprivate func SpreadsheetAPIFactoryBlock() -> BeaconAddressLoader.SpreadsheetApiFactoryBlock {
         return { (delegate) in
             let driveClient = SheetDriveWrapper(withService: self.googleDriveService())
             let fileService = self.fileService()
@@ -168,7 +168,7 @@ class Wiring: NSObject {
     
     func appUpdateController() -> AppUpdateController {
         if (_appUpdateController == nil) {
-            let manager = BITHockeyManager.sharedHockeyManager().updateManager
+            let manager = BITHockeyManager.shared().updateManager
             _appUpdateController = AppUpdateController(updateManager: manager, settings: settings())
         }
         return _appUpdateController
@@ -212,14 +212,14 @@ class Wiring: NSObject {
     }
     
     //MARK: Private
-    private func beaconClientForBackgroundManager() -> ESTBeaconManager {
+    fileprivate func beaconClientForBackgroundManager() -> ESTBeaconManager {
         if(_beaconClientForBackgroundManager == nil){
             _beaconClientForBackgroundManager = ESTBeaconManager.init()
         }
         return _beaconClientForBackgroundManager
     }
     
-    private func beaconManagerClient() -> ESTBeaconManager {
+    fileprivate func beaconManagerClient() -> ESTBeaconManager {
         if(_beaconClient == nil){
             _beaconClient = ESTBeaconManager.init()
         }

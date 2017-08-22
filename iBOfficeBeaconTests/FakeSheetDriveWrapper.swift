@@ -10,20 +10,20 @@ import Foundation
 
 class FakeSheetDriveWrapper: RemoteFileServiceProtocol {
     
-    let queue = dispatch_queue_create("FakeSheetDriveWrapper", nil)
+    let queue = DispatchQueue(label: "FakeSheetDriveWrapper", attributes: [])
     
     var requestedFileId: String?
     var fileMetadata: FileMetadata?
     var requestFileError: NSError?
     
-    var fetchedData: NSData?
+    var fetchedData: Data?
     var fetchingFileError: NSError?
     
     var hasFetchedFileCalled = false
     var hasRequestFileMetadataForIdCalled = false
     
-    func fetchFile(file: FileMetadata, fetchCompletionHandler: (NSData?, NSError?) -> ()) {
-        dispatch_async(queue) {
+    func fetchFile(_ file: FileMetadata, fetchCompletionHandler: @escaping (Data?, NSError?) -> ()) {
+        queue.async {
             self.hasFetchedFileCalled = true
             if let data = self.fetchedData {
                 fetchCompletionHandler(data, nil)
@@ -33,9 +33,9 @@ class FakeSheetDriveWrapper: RemoteFileServiceProtocol {
         }
     }
     
-    func requestFileMetadataForFileId(fileId: String, completionHandler: (FileMetadata, NSError?) -> ()) {
+    func requestFileMetadataForFileId(_ fileId: String, completionHandler: @escaping (FileMetadata, NSError?) -> ()) {
         
-        dispatch_async(queue) {
+        queue.async {
             self.hasRequestFileMetadataForIdCalled = true
             self.requestedFileId = fileId
             if let file = self.fileMetadata {

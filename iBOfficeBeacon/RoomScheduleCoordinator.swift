@@ -10,7 +10,7 @@ import Foundation
 
 class RoomScheduleCoordinator {
 
-    var datetimeNow: NSDate!
+    var datetimeNow: Date!
     let timeslotsCalculator: FreeTimeslotCalculator
     let MAX_TIMESLOT_MINUTES = 120
     
@@ -18,8 +18,8 @@ class RoomScheduleCoordinator {
         self.timeslotsCalculator = timeslotsCalculator
     }
     
-    func findCurrentRoomScheduleFromEvents(events: [CalendarEvent]) -> ScheduleProtocol {
-        datetimeNow = NSDate()
+    func findCurrentRoomScheduleFromEvents(_ events: [CalendarEvent]) -> ScheduleProtocol {
+        datetimeNow = Date()
         
         let sortedEvents = sortEventsInAscendingOrder(filterOutPastEvents(events))
         
@@ -31,7 +31,7 @@ class RoomScheduleCoordinator {
         }
     }
     
-    private func processEvents(events: [CalendarEvent]) ->  ScheduleProtocol {
+    fileprivate func processEvents(_ events: [CalendarEvent]) ->  ScheduleProtocol {
         let firstEvent = events.first!
         
         if isACurrentEvent(firstEvent) {
@@ -47,29 +47,29 @@ class RoomScheduleCoordinator {
                                 nextAvailable: endDatetimeOfLastConsecutiveEvent)
         }
         
-        let minutesTillNextEvent = timeIntervalInMinutesFromDate(firstEvent.startDatetime)
+        let minutesTillNextEvent = timeIntervalInMinutesFromDate(firstEvent.startDatetime as Date)
         let freeTimeslots = timeslotsCalculator.calculateFreeTimeslotsFrom(minutes: minutesTillNextEvent)
         return FreeSchedule(for: minutesTillNextEvent, with: freeTimeslots)
     }
     
 
-    private func filterOutPastEvents(events: [CalendarEvent]) -> [CalendarEvent] {
+    fileprivate func filterOutPastEvents(_ events: [CalendarEvent]) -> [CalendarEvent] {
         return events.filter { (event) -> Bool in
             return datetimeNow.isEarlierThanDate(event.endDatetime)
         }
     }
     
-    private func sortEventsInAscendingOrder(events: [CalendarEvent]) -> [CalendarEvent] {
-        return events.sort { (event, anotherEvent) -> Bool in
+    fileprivate func sortEventsInAscendingOrder(_ events: [CalendarEvent]) -> [CalendarEvent] {
+        return events.sorted { (event, anotherEvent) -> Bool in
             return event.startDatetime.isEarlierThanDate(anotherEvent.startDatetime)
         }
     }
     
-    private func timeIntervalInMinutesFromDate(date: NSDate) -> Int {
-        return Int(ceil(date.timeIntervalSinceDate(datetimeNow)/60))
+    fileprivate func timeIntervalInMinutesFromDate(_ date: Date) -> Int {
+        return Int(ceil(date.timeIntervalSince(datetimeNow)/60))
     }
     
-    private func isACurrentEvent(event: CalendarEvent) -> Bool {
+    fileprivate func isACurrentEvent(_ event: CalendarEvent) -> Bool {
         return event.startDatetime.isEarlierThanDate(datetimeNow) &&
             event.endDatetime.isLaterThanDate(datetimeNow)
     }

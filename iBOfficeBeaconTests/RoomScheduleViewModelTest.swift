@@ -16,14 +16,14 @@ class RoomScheduleViewModelTest: XCTestCase {
     func testItSetsTheViewModelForBusyRoomSchedule() {
         let busySchedule = createBusySchedule()
 
-        let expectedDetails = "Booked until\n\n\(dateToString(busySchedule.nextAvailable))"
+        let expectedDetails = "Booked until\n\n\(dateToString(busySchedule.nextAvailable as Date))"
         
         subject = RoomScheduleViewModel(model: busySchedule, room: anyRoom)
         
         XCTAssertTrue(subject.shouldHideBookButton)
         XCTAssertTrue(subject.statusLabelBackgroundColor.isEqual(AppColours.red))
         XCTAssertTrue(isString(firstString: subject.statusLabelTitle, equalsToOtherString: "Room is busy", ignoreCase: false))
-        XCTAssertTrue(subject.scheduleLabelTitle == busySchedule.currentEvent.title)
+        XCTAssertTrue(subject.scheduleLabelTitle == busySchedule.currentEvent.title as String)
         XCTAssertTrue(isString(firstString: subject.scheduleTimeInfoAttributedString.string, equalsToOtherString: expectedDetails, ignoreCase: true))
     }
     
@@ -40,8 +40,8 @@ class RoomScheduleViewModelTest: XCTestCase {
     
     func testItSetsTheViewModelForFreeRoomSchedule() {
         let availableForInMinutes = 60
-        let timeIntervalInSeconds = NSTimeInterval(60 * availableForInMinutes)
-        let availableForAsDate = NSDate().dateByAddingTimeInterval(timeIntervalInSeconds)
+        let timeIntervalInSeconds = TimeInterval(60 * availableForInMinutes)
+        let availableForAsDate = Date().addingTimeInterval(timeIntervalInSeconds)
         
         let freeSchedule = createFreeScheduleWithFreeTill(availableForInMinutes)
         
@@ -79,7 +79,7 @@ class RoomScheduleViewModelTest: XCTestCase {
         XCTAssertTrue(subject.shouldHideBookButton)
         XCTAssertTrue(subject.statusLabelBackgroundColor.isEqual(AppColours.red))
         XCTAssertTrue(isString(firstString: subject.statusLabelTitle, equalsToOtherString: "Room is busy", ignoreCase: false))
-        XCTAssertTrue(subject.scheduleLabelTitle == busySchedule.currentEvent.title)
+        XCTAssertTrue(subject.scheduleLabelTitle == busySchedule.currentEvent.title as String)
         XCTAssertTrue(isString(firstString: subject.scheduleTimeInfoAttributedString.string, equalsToOtherString: expectedDetails, ignoreCase: true))
     }
     
@@ -93,28 +93,28 @@ class RoomScheduleViewModelTest: XCTestCase {
         XCTAssertTrue(model.shouldHideBookButton)
     }
     
-    private func createBusyScheduleWithAllDayEvent() -> BusySchedule {
-        let start = NSDate().beginningOfDay()
+    fileprivate func createBusyScheduleWithAllDayEvent() -> BusySchedule {
+        let start = Date().beginningOfDay()
         let end = start.tomorrow()
         let currentEvent = CalendarEvent(start: start, end: end, title: "Testing RoomScheduleVM")
         return BusySchedule(with: currentEvent, nextAvailable: end)
     }
     
-    private func createFreeScheduleWithFreeTill(minutes: Int) -> FreeSchedule {
+    fileprivate func createFreeScheduleWithFreeTill(_ minutes: Int) -> FreeSchedule {
         return FreeSchedule(for: minutes, with: Set())
     }
     
-    private func createBusySchedule() -> BusySchedule {
-        let scheduleEndsAt = NSDate().dateByAddingTimeInterval(oneHour)
-        let event = CalendarEvent(start: NSDate(), end: NSDate(), title: "Testing RoomScheduleVM")
+    fileprivate func createBusySchedule() -> BusySchedule {
+        let scheduleEndsAt = Date().addingTimeInterval(oneHour)
+        let event = CalendarEvent(start: Date(), end: Date(), title: "Testing RoomScheduleVM")
         return BusySchedule(with: event, nextAvailable: scheduleEndsAt)
     }
     
-    private func dateToString(date: NSDate) -> String {
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Hour, .Minute], fromDate: date)
+    fileprivate func dateToString(_ date: Date) -> String {
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components([.hour, .minute], from: date)
         
-        return String(format: "%02d:%02d", components.hour, components.minute)
+        return String(format: "%02d:%02d", components.hour!, components.minute!)
     }
 
 }

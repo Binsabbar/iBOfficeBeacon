@@ -3,10 +3,10 @@ import Foundation
 class BeaconAddressMapper {
 
     
-    private typealias officeInfo = (major: Int, minor:Int, office:String, room:String,
+    fileprivate typealias officeInfo = (major: Int, minor:Int, office:String, room:String,
         calendarID: String)
     
-    func mapAddresses(addresses: [[String:String]]) -> [OfficeAddress] {
+    func mapAddresses(_ addresses: [[String:String]]) -> [OfficeAddress] {
         var offices = [OfficeAddress]()
         var officesHash = [Int: OfficeAddress]()
         
@@ -26,11 +26,11 @@ class BeaconAddressMapper {
         return offices
     }
     
-    private func extractOfficeInfoFromAddress(address:[String: String]) -> officeInfo? {
-        if let major = address["major"], majorInt = Int(major),
-               minor = address["minor"], minorInt = Int(minor),
-               room = address["room"], office = address["office"],
-               calendarID = address["calendar id"] {
+    fileprivate func extractOfficeInfoFromAddress(_ address:[String: String]) -> officeInfo? {
+        if let major = address["major"], let majorInt = Int(major),
+               let minor = address["minor"], let minorInt = Int(minor),
+               let room = address["room"], let office = address["office"],
+               let calendarID = address["calendar id"] {
             
             return (majorInt, minorInt, office, room, calendarID)
         }

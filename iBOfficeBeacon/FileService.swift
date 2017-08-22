@@ -10,34 +10,34 @@ import Foundation
 
 class FileService : NSString {
     
-    private let documentDirectory:NSString = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,
-                                                                         .UserDomainMask,
-                                                                         true).first!
+    fileprivate let documentDirectory:NSString = NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                                         .userDomainMask,
+                                                                         true).first! as NSString
     
-    func fullPathForFileName(name: String) -> String {
-        return documentDirectory.stringByAppendingPathComponent(name)
+    func fullPathForFileName(_ name: String) -> String {
+        return documentDirectory.appendingPathComponent(name)
     }
     
-    func writeData(data: NSData, toFileName name: String) -> Bool {
+    func writeData(_ data: Data, toFileName name: String) -> Bool {
         let writter = UTF8DataWriterService(directoryToWriteIn: documentDirectory as String)
         return writter.writeDataAsString(data, inFileName: name)
     }
     
-    func lastModifiedDateForFileName(name: String) -> NSDate {
-        let manager = NSFileManager.defaultManager()
+    func lastModifiedDateForFileName(_ name: String) -> Date {
+        let manager = FileManager.default
         do {
-            let filePath = documentDirectory.stringByAppendingPathComponent(name)
-            let attrs = try manager.attributesOfItemAtPath(filePath)
-            return attrs[NSFileModificationDate] as! NSDate
+            let filePath = documentDirectory.appendingPathComponent(name)
+            let attrs = try manager.attributesOfItem(atPath: filePath)
+            return attrs[FileAttributeKey.modificationDate] as! Date
         } catch {}
-        return NSDate()
+        return Date()
     }
     
-    func deleteFile(fileName: String) {
-        let manager = NSFileManager.defaultManager()
+    func deleteFile(_ fileName: String) {
+        let manager = FileManager.default
         do {
-            let filePath = documentDirectory.stringByAppendingPathComponent(fileName)
-            try manager.removeItemAtURL(NSURL(fileURLWithPath: filePath))
+            let filePath = documentDirectory.appendingPathComponent(fileName)
+            try manager.removeItem(at: URL(fileURLWithPath: filePath))
         } catch{}
     }
 }

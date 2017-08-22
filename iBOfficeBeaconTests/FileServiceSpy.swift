@@ -17,22 +17,22 @@ class FileServiceSpy: FileService {
     
     var deleteFileParam: String?
 
-    override func writeData(data: NSData, toFileName name: String) -> Bool {
+    override func writeData(_ data: Data, toFileName name: String) -> Bool {
         isWriteDataCalled = true
         return true
     }
     
-    override func deleteFile(fileName: String) {
+    override func deleteFile(_ fileName: String) {
         isDeleteFileCalled = true
         deleteFileParam = fileName
     }
     
-    override func lastModifiedDateForFileName(name: String) -> NSDate {
+    override func lastModifiedDateForFileName(_ name: String) -> Date {
         isLastModifiedCalled = true
-        return NSDate()
+        return Date()
     }
     
-    override func fullPathForFileName(name: String) -> String {
+    override func fullPathForFileName(_ name: String) -> String {
         isFullPathForFileNameCalled = true
         return name
     }

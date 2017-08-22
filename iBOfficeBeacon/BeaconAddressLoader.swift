@@ -1,7 +1,7 @@
 import Foundation
 
 protocol BeaconAddressLoaderProtocol {
-    func beaconAddressesLoaded(address: [[String: String]]?)
+    func beaconAddressesLoaded(_ address: [[String: String]]?)
 }
 
 class BeaconAddressLoader: SpreadsheetAPIDelegate {
@@ -12,19 +12,19 @@ class BeaconAddressLoader: SpreadsheetAPIDelegate {
     
     static let ParsingAddressFailed = "ParsingAddressFailed"
     
-    private let apiFactoryBlock: SpreadsheetApiFactoryBlock
-    private let localFileName: String
-    private let queue = dispatch_queue_create("BeaconAddressLoader", nil)
-    private let errorHandler: ErrorHandlingProtocol
-    private let fileService: FileService
+    fileprivate let apiFactoryBlock: SpreadsheetApiFactoryBlock
+    fileprivate let localFileName: String
+    fileprivate let queue = DispatchQueue(label: "BeaconAddressLoader", attributes: [])
+    fileprivate let errorHandler: ErrorHandlingProtocol
+    fileprivate let fileService: FileService
     
-    private lazy var spreadsheetApi: SpreadsheetAPI = {
+    fileprivate lazy var spreadsheetApi: SpreadsheetAPI = {
         [unowned self] in
         return self.apiFactoryBlock(self)
     }()
     
     // object lifecyle (delegate and api class strong reference cycle)
-    init(spreadsheetApiCreate: SpreadsheetApiFactoryBlock,
+    init(spreadsheetApiCreate: @escaping SpreadsheetApiFactoryBlock,
          localFileName: String,
          fileService: FileService,
          errorHandler: ErrorHandlingProtocol)
@@ -35,41 +35,41 @@ class BeaconAddressLoader: SpreadsheetAPIDelegate {
         self.fileService = fileService
     }
     
-    func loadBeaconAddressFromSheetWithID(sheetID: String) -> Void {
-        dispatch_async(queue) {
+    func loadBeaconAddressFromSheetWithID(_ sheetID: String) -> Void {
+        queue.async {
             self.spreadsheetApi.saveRemoteSheetFileWithId(sheetID, locallyToFile: self.localFileName)
         }
     }
 
     // MARK: SpreadsheetAPIDelegate
-    func localFile(localName: String, isUpToDateWithRequestedFile remoteName: String) {
+    func localFile(_ localName: String, isUpToDateWithRequestedFile remoteName: String) {
         self.delegate?.beaconAddressesLoaded(self.parseAddresses())
     }
     
-    func requestedFile(remoteName: String, hasBeenSavedLocallyToFile localName: String){
+    func requestedFile(_ remoteName: String, hasBeenSavedLocallyToFile localName: String){
         self.delegate?.beaconAddressesLoaded(self.parseAddresses())
     }
     
-    func requestingRemoteFileFailedWithError(error: NSError){
+    func requestingRemoteFileFailedWithError(_ error: NSError){
         errorHandler.handleError(error)
     }
     
-    func fetchingRemoteFileFailedWithError(error: NSError) {
+    func fetchingRemoteFileFailedWithError(_ error: NSError) {
         errorHandler.handleError(error)
     }
     
-    func fileCouldNotBeSavedTo(fileName: String){}
+    func fileCouldNotBeSavedTo(_ fileName: String){}
     
     // MARK: Private function
-    private func parseAddresses() -> [[String:String]]? {
+    fileprivate func parseAddresses() -> [[String:String]]? {
         var addresses: [[String: String]] = []
         do {
             let path = fileService.fullPathForFileName(localFileName)
             let parsedData = try CSV(name: path)
             addresses = parsedData.rows
         } catch {
-            NSNotificationCenter.defaultCenter()
-                .postNotificationName(BeaconAddressLoader.ParsingAddressFailed,
+            NotificationCenter.default
+                .post(name: Notification.Name(rawValue: BeaconAddressLoader.ParsingAddressFailed),
                                       object: self)
         }
         return addresses

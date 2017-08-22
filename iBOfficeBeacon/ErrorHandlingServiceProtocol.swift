@@ -10,6 +10,6 @@ import Foundation
 
 protocol ErrorHandlingProtocol {
 
-    func handleError(error: NSError)
+    func handleError(_ error: NSError)
     
 }

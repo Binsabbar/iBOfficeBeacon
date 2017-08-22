@@ -17,7 +17,7 @@ class FakeAppSettings: AppSettings {
         return fakeBeaconUUID
     }
     
-    func setFeautreToggle(feature: FeatureToggles, To value: Bool) {
+    func setFeautreToggle(_ feature: FeatureToggles, To value: Bool) {
         fakeFeatureToggles[feature.rawValue] = value
     }
     

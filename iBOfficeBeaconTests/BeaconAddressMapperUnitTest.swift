@@ -55,7 +55,7 @@ class BeaconAddressMapperUnitTest: XCTestCase {
         XCTAssertTrue(LonodonOffice.rooms.first?.calendarID == "hive@someemail.com")
     }
     
-    private func parsedOfficeAddresses() -> [[String:String]]{
+    fileprivate func parsedOfficeAddresses() -> [[String:String]]{
         return [
             [
                 "major":"1",

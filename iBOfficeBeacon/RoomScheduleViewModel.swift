@@ -27,7 +27,7 @@ class RoomScheduleViewModel {
     }
     
     var bookButtonColorForNormalState: UIColor {
-        return UIColor.clearColor()
+        return UIColor.clear
     }
     
     var bookButtonColorForTapState: UIColor {
@@ -47,7 +47,7 @@ class RoomScheduleViewModel {
     }
 
     var scheduleTimeInfoBackgroundColor: UIColor {
-        return UIColor.clearColor()
+        return UIColor.clear
     }
     
     var statusLabelTitle: String {
@@ -66,35 +66,35 @@ class RoomScheduleViewModel {
     }
     
     var scheduleTimeInfoAttributedString: NSAttributedString {
-        let attrs = [NSFontAttributeName: UIFont.boldSystemFontOfSize(30),
-                     NSForegroundColorAttributeName: UIColor.whiteColor()]
+        let attrs = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 30),
+                     NSForegroundColorAttributeName: UIColor.white]
         let attributedText = NSMutableAttributedString()
         if let model = model as? BusySchedule {
             if model.currentEvent.isAllDayEvent() {
-                attributedText.appendAttributedString(NSAttributedString(string: "Booked all day"))
+                attributedText.append(NSAttributedString(string: "Booked all day"))
             } else {
                 let date = model.nextAvailable
-                attributedText.appendAttributedString(NSAttributedString(string: "Booked until\n\n"))
-                attributedText.appendAttributedString(NSAttributedString(string: dateToString(date), attributes: attrs))
+                attributedText.append(NSAttributedString(string: "Booked until\n\n"))
+                attributedText.append(NSAttributedString(string: dateToString(date as Date), attributes: attrs))
             }
             
         } else {
             let date = minutesToDate(model.minutesTillNextEvent)
-            attributedText.appendAttributedString(NSAttributedString(string: "Free until\n\n"))
-            attributedText.appendAttributedString(NSAttributedString(string: dateToString(date), attributes: attrs))
+            attributedText.append(NSAttributedString(string: "Free until\n\n"))
+            attributedText.append(NSAttributedString(string: dateToString(date), attributes: attrs))
         }
         return attributedText
     }
     
-    private func minutesToDate(minutes: Int) -> NSDate {
-        let minutesAsTimeInterval = NSTimeInterval(60 * minutes)
-        return NSDate().dateByAddingTimeInterval(minutesAsTimeInterval)
+    fileprivate func minutesToDate(_ minutes: Int) -> Date {
+        let minutesAsTimeInterval = TimeInterval(60 * minutes)
+        return Date().addingTimeInterval(minutesAsTimeInterval)
     }
     
-    private func dateToString(date: NSDate) -> String {
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Hour, .Minute], fromDate: date)
+    fileprivate func dateToString(_ date: Date) -> String {
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components([.hour, .minute], from: date)
         
-        return String(format: "%02d:%02d", components.hour, components.minute)
+        return String(format: "%02d:%02d", components.hour!, components.minute!)
     }
 }

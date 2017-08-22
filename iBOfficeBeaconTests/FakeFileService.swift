@@ -12,25 +12,25 @@ class FakeFileService : FileService {
     
     var hasWriteDataToFileNameBeenCalled = false
     var fileName: String?
-    var writtenData: NSData?
+    var writtenData: Data?
     
-    var lastModified: NSDate?
+    var lastModified: Date?
     var writeDataResult = false
     
     var mockWrongFullPathForFileName = false
     
-    override func writeData(data: NSData, toFileName name: String) -> Bool {
+    override func writeData(_ data: Data, toFileName name: String) -> Bool {
         hasWriteDataToFileNameBeenCalled = true
         fileName = name
         writtenData = data
         return writeDataResult
     }
     
-    override func lastModifiedDateForFileName(name: String) -> NSDate {
-        return NSDate()
+    override func lastModifiedDateForFileName(_ name: String) -> Date {
+        return Date()
     }
     
-    override func fullPathForFileName(name: String) -> String {
+    override func fullPathForFileName(_ name: String) -> String {
         if mockWrongFullPathForFileName {
             return ""
         }

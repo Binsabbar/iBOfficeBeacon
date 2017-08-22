@@ -22,7 +22,7 @@ class SpreadsheetAPIIntegrationTest: XCTestCase {
     var localFileName = "integration-test.csv"
     
     var remoteFileName = "remoteFileName"
-    var remoteFileContent = "Some content for the remote file".dataUsingEncoding(NSUTF8StringEncoding)
+    var remoteFileContent = "Some content for the remote file".data(using: String.Encoding.utf8)
     
     var fileHelper = FileUtilHelper(searchDirectory: FileUtilHelper.documentDirectory)
     
@@ -47,7 +47,7 @@ class SpreadsheetAPIIntegrationTest: XCTestCase {
     }
     
     func testItLoadsRemoteSpreadsheetAndSavesItLocally() {
-        let testExpectation = expectationWithDescription("SpreadSheetAPI Integration Test")
+        let testExpectation = expectation(description: "SpreadSheetAPI Integration Test")
         
         fakeServiceDrive.testBlock = { (ticket, testResponse) in
             if ticket.originalQuery is GTLRDriveQuery_FilesGet {
@@ -61,20 +61,20 @@ class SpreadsheetAPIIntegrationTest: XCTestCase {
         
         spreadsheetAPI.saveRemoteSheetFileWithId(remoteFileName, locallyToFile: localFileName)
         
-        let savedFileContent = String(data: remoteFileContent!, encoding: NSUTF8StringEncoding)!
+        let savedFileContent = String(data: remoteFileContent!, encoding: String.Encoding.utf8)!
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
         
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertTrue(self.fileHelper.hasContent(savedFileContent, beenWrittenToFile: self.localFileName))
         }
     }
     
-    private func fakeRemoteGTLDriveFile() -> GTLRDrive_File {
+    fileprivate func fakeRemoteGTLDriveFile() -> GTLRDrive_File {
         let fakeFileObject = GTLRDrive_File()
         fakeFileObject.name = remoteFileName
         fakeFileObject.identifier = remoteFileName
-        fakeFileObject.modifiedTime = GTLRDateTime(date: NSDate())
+        fakeFileObject.modifiedTime = GTLRDateTime(date: Date())
         return fakeFileObject
     }
 }

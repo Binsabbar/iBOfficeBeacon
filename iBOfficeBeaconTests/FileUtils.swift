@@ -2,7 +2,7 @@ import Foundation
 
 class FileUtilHelper {
     
-    static let documentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!
+    static let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
     
     let searchDir: String
     
@@ -10,20 +10,20 @@ class FileUtilHelper {
         searchDir = searchDirectory
     }
     
-    func hasContent(content: String, beenWrittenToFile theFile: String) -> Bool {
+    func hasContent(_ content: String, beenWrittenToFile theFile: String) -> Bool {
         if let path = filePath(theFile) {
-            let fileContent = stringFromFile(path)
-            return fileContent.compare(content) == .OrderedSame
+            let fileContent = stringFromFile(path as NSString)
+            return fileContent.compare(content) == .orderedSame
         }
         return false
     }
     
-    func deleteFile(theFile: String) {
-        let fileManager = NSFileManager.defaultManager()
+    func deleteFile(_ theFile: String) {
+        let fileManager = FileManager.default
         
         if let path = filePath(theFile) {
             do {
-                try fileManager.removeItemAtPath(path)
+                try fileManager.removeItem(atPath: path)
             }
             catch let error as NSError {
                 print("Something went wrong: \(error)")
@@ -31,58 +31,58 @@ class FileUtilHelper {
         }
     }
     
-    func changeFile(theFile: String, modifiedDateToDate date: NSDate) {
-        let fileManager = NSFileManager.defaultManager()
+    func changeFile(_ theFile: String, modifiedDateToDate date: Date) {
+        let fileManager = FileManager.default
         do {
-            try fileManager.setAttributes([NSFileModificationDate: date],
+            try fileManager.setAttributes([FileAttributeKey.modificationDate: date],
                                           ofItemAtPath: filePath(theFile)!)
         } catch{}
     }
     
-    func assertFileIsDeleted(theFile: String) {
-        let fileManager = NSFileManager.defaultManager()
+    func assertFileIsDeleted(_ theFile: String) {
+        let fileManager = FileManager.default
         if let path = filePath(theFile) {
-            assert(!fileManager.fileExistsAtPath(path), "File should be deleted after the test")
+            assert(!fileManager.fileExists(atPath: path), "File should be deleted after the test")
         }
     }
     
-    func writeString(string: String, toFile theFile: String) {
+    func writeString(_ string: String, toFile theFile: String) {
         
         do {
             if let path = filePath(theFile) {
-                try string.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
+                try string.write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
             }
         } catch {
             assertionFailure("Could not write the file")
         }
     }
     
-    func stringFromFile(file: NSString)-> NSString {
+    func stringFromFile(_ file: NSString)-> NSString {
         do {
-            return try NSString(contentsOfFile: file as String, encoding: NSUTF8StringEncoding)
+            return try NSString(contentsOfFile: file as String, encoding: String.Encoding.utf8.rawValue)
         } catch {return ""}
     }
     
     //MARK: Private helpers
-    private func filePath(file: String) -> String? {
-        return (searchDir as NSString).stringByAppendingPathComponent(file)
+    fileprivate func filePath(_ file: String) -> String? {
+        return (searchDir as NSString).appendingPathComponent(file)
     }
 }
 
-func hasContent(content: String, beenWrittenToFile theFile: String) -> Bool {
-    if let path = file(theFile, inDirectory: .DocumentDirectory) {
-        let fileContent = stringFromFile(path)
-        return fileContent.compare(content) == .OrderedSame
+func hasContent(_ content: String, beenWrittenToFile theFile: String) -> Bool {
+    if let path = file(theFile, inDirectory: .documentDirectory) {
+        let fileContent = stringFromFile(path as NSString)
+        return fileContent.compare(content) == .orderedSame
     }
     return false
 }
 
-func deleteFile(theFile: String) {
-    let fileManager = NSFileManager.defaultManager()
+func deleteFile(_ theFile: String) {
+    let fileManager = FileManager.default
     
-    if let path = file(theFile, inDirectory: .DocumentDirectory) {
+    if let path = file(theFile, inDirectory: .documentDirectory) {
         do {
-            try fileManager.removeItemAtPath(path)
+            try fileManager.removeItem(atPath: path)
         }
         catch let error as NSError {
             print("Something went wrong: \(error)")
@@ -90,43 +90,43 @@ func deleteFile(theFile: String) {
     }
 }
 
-func changeFile(theFile: String, modifiedDateToDate date: NSDate) {
-    let fileManager = NSFileManager.defaultManager()
+func changeFile(_ theFile: String, modifiedDateToDate date: Date) {
+    let fileManager = FileManager.default
     do {
-        try fileManager.setAttributes([NSFileModificationDate: date],
-                                      ofItemAtPath: file(theFile, inDirectory: .DocumentDirectory)!)
+        try fileManager.setAttributes([FileAttributeKey.modificationDate: date],
+                                      ofItemAtPath: file(theFile, inDirectory: .documentDirectory)!)
     } catch{}
 }
 
-func assertFileIsDeleted(theFile: String) {
-    let fileManager = NSFileManager.defaultManager()
-    if let path = file(theFile, inDirectory: .DocumentDirectory) {
-        assert(!fileManager.fileExistsAtPath(path), "File should be deleted after the test")
+func assertFileIsDeleted(_ theFile: String) {
+    let fileManager = FileManager.default
+    if let path = file(theFile, inDirectory: .documentDirectory) {
+        assert(!fileManager.fileExists(atPath: path), "File should be deleted after the test")
     }
 }
 
-func writeString(string: String, toFile theFile: String) {
+func writeString(_ string: String, toFile theFile: String) {
     
     do {
-        if let path = file(theFile, inDirectory: .DocumentDirectory) {
-            try string.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
+        if let path = file(theFile, inDirectory: .documentDirectory) {
+            try string.write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
         }
     } catch {
         assertionFailure("Could not write the file")
     }
 }
 
-func stringFromFile(file: NSString)-> NSString {
+func stringFromFile(_ file: NSString)-> NSString {
     do {
-        return try NSString(contentsOfFile: file as String, encoding: NSUTF8StringEncoding)
+        return try NSString(contentsOfFile: file as String, encoding: String.Encoding.utf8.rawValue)
     } catch {return ""}
 }
 
 //MARK: Private helpers
-private func file(file: String, inDirectory directory: NSSearchPathDirectory) -> String? {
-    if let dir: NSString = NSSearchPathForDirectoriesInDomains(directory, .UserDomainMask, true).first
+private func file(_ file: String, inDirectory directory: FileManager.SearchPathDirectory) -> String? {
+    if let dir: NSString = NSSearchPathForDirectoriesInDomains(directory, .userDomainMask, true).first as! NSString
     {
-        return dir.stringByAppendingPathComponent(file)
+        return dir.appendingPathComponent(file)
     }
     return nil
 }

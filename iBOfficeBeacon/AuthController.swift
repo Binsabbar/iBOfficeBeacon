@@ -7,34 +7,34 @@
 //
 
 protocol AuthControlerProtocol {
-    func authenticationFinishedWithResult(result: AuthResult)
+    func authenticationFinishedWithResult(_ result: AuthResult)
 }
 
 enum AuthResult: Int {
-    case Succeed = 1
-    case Failed = 2
+    case succeed = 1
+    case failed = 2
 }
 
 class AuthController: NSObject {
     
     var authDelegate:AuthControlerProtocol?
     
-    private let services: Array<GTLRService>
-    private let settings: GoogleSettings
-    private var auth: GTMOAuth2Authentication!
+    fileprivate let services: Array<GTLRService>
+    fileprivate let settings: GoogleSettings
+    fileprivate var auth: GTMOAuth2Authentication!
     
     init(services: [GTLRService], withSettings settings: GoogleSettings) {
         self.services = services
         self.settings = settings
-        self.auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
-            settings.keychainItemName,
+        self.auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychain(
+            forName: settings.keychainItemName,
             clientID: settings.clientID,
             clientSecret: nil)
         super.init()        
     }
     
     func canAuthorize() -> Bool {
-        if let authorizer = auth where authorizer.canAuthorize {
+        if let authorizer = auth, authorizer.canAuthorize {
             for service in services {
                 service.authorizer = authorizer
             }
@@ -44,8 +44,8 @@ class AuthController: NSObject {
     }
     
     func logout() {
-        GTMOAuth2ViewControllerTouch.revokeTokenForGoogleAuthentication(auth)
-        GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName(settings.keychainItemName)
+        GTMOAuth2ViewControllerTouch.revokeToken(forGoogleAuthentication: auth)
+        GTMOAuth2ViewControllerTouch.removeAuthFromKeychain(forName: settings.keychainItemName)
     }
     
     func authorizationView() -> GTMOAuth2ViewControllerTouch {
@@ -58,15 +58,15 @@ class AuthController: NSObject {
     }
     
     //MARK: Auth Callback
-    func viewController(viewController: UIViewController, finishedWithAuth result: GTMOAuth2Authentication,
+    func viewController(_ viewController: UIViewController, finishedWithAuth result: GTMOAuth2Authentication,
                         error : NSError?) {
         
-        var authResult: AuthResult = .Succeed
+        var authResult: AuthResult = .succeed
         var alert: UIAlertController?
         auth = result
         
         if let error = error {
-            authResult = .Failed
+            authResult = .failed
             auth = nil
             alert = showAlert("Authentication Error", message: error.localizedDescription)
         }
@@ -75,18 +75,18 @@ class AuthController: NSObject {
             service.authorizer = auth
         }
         
-        viewController.presentingViewController?.dismissViewControllerAnimated(true, completion: { _ in
+        viewController.presentingViewController?.dismiss(animated: true, completion: { _ in
             if let alert = alert {
-                viewController.presentingViewController?.presentViewController(alert, animated: true, completion: nil)
+                viewController.presentingViewController?.present(alert, animated: true, completion: nil)
             }
             self.authDelegate?.authenticationFinishedWithResult(authResult)
         })
     }
     
     //MARK: Helpers
-    private func showAlert(title : String, message: String) -> UIAlertController {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let action = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+    fileprivate func showAlert(_ title : String, message: String) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
         alert.addAction(action)
         return alert
     }

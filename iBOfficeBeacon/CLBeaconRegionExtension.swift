@@ -10,7 +10,7 @@ import Foundation
 
 extension CLBeaconRegion {
     
-    public func isEqualTo(region:CLBeaconRegion) -> Bool{
+    public func isEqualTo(_ region:CLBeaconRegion) -> Bool{
         return region.proximityUUID == self.proximityUUID
             && region.major == self.major
             && region.minor == self.minor

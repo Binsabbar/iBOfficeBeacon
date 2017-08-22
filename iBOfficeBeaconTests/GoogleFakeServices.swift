@@ -6,30 +6,30 @@ class FakeGTLServiceDrive: GTLRDriveService {
     }
     
     var fileID: String!
-    var lastModifiedDate: NSDate!
+    var lastModifiedDate: Date!
     var error: NSError?
     
     var fakeFetcher: FakeFetcherService!
     
-    func stubError(error: NSError) {
+    func stubError(_ error: NSError) {
         self.error = error
     }
     
-    func stubFetcherService(service: FakeFetcherService) {
+    func stubFetcherService(_ service: FakeFetcherService) {
         self.fakeFetcher = service
         fetcherService = self.fakeFetcher
     }
     
-    func stubGTLDriveFileWithID(ID: String) {
+    func stubGTLDriveFileWithID(_ ID: String) {
         fileID = ID
     }
     
-    func stubGTLDriveFileLastModifiedDate(date: NSDate) {
+    func stubGTLDriveFileLastModifiedDate(_ date: Date) {
         lastModifiedDate = date
     }
     
     
-    override func executeQuery(query: GTLRQueryProtocol, completionHandler handler: GTLRServiceCompletionHandler?) -> GTLRServiceTicket {
+    override func executeQuery(_ query: GTLRQueryProtocol, completionHandler handler: GTLRServiceCompletionHandler?) -> GTLRServiceTicket {
         let file = GTLRDrive_File()
         file.identifier = self.fileID
         if lastModifiedDate != nil {
@@ -48,29 +48,29 @@ class FakeFetcherService: GTMSessionFetcherService {
     
     var fetcher: FakeFetcher!
     
-    func stubFetcher(fetcher: FakeFetcher) {
+    func stubFetcher(_ fetcher: FakeFetcher) {
         self.fetcher = fetcher
     }
     
-    override func fetcherWithURLString(url: String) -> GTMSessionFetcher {
+    override func fetcher(withURLString url: String) -> GTMSessionFetcher {
         return fetcher ?? FakeFetcher()
     }
 }
 
 class FakeFetcher:GTMSessionFetcher {
     
-    var data: NSData!
+    var data: Data!
     var error: NSError!
     
-    func stubError(error: NSError) {
+    func stubError(_ error: NSError) {
         self.error = error
     }
     
-    func stubFetchedData(data: NSData) {
+    func stubFetchedData(_ data: Data) {
         self.data = data
     }
     
-    override func beginFetchWithCompletionHandler(handler: GTMSessionFetcherCompletionHandler?) {
+    override func beginFetch(completionHandler handler: GTMSessionFetcherCompletionHandler?) {
         handler?(self.data, self.error)
     }
 }

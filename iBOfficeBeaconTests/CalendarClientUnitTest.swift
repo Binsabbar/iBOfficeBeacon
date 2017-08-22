@@ -23,7 +23,7 @@ class CalendarClientUnitTest: XCTestCase {
         errorHandler = ErrorHandlerSpy()
         service = GTLRCalendarService()
         subject = CalendarClient(withGoogleService: service, errorHandler: errorHandler)
-        event = GTLTCalendar_EventsBuilder.buildGTLRCalendar_EventForCalendarID(calendarID, withDate: NSDate())
+        event = GTLTCalendar_EventsBuilder.buildGTLRCalendar_EventForCalendarID(calendarID, withDate: Date())
     }
 
     //MARK: #fetchEventsForCalendarWithID (FE)
@@ -45,7 +45,7 @@ class CalendarClientUnitTest: XCTestCase {
     }
     
     func testItCallsErrorHandlerWhenFetchingEventsFails() {
-        let expectation = expectationWithDescription("Fetching Event")
+        let expectation = self.expectation(description: "Fetching Event")
         service.testBlock = { (_, testResponse) in
             testResponse(nil, self.dummyError)
         }
@@ -54,14 +54,14 @@ class CalendarClientUnitTest: XCTestCase {
                                              onFailur: {_ in
             expectation.fulfill()
         })
-        waitForExpectationsWithTimeout(hundredMs) { _ in
+        waitForExpectations(timeout: hundredMs) { _ in
             XCTAssertTrue((self.errorHandler as! ErrorHandlerSpy).handleErrorIsCalled)
             XCTAssertEqual((self.errorHandler as! ErrorHandlerSpy).calledError, self.dummyError)
         }
     }
     
     func testItCallsBackWithTrueWhenInsertingAnEventSuceeded() {
-        let expectation = expectationWithDescription("Asyn Insert Event")
+        let expectation = self.expectation(description: "Asyn Insert Event")
         
         service.testBlock = { (_, testResponse) in
             testResponse(nil, nil)
@@ -72,11 +72,11 @@ class CalendarClientUnitTest: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(hundredMs, handler: nil)
+        waitForExpectations(timeout: hundredMs, handler: nil)
     }
     
     func testItCallsBackWithFalseWhenInsertingAnEventFails() {
-        let expectation = expectationWithDescription("Asyn Insert Event")
+        let expectation = self.expectation(description: "Asyn Insert Event")
     
         service.testBlock = { (_, testResponse) in
             testResponse(nil, self.dummyError)
@@ -87,11 +87,11 @@ class CalendarClientUnitTest: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(hundredMs, handler: nil)
+        waitForExpectations(timeout: hundredMs, handler: nil)
     }
     
     func testItCallsErrorHandlerWhenInsertingAnEventFails() {
-        let expectation = expectationWithDescription("Asyn Insert Event")
+        let expectation = self.expectation(description: "Asyn Insert Event")
         service.testBlock = { (_, testResponse) in
             testResponse(nil, self.dummyError)
         }
@@ -100,7 +100,7 @@ class CalendarClientUnitTest: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(hundredMs) { _ in
+        waitForExpectations(timeout: hundredMs) { _ in
             XCTAssertTrue((self.errorHandler as! ErrorHandlerSpy).handleErrorIsCalled)
             XCTAssertEqual((self.errorHandler as! ErrorHandlerSpy).calledError, self.dummyError)
         }

@@ -28,20 +28,20 @@ class BackgroundBeaconService:NSObject, ESTBeaconManagerDelegate {
     func startBackgroundMonitoring() {
         client.delegate = self
         client.monitoredRegions.forEach{
-            client.startMonitoringForRegion($0 as! CLBeaconRegion)
+            client.startMonitoring(for: $0 as! CLBeaconRegion)
         }
     }
     
     //Mark: ESTBeaconManagerDelegate
-    func beaconManager(manager: AnyObject, didEnterRegion region: CLBeaconRegion) {
-        if let room = store.roomWithMajor((region.major?.integerValue)!, minor: (region.minor?.integerValue)!) {
+    func beaconManager(_ manager: Any, didEnter region: CLBeaconRegion) {
+        if let room = store.roomWithMajor((region.major?.intValue)!, minor: (region.minor?.intValue)!) {
             lastEnteredRegion = region
             notificationService.clearLastNotification()
             notificationService.fireNotification("You are in \(room.name)")
         }
     }
     
-    func beaconManager(manager: AnyObject, didExitRegion region: CLBeaconRegion) {
+    func beaconManager(_ manager: Any, didExitRegion region: CLBeaconRegion) {
         if lastEnteredRegion != nil && lastEnteredRegion.isEqualTo(region) {
             notificationService.clearLastNotification()
         }

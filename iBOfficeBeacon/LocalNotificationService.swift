@@ -11,9 +11,9 @@ import UIKit
 
 class LocalNotificationService {
  
-    private var application: UIApplication
-    private var lastNotification: UILocalNotification?
-    private var notificationSettings: UIUserNotificationSettings!
+    fileprivate var application: UIApplication
+    fileprivate var lastNotification: UILocalNotification?
+    fileprivate var notificationSettings: UIUserNotificationSettings!
     
     init(application: UIApplication) {
         self.application = application
@@ -23,7 +23,7 @@ class LocalNotificationService {
         application.registerUserNotificationSettings(self.applicationNotificationSettings())
     }
     
-    func fireNotification(message: String) {
+    func fireNotification(_ message: String) {
         lastNotification = UILocalNotification()
         lastNotification!.alertTitle = "Room Entered"
         lastNotification!.alertBody = message
@@ -36,11 +36,11 @@ class LocalNotificationService {
         }
     }
     
-    private func applicationNotificationSettings() -> UIUserNotificationSettings {
+    fileprivate func applicationNotificationSettings() -> UIUserNotificationSettings {
         if let settings = notificationSettings {
             return settings
         } else {
-            notificationSettings = UIUserNotificationSettings(forTypes: .Alert, categories: nil)
+            notificationSettings = UIUserNotificationSettings(types: .alert, categories: nil)
             return notificationSettings
         }
     }

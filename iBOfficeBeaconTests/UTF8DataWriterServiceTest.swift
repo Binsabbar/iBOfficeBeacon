@@ -12,8 +12,8 @@ class UTF8DataWriterServiceTest: XCTestCase {
 
     var service: UTF8DataWriterService!
     
-    let directory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,
-                                                        .UserDomainMask,
+    let directory = NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                        .userDomainMask,
                                                         true).first
     let fileName = "FileWriteServiceTest.txt"
     let dummyString = "Random string to write to a file"
@@ -33,7 +33,7 @@ class UTF8DataWriterServiceTest: XCTestCase {
     }
 
     func testItReturnsTrueIfDataIsWrittenToAFile() {
-        let dataToWrite = dummyString.dataUsingEncoding(NSUTF8StringEncoding)
+        let dataToWrite = dummyString.data(using: String.Encoding.utf8)
         
         let result = service.writeDataAsString(dataToWrite!, inFileName: fileName)
         
@@ -46,7 +46,7 @@ class UTF8DataWriterServiceTest: XCTestCase {
         fileTestHelper.writeString(oldContent, toFile: fileName)
         
         let newContent = "New content in the file"
-        let dataToWrite = newContent.dataUsingEncoding(NSUTF8StringEncoding)
+        let dataToWrite = newContent.data(using: String.Encoding.utf8)
         
         let result = service.writeDataAsString(dataToWrite!, inFileName: fileName)
         
@@ -58,7 +58,7 @@ class UTF8DataWriterServiceTest: XCTestCase {
     
     func testItReturnsFalseIfDataIsWritenToAFile() {
         let invalidFileName = "</ -_- />,filename"
-        let dataToWrite = dummyString.dataUsingEncoding(NSUTF8StringEncoding)
+        let dataToWrite = dummyString.data(using: String.Encoding.utf8)
         
         let result = service.writeDataAsString(dataToWrite!, inFileName: invalidFileName)
         
@@ -67,7 +67,7 @@ class UTF8DataWriterServiceTest: XCTestCase {
     }
     
     func testItReturnsFalseIfDataIsNotEncodedAsUTF8() {
-        let dataToWrite = dummyString.dataUsingEncoding(NSUTF32StringEncoding)
+        let dataToWrite = dummyString.data(using: String.Encoding.utf32)
         
         let result = service.writeDataAsString(dataToWrite!, inFileName: fileName)
         

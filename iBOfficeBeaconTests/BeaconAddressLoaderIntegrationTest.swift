@@ -35,7 +35,7 @@ class BeaconAddressLoaderIntegrationTest: XCTestCase, BeaconAddressLoaderProtoco
         super.setUp()
         deleteFile(localFileName)
         notificationIsFired = false
-        testExpectation = expectationWithDescription("BeaconAddressLoaderIntegrationTest")
+        testExpectation = expectation(description: "BeaconAddressLoaderIntegrationTest")
     }
 
     override func tearDown() {
@@ -57,7 +57,7 @@ class BeaconAddressLoaderIntegrationTest: XCTestCase, BeaconAddressLoaderProtoco
         
         subject.loadBeaconAddressFromSheetWithID(sheetID)
         
-        waitForExpectationsWithTimeout(hundredMs, handler: nil)
+        waitForExpectations(timeout: hundredMs, handler: nil)
     }
     
     func testItLogsUserOutWhenFetchingRemoteFileFailsDueTo4XXErrors() {
@@ -72,7 +72,7 @@ class BeaconAddressLoaderIntegrationTest: XCTestCase, BeaconAddressLoaderProtoco
         subject.loadBeaconAddressFromSheetWithID(sheetID)
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertTrue(nvc.viewControllers.count == 1)
             XCTAssertTrue(nvc.topViewController == loginView)
         }
@@ -91,7 +91,7 @@ class BeaconAddressLoaderIntegrationTest: XCTestCase, BeaconAddressLoaderProtoco
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
         
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertTrue(nvc.viewControllers.count == 1)
             XCTAssertTrue(nvc.topViewController == loginView)
         }
@@ -103,17 +103,16 @@ class BeaconAddressLoaderIntegrationTest: XCTestCase, BeaconAddressLoaderProtoco
         fileService = fakeFileService
         setupSubjectWithTestData(fetchedUnformattedData)
         
-        
-        NSNotificationCenter.defaultCenter()
-            .addObserver(self,
-                         selector: notificationSelector,
-                         name: BeaconAddressLoader.ParsingAddressFailed,
-                         object: nil)
+        NotificationCenter.default.addObserver(self, selector: notificationSelector, name: NSNotification.Name(rawValue: BeaconAddressLoader.ParsingAddressFailed), object: nil)
+//        NotificationCenter.default.addObserver(self, waitForExpectations(withTimeout:
+//                         selector: notificationSelector,
+//                         name: NSNotification.Name(rawValue: BeaconAddressLoader.ParsingAddressFailed),
+//                         object: nil)
         
         subject.loadBeaconAddressFromSheetWithID(sheetID)
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertTrue(self.notificationIsFired)
         }
     }
@@ -123,14 +122,14 @@ class BeaconAddressLoaderIntegrationTest: XCTestCase, BeaconAddressLoaderProtoco
     }
     
     //MARK: BeaconAddressLoaderProtocol
-    func beaconAddressesLoaded(addresses: [[String: String]]?) {
+    func beaconAddressesLoaded(_ addresses: [[String: String]]?) {
         expectDelegateMethodAddressesLoadedTo?(addresses)
     }
     
     //MARK: helpers
     typealias MockHelper = ServiceDriveMockHelper
     
-    private func setupSubjectWithRequestingFileError() {
+    fileprivate func setupSubjectWithRequestingFileError() {
         let error = NSErrorBuilder.createUnauthenticatedUseExceededError()
         let serviceDrive = MockHelper.mockDriveServiceRequestFileWithError(error)
         let driveClient = SheetDriveWrapper(withService: serviceDrive)
@@ -145,7 +144,7 @@ class BeaconAddressLoaderIntegrationTest: XCTestCase, BeaconAddressLoaderProtoco
         initSubject(spreadsheetFactoryMethod)
     }
     
-    private func setupSubjectWithFetchingFileError() {
+    fileprivate func setupSubjectWithFetchingFileError() {
         let error = NSErrorBuilder.createUnauthenticatedUseExceededError()
         let serviceDrive = MockHelper.mockDriveFetchServiceWithError(error, forSheetID: self.sheetID)
         let driveClient = SheetDriveWrapper(withService: serviceDrive)
@@ -160,7 +159,7 @@ class BeaconAddressLoaderIntegrationTest: XCTestCase, BeaconAddressLoaderProtoco
         initSubject(spreadsheetFactoryMethod)
     }
     
-    private func setupSubjectWithTestData(testData: String) {
+    fileprivate func setupSubjectWithTestData(_ testData: String) {
         let serviceDrive = MockHelper.mockDriveFetchServiceWithRemoteData(testData, forSheetID: self.sheetID)
         let driveClient = SheetDriveWrapper(withService: serviceDrive)
         
@@ -174,7 +173,7 @@ class BeaconAddressLoaderIntegrationTest: XCTestCase, BeaconAddressLoaderProtoco
         initSubject(spreadsheetFactoryMethod)
     }
     
-    private func initSubject(factory: BeaconAddressLoader.SpreadsheetApiFactoryBlock) {
+    fileprivate func initSubject(_ factory: @escaping BeaconAddressLoader.SpreadsheetApiFactoryBlock) {
         let errorHandler = GoogleAuthorizationErrorHandler(authController: AuthControllerSpy())
         subject = BeaconAddressLoader(spreadsheetApiCreate: factory,
                                       localFileName: localFileName,

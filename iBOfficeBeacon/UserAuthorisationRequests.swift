@@ -23,21 +23,21 @@ class UserAuthorisationRequests: NSObject {
     }
     
     func registerNotificationAlert() {
-        let notificationSetting = UIUserNotificationSettings(forTypes: .Alert, categories: nil)
+        let notificationSetting = UIUserNotificationSettings(types: .alert, categories: nil)
         application.registerUserNotificationSettings(notificationSetting)
     }
     
     func requestBackgroundLocationService() {
         if (CLLocationManager.locationServicesEnabled()) {
             switch(CLLocationManager.authorizationStatus()){
-            case .NotDetermined:
+            case .notDetermined:
                 // request location
                 break
-            case .Denied, .Restricted:
+            case .denied, .restricted:
                 print("need auth")
-            case .AuthorizedAlways:
+            case .authorizedAlways:
                 print("Good")
-            case .AuthorizedWhenInUse:
+            case .authorizedWhenInUse:
                 print("hmmm")
             }
         } else {

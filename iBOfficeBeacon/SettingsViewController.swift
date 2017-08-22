@@ -18,7 +18,7 @@ class SettingsViewController: UIViewController {
     var settings: AppSettings!
     let topSpaceFromLayout: CGFloat = 20
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -32,47 +32,46 @@ class SettingsViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = AppColours.lightGrey
         
         if (currentEnv == .Test || currentEnv == .Dev ) {
-            self.buildLabel.hidden = false
+            self.buildLabel.isHidden = false
             self.buildLabel.text = "Beta version: \(settings.buildNumber)"
         }
         
         let featureName = FeatureToggles.HockeyAppIntegration.rawValue
-        if let hockeyAppEnabled = settings.featureToggles[featureName]
-            where !hockeyAppEnabled {
-            sendFeedbackButton.hidden = true
+        if let hockeyAppEnabled = settings.featureToggles[featureName], !hockeyAppEnabled {
+            sendFeedbackButton.isHidden = true
             moveLogoutButtonPositionToFeedbackButtonPosition()
             view.setNeedsLayout()
         }
     }
     
-    @IBAction func logoutUser(sender: AnyObject) {
+    @IBAction func logoutUser(_ sender: AnyObject) {
         Wiring.sharedWiring.logoutController().logout()
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
-    @IBAction func showFeedbackView(sender: AnyObject) {
-        let feedbackManager = BITHockeyManager.sharedHockeyManager().feedbackManager
+    @IBAction func showFeedbackView(_ sender: AnyObject) {
+        let feedbackManager = BITHockeyManager.shared().feedbackManager
         feedbackManager.feedbackComposeHideImageAttachmentButton = true
         feedbackManager.showAlertOnIncomingMessages = false
-        feedbackManager.requireUserName = .Required
-        feedbackManager.requireUserEmail = .Optional
+        feedbackManager.requireUserName = .required
+        feedbackManager.requireUserEmail = .optional
         feedbackManager.showFeedbackListView()
     }
     
-    private func moveLogoutButtonPositionToFeedbackButtonPosition() {
+    fileprivate func moveLogoutButtonPositionToFeedbackButtonPosition() {
         let topConstraint = logoutButtonTopConstraint.constant
         logoutButtonTopConstraint.constant = -(topConstraint + topSpaceFromLayout)
     }
     
-    private func setupButtonColor() {
-        logoutButton.colorForNormalState = UIColor.clearColor()
+    fileprivate func setupButtonColor() {
+        logoutButton.colorForNormalState = UIColor.clear
         logoutButton.colorForTapState = AppColours.darkestGrey
     }
     
-    private func setupBackgroundImage() {
-        let blur = UIBlurEffect(style: .Dark)
+    fileprivate func setupBackgroundImage() {
+        let blur = UIBlurEffect(style: .dark)
         
-        let vibrancy = UIVibrancyEffect(forBlurEffect: blur)
+        let vibrancy = UIVibrancyEffect(blurEffect: blur)
         let vibrantEffect = UIVisualEffectView(effect: vibrancy)
         let visualEffect = UIVisualEffectView(effect: blur)
         vibrantEffect.frame = self.view.frame

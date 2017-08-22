@@ -37,15 +37,15 @@ import UIKit
     
     @IBInspectable var borderColor: UIColor {
         get {
-            return UIColor.clearColor()
+            return UIColor.clear
         }
         set {
-            _borderColor = newValue.CGColor
+            _borderColor = newValue.cgColor
         }
     }
     
-    override var highlighted: Bool {
-        get { return super.highlighted }
+    override var isHighlighted: Bool {
+        get { return super.isHighlighted }
         set {
             if newValue {
                 if let color = colorForTapState {
@@ -57,7 +57,7 @@ import UIKit
                     backgroundColor = color
                 }
             }
-            super.highlighted = newValue
+            super.isHighlighted = newValue
         }
     }
     
@@ -71,9 +71,9 @@ import UIKit
         setup()
     }
     
-    private func setup() {
+    fileprivate func setup() {
         layer.borderWidth = 1.0
-        layer.borderColor = UIColor.clearColor().CGColor
+        layer.borderColor = UIColor.clear.cgColor
         layer.cornerRadius = 4.0
         addBlurEffect(self)
     }
@@ -81,28 +81,28 @@ import UIKit
     override func setNeedsLayout() {
         self.layer.cornerRadius = _borderRadius ?? borderRadius
         self.layer.borderWidth = _borderWidth ?? borderWidth
-        self.layer.borderColor = _borderColor ?? borderColor.CGColor
+        self.layer.borderColor = _borderColor ?? borderColor.cgColor
     }
     
-    func addBlurEffect(view: UIView) {
+    func addBlurEffect(_ view: UIView) {
         let blurEffectView: UIVisualEffectView!
-        let blurEffect = UIBlurEffect(style: .ExtraLight)
+        let blurEffect = UIBlurEffect(style: .extraLight)
         blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.clipsToBounds = true
         blurEffectView.frame = view.bounds
         
-        blurEffectView.layer.borderColor = UIColor.clearColor().CGColor
-        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        blurEffectView.layer.borderColor = UIColor.clear.cgColor
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         //Vibrancy Effect
-        let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
         let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
         vibrancyEffectView.frame = view.bounds
         
         blurEffectView.layer.cornerRadius = 20
         blurEffectView.addSubview(vibrancyEffectView)
-        blurEffectView.userInteractionEnabled = false
+        blurEffectView.isUserInteractionEnabled = false
         view.addSubview(blurEffectView)
-        view.sendSubviewToBack(blurEffectView)
+        view.sendSubview(toBack: blurEffectView)
     }
 }

@@ -10,22 +10,22 @@ import Foundation
 
 class NavigationControllerBuilder {
     
-    private var navigationVC: NavigationControllerSpy!
+    fileprivate var navigationVC: NavigationControllerSpy!
     
     init() {
         navigationVC = NavigationControllerSpy()
     }
     
-    private init(navigationVC: NavigationControllerSpy) {
+    fileprivate init(navigationVC: NavigationControllerSpy) {
         self.navigationVC = navigationVC
     }
     
     func build() -> NavigationControllerSpy {
-        UIApplication.sharedApplication().windows.first?.rootViewController = navigationVC
+        UIApplication.shared.windows.first?.rootViewController = navigationVC
         return navigationVC
     }
     
-    func pushViewController(viewController: UIViewController) -> NavigationControllerBuilder {
+    func pushViewController(_ viewController: UIViewController) -> NavigationControllerBuilder {
         navigationVC.viewControllers.append(viewController)
         return NavigationControllerBuilder(navigationVC: navigationVC)
     }

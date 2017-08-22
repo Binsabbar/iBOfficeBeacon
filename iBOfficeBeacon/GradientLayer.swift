@@ -8,9 +8,9 @@
 
 class GradientLayer {
     
-    var colorTop = UIColor(red: 23.0/255.0, green: 41.0/255.0, blue: 66.0/255.0, alpha: 1.0).CGColor
-    var colorMiddle = UIColor(red: 24/255.0, green: 123/255.0, blue: 157/255.0, alpha: 1.0).CGColor
-    var colorBottom = UIColor(red: 24/255.0, green: 90/255.0, blue: 157/255.0, alpha: 1.0).CGColor
+    var colorTop = UIColor(red: 23.0/255.0, green: 41.0/255.0, blue: 66.0/255.0, alpha: 1.0).cgColor
+    var colorMiddle = UIColor(red: 24/255.0, green: 123/255.0, blue: 157/255.0, alpha: 1.0).cgColor
+    var colorBottom = UIColor(red: 24/255.0, green: 90/255.0, blue: 157/255.0, alpha: 1.0).cgColor
     
     let gradient: CAGradientLayer
     

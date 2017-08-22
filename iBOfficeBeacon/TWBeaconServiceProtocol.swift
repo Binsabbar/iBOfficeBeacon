@@ -9,5 +9,5 @@
 import Foundation
 
 protocol TWBeaconServiceProtocol:NSObjectProtocol {
-    func foundRoom(room: OfficeRoom)->Void
+    func foundRoom(_ room: OfficeRoom)->Void
 }

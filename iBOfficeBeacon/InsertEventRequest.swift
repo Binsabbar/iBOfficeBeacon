@@ -1,9 +1,9 @@
 class InsertEventRequest {
     
     let event: GTLRCalendar_Event
-    let requestURL: NSURL
+    let requestURL: URL
     
-    init(event: GTLRCalendar_Event, url: NSURL) {
+    init(event: GTLRCalendar_Event, url: URL) {
         self.event = event
         self.requestURL = url
     }

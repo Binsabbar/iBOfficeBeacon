@@ -10,8 +10,8 @@ class BeaconManagerUnitTest: XCTestCase, TWBeaconEventDelegate {
     var fakeESTManager: FakeESTBeaconManager!
     var simulator: IBeaconEventSimulator!
     
-    var testUUID = NSUUID()
-    var testUUID2 = NSUUID()
+    var testUUID = UUID()
+    var testUUID2 = UUID()
     var randomMajor = 12
     var randomMajor2 = 14
     
@@ -28,8 +28,8 @@ class BeaconManagerUnitTest: XCTestCase, TWBeaconEventDelegate {
         region = CLBeaconRegionStub(proximityUUID: testUUID, identifier: "test region 1")
         anotherRegion = CLBeaconRegionStub(proximityUUID: testUUID2, identifier: "test region 2")
         
-        encounteredBeacons = [CLBeaconStub(withUUID: testUUID, andMajor: randomMajor, andProximity: .Immediate),
-                              CLBeaconStub(withUUID: testUUID, andMajor: randomMajor2, andProximity: .Near)]
+        encounteredBeacons = [CLBeaconStub(withUUID: testUUID, andMajor: randomMajor, andProximity: .immediate),
+                              CLBeaconStub(withUUID: testUUID, andMajor: randomMajor2, andProximity: .near)]
 
         fakeESTManager = FakeESTBeaconManager()
         simulator = IBeaconEventSimulator(estManager: fakeESTManager)
@@ -47,9 +47,9 @@ class BeaconManagerUnitTest: XCTestCase, TWBeaconEventDelegate {
     }
     
     func testResponseToDelegateMethodDidRangeBeacon () {
-        let selector = #selector(ESTBeaconManagerDelegate.beaconManager(_:didRangeBeacons:inRegion:))
+        let selector = #selector(ESTBeaconManagerDelegate.beaconManager(_:didRangeBeacons:in:))
         
-        XCTAssertTrue(subject.respondsToSelector(selector), "Delegate method not implemented")
+        XCTAssertTrue(subject.responds(to: selector), "Delegate method not implemented")
     }
     
     //MARK: #startRanging
@@ -110,20 +110,20 @@ class BeaconManagerUnitTest: XCTestCase, TWBeaconEventDelegate {
     
     //MARK: Call back CompeletionHandler when beacons are ranged
     func testCallsCompeletionBlockWhenTheClosestBeaconIsRanged() {
-        let expectation = expectationWithDescription("Compeletion Block Call")
+        let expectation = self.expectation(description: "Compeletion Block Call")
         simulator.range(encounteredBeacons, inRegion: region)
         
         subject.startRangingOnCompletion(){ _ in expectation.fulfill() }
         
         simulator.simulate()
         
-        waitForExpectationsWithTimeout(twoSeconds) { _ in }
+        waitForExpectations(timeout: twoSeconds) { _ in }
     }
     
     func testCallsCompeletionBlockWhenANewBeaconBecomesTheClosest() {
-        let expectation = expectationWithDescription("Compeletion Block Call")
-        let aCloseBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .Immediate, accuracy: 0.12)
-        let newCloseBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 12, proximity: .Immediate, accuracy: 0.22)
+        let expectation = self.expectation(description: "Compeletion Block Call")
+        let aCloseBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .immediate, accuracy: 0.12)
+        let newCloseBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 12, proximity: .immediate, accuracy: 0.22)
         
         simulator
             .range([aCloseBeacon], inRegion: region).wait(hundredMs)
@@ -139,14 +139,14 @@ class BeaconManagerUnitTest: XCTestCase, TWBeaconEventDelegate {
         simulator.simulate()
         
         fullfillExpectation(expectation, withinTime: second)
-        waitForExpectationsWithTimeout(twoSeconds) { _ in
+        waitForExpectations(timeout: twoSeconds) { _ in
             XCTAssertEqual(self.numberOfTimesHandlerCalled, 2)
         }
     }
     
     func testItDoesNotCallCompeletionBlockTwiceIfSameBeaconIsEncounteredTwiceInSuccession() {
-        let expectation = expectationWithDescription("Compeletion Block Call")
-        let beacon = CLBeaconStub(withUUID: testUUID, andMajor: randomMajor, andProximity: .Immediate)
+        let expectation = self.expectation(description: "Compeletion Block Call")
+        let beacon = CLBeaconStub(withUUID: testUUID, andMajor: randomMajor, andProximity: .immediate)
         
         simulator.range([beacon], inRegion: region)
             .wait(hundredMs)
@@ -159,13 +159,13 @@ class BeaconManagerUnitTest: XCTestCase, TWBeaconEventDelegate {
         simulator.simulate()
         
         fullfillExpectation(expectation, withinTime: second)
-        waitForExpectationsWithTimeout(twoSeconds) { _ in
+        waitForExpectations(timeout: twoSeconds) { _ in
             XCTAssertEqual(self.numberOfTimesHandlerCalled, 1)
         }
     }
     
     func testItDoesNotCallCompeletionBlockWithBeaconsFromOtherRegions() {
-        let expectation = expectationWithDescription("Compeletion Block Call")
+        let expectation = self.expectation(description: "Compeletion Block Call")
         simulator.range(encounteredBeacons, inRegion: anotherRegion)
         
         subject.startRangingOnCompletion(){ _ in XCTFail("Should not get called")}
@@ -173,27 +173,27 @@ class BeaconManagerUnitTest: XCTestCase, TWBeaconEventDelegate {
         simulator.simulate()
         
         fullfillExpectation(expectation, withinTime: hundredMs)
-        waitForExpectationsWithTimeout(second) { _ in }
+        waitForExpectations(timeout: second) { _ in }
     }
     
 
     func testItReturnsRangedBeaconsOnlyThoseWithImmedaiteProximity() {
-        let expectation = expectationWithDescription("Return Immedaite Beacons")
+        let expectation = self.expectation(description: "Return Immedaite Beacons")
         simulator.range(encounteredBeacons, inRegion: region)
         
         subject.startRangingOnCompletion(){ (beacons) in
             XCTAssertEqual(beacons.count, 1)
-            XCTAssertTrue(beacons.first!.proximity == CLProximity.Immediate)
+            XCTAssertTrue(beacons.first!.proximity == CLProximity.immediate)
             expectation.fulfill()
         }
         
         simulator.simulate()
         
-        waitForExpectationsWithTimeout(twoSeconds) { _ in}
+        waitForExpectations(timeout: twoSeconds) { _ in}
     }
     
     func testItReturnsARangedBeaconOnlyThoseWithACertainAccuracy() {
-        let expectation = expectationWithDescription("Return beacons with certain accuracy")
+        let expectation = self.expectation(description: "Return beacons with certain accuracy")
         subject.addBeaconRegion(region)
         simulator.range(encounteredBeacons, inRegion: region)
         
@@ -205,16 +205,16 @@ class BeaconManagerUnitTest: XCTestCase, TWBeaconEventDelegate {
         
         simulator.simulate()
         
-        waitForExpectationsWithTimeout(twoSeconds) { _ in}
+        waitForExpectations(timeout: twoSeconds) { _ in}
     }
     
     func testItReturnsTheClosestBeaconToTheDeviceWhenMultipleImmediateBeaconsAreEncountered() {
-        let expectation = expectationWithDescription("Compeletion Block Call")
+        let expectation = self.expectation(description: "Compeletion Block Call")
         
-        let beacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .Immediate, accuracy: 0.12)
-        let beaconTwo = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 2, proximity: .Immediate, accuracy: 0.22)
-        let beaconThree = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 3, proximity: .Immediate, accuracy: 0.102)
-        let beaconFour = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 3, proximity: .Near, accuracy: 0.312)
+        let beacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .immediate, accuracy: 0.12)
+        let beaconTwo = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 2, proximity: .immediate, accuracy: 0.22)
+        let beaconThree = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 3, proximity: .immediate, accuracy: 0.102)
+        let beaconFour = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 3, proximity: .near, accuracy: 0.312)
         
         simulator.range([beacon, beaconTwo, beaconThree, beaconFour], inRegion: region)
         
@@ -226,15 +226,15 @@ class BeaconManagerUnitTest: XCTestCase, TWBeaconEventDelegate {
         
         simulator.simulate()
         
-        waitForExpectationsWithTimeout(twoSeconds, handler: nil)
+        waitForExpectations(timeout: twoSeconds, handler: nil)
     }
     
     //MARK: When Devices moves away from beacon
     func testItInvokesDelegateWhenTheCloestBeaconBecomesAway() {
-        let expectation = expectationWithDescription("Compeletion Block Call")
+        let expectation = self.expectation(description: "Compeletion Block Call")
         
-        let aCloseBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .Immediate, accuracy: 0.12)
-        let aNearBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .Near, accuracy: accuracyLargerThanImmediate)
+        let aCloseBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .immediate, accuracy: 0.12)
+        let aNearBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .near, accuracy: accuracyLargerThanImmediate)
         
         simulator.range([aCloseBeacon], inRegion: region).wait(second)
         .range([aNearBeacon], inRegion: region)
@@ -244,16 +244,16 @@ class BeaconManagerUnitTest: XCTestCase, TWBeaconEventDelegate {
         simulator.simulate()
         
         fullfillExpectation(expectation, withinTime: twoSeconds)
-        waitForExpectationsWithTimeout(second + twoSeconds){ _ in
+        waitForExpectations(timeout: second + twoSeconds){ _ in
             XCTAssertTrue(self.isMovedAwayFromClosestBeaconCalled)
         }
     }
     
     //MARK: When device moves back to the previous closest beacon after it moves away from it
     func testItCallsCompeletionHandler() {
-        let expectation = expectationWithDescription("Compeletion Block Call")
-        let aCloseBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .Immediate, accuracy: 0.12)
-        let aNearBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .Near, accuracy: accuracyLargerThanImmediate)
+        let expectation = self.expectation(description: "Compeletion Block Call")
+        let aCloseBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .immediate, accuracy: 0.12)
+        let aNearBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .near, accuracy: accuracyLargerThanImmediate)
         
         simulator
             .range([aCloseBeacon], inRegion: region).wait(hundredMs)
@@ -268,17 +268,17 @@ class BeaconManagerUnitTest: XCTestCase, TWBeaconEventDelegate {
         simulator.simulate()
         
         fullfillExpectation(expectation, withinTime: twoSeconds)
-        waitForExpectationsWithTimeout(second + twoSeconds){ _ in
+        waitForExpectations(timeout: second + twoSeconds){ _ in
             XCTAssertEqual(self.numberOfTimesHandlerCalled, 2)
         }
     }
     
     //MARK: When device is still theclosest to the beacon when ranging
     func testItDoesNotInvokeDelegateWhenTheCloestBeaconStillClose() {
-        let expectation = expectationWithDescription("Compeletion Block Call")
+        let expectation = self.expectation(description: "Compeletion Block Call")
         
-        let aCloseBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .Immediate, accuracy: 0.12)
-        let similarBeaconWithDiffAccuracy = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .Immediate, accuracy: 0.22)
+        let aCloseBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .immediate, accuracy: 0.12)
+        let similarBeaconWithDiffAccuracy = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .immediate, accuracy: 0.22)
         
         simulator.range([aCloseBeacon], inRegion: region).wait(second)
             .range([similarBeaconWithDiffAccuracy], inRegion: region)
@@ -288,17 +288,17 @@ class BeaconManagerUnitTest: XCTestCase, TWBeaconEventDelegate {
         simulator.simulate()
         
         fullfillExpectation(expectation, withinTime: twoSeconds)
-        waitForExpectationsWithTimeout(second + twoSeconds){ _ in
+        waitForExpectations(timeout: second + twoSeconds){ _ in
             XCTAssertFalse(self.isMovedAwayFromClosestBeaconCalled)
         }
     }
     
     //MARK: When device is Near proximity, but NOT more than IMMEDIATE_ACCURACY away
     func testItDoesNotInvokeDelegateWhenBeaconIsNearButItIsNotAwayMoreThanImmediateAccuracy() {
-        let expectation = expectationWithDescription("Compeletion Block Call")
+        let expectation = self.expectation(description: "Compeletion Block Call")
         
-        let aCloseBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .Immediate, accuracy: 0.12)
-        let similarBeaconWithDiffAccuracy = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .Near, accuracy: BeaconManager.IMMEDIATE_ACCURACY - 0.2)
+        let aCloseBeacon = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .immediate, accuracy: 0.12)
+        let similarBeaconWithDiffAccuracy = CLBeaconStub(uuid: testUUID, major: randomMajor, minor: 1, proximity: .near, accuracy: BeaconManager.IMMEDIATE_ACCURACY - 0.2)
         
         simulator.range([aCloseBeacon], inRegion: region).wait(second)
             .range([similarBeaconWithDiffAccuracy], inRegion: region)
@@ -308,7 +308,7 @@ class BeaconManagerUnitTest: XCTestCase, TWBeaconEventDelegate {
         simulator.simulate()
         
         fullfillExpectation(expectation, withinTime: twoSeconds)
-        waitForExpectationsWithTimeout(second + twoSeconds){ _ in
+        waitForExpectations(timeout: second + twoSeconds){ _ in
             XCTAssertFalse(self.isMovedAwayFromClosestBeaconCalled)
         }
     }
