@@ -13,7 +13,7 @@ class CalendarEventsProcessorUnitTest: XCTestCase {
     var subject: CalendarEventsProcessor!
     var googleEvents: GTLRCalendar_Events!
     
-    let oneHour = NSTimeInterval(3600)
+    let oneHour = TimeInterval(3600)
     let calendarID = "CalendarEventsProcessorUnitTest"
     
     override func setUp() {
@@ -73,16 +73,16 @@ class CalendarEventsProcessorUnitTest: XCTestCase {
         let results = subject.processEvents(allDayEvents, forCalendarWithID: calendarID)
         let event = results.first!
         
-        let startOfToday = NSDate().beginningOfDayUTC()
-        let tomorrow = NSDate.tomorrowInUTC().beginningOfDayUTC()
-        XCTAssertTrue(event.startDatetime.isEqualToDate(startOfToday))
-        XCTAssertTrue(event.endDatetime.isEqualToDate(tomorrow))
+        let startOfToday = Date().beginningOfDayUTC()
+        let tomorrow = Date.tomorrowInUTC().beginningOfDayUTC()
+        XCTAssertTrue(event.startDatetime == startOfToday)
+        XCTAssertTrue(event.endDatetime == tomorrow)
     }
     
     //MARK: Google Events creation
     func testItCreatesGTLREventWithAttendees() {
-        let start = NSDate()
-        let end = start.dateByAddingTimeInterval(oneHour)
+        let start = Date()
+        let end = start.addingTimeInterval(oneHour)
         let attendees = ["attendee1@gmail.com", "attendee2@gmail.com"]
         
         let event = subject.eventStartsAt(start, endsAt: end, includesAttendees: attendees)
@@ -93,8 +93,8 @@ class CalendarEventsProcessorUnitTest: XCTestCase {
     }
     
     func testItCreatesGTLREventWithStartAndEndtimes() {
-        let startTime = NSDate()
-        let endTime = startTime.dateByAddingTimeInterval(oneHour)
+        let startTime = Date()
+        let endTime = startTime.addingTimeInterval(oneHour)
         let attendees = ["attendee1@gmail.com", "attendee2@gmail.com"]
         
         let event = subject.eventStartsAt(startTime, endsAt: endTime, includesAttendees: attendees)

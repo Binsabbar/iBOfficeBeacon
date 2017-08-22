@@ -13,7 +13,7 @@ class ErrorHandlerSpy:ErrorHandlingProtocol {
     var handleErrorIsCalled = false
     var calledError: NSError!
     
-    func handleError(error: NSError) {
+    func handleError(_ error: NSError) {
         calledError = error
         handleErrorIsCalled = true
     }

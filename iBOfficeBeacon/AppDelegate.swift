@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let wiring = Wiring.sharedWiring
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         self.setupHockyApp()
         self.assignBeaconManagerForLaunchOptions(launchOptions)
@@ -22,40 +22,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    private func initRootViewController() {
+    fileprivate func initRootViewController() {
         if(wiring.authorizationController().canAuthorize()) {
             let storyboardName = "MainV1"
             let entryViewName = "mainViewV1"
             
-            let storyboard = UIStoryboard.init(name: storyboardName, bundle: NSBundle.mainBundle())
+            let storyboard = UIStoryboard.init(name: storyboardName, bundle: Bundle.main)
             
             if let nv = window?.rootViewController as? UINavigationController {
-                let viewC = storyboard.instantiateViewControllerWithIdentifier(entryViewName)
+                let viewC = storyboard.instantiateViewController(withIdentifier: entryViewName)
                 nv.pushViewController(viewC, animated: false)
             }
         }
     }
 
     
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         self.assignBeaconManagerForInactiveState()
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         self.assignBeaconManagerForActiveState()
         wiring.beaconAddressStore().refreshAdddresses()
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         wiring.locationServiceAuthzController().checkLocationAuthorizationStatus()
         wiring.bluetoothController()
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         
     }
     

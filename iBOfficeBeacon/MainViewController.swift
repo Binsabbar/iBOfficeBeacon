@@ -23,19 +23,19 @@ class MainViewController: UIViewController, TWBeaconServiceProtocol, TWBeaconEve
     
     var officeRoom: OfficeRoom?
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         do {
             try beaconService.startRanging()
         } catch {
-            let action = UIAlertAction(title: "Exit the app", style: .Destructive)
+            let action = UIAlertAction(title: "Exit the app", style: .destructive)
             { _ in exit(-1) }
             let message = "Internal unrecoverable error occured. Please report this issue."
-            let alert = UIAlertController(title: "Fatel Error", message: message, preferredStyle: .Alert)
+            let alert = UIAlertController(title: "Fatel Error", message: message, preferredStyle: .alert)
             alert.addAction(action)
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -60,43 +60,44 @@ class MainViewController: UIViewController, TWBeaconServiceProtocol, TWBeaconEve
 
 
     // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == roomViewControllerSegueIdentifier {
-            let destinationViewController = segue.destinationViewController as! RoomScheduleViewController
+            let destinationViewController = segue.destination as! RoomScheduleViewController
             destinationViewController.officeRoom = officeRoom
         }
     }
     
     //MARK: - TWBeaconServiceProtocol
     var performeRoomViewDismiss = true
-    func foundRoom(room: OfficeRoom) {
-        NSThread.synchronize(performeRoomViewDismiss) {
+    func foundRoom(_ room: OfficeRoom) {
+        
+        Thread.synchronize(performeRoomViewDismiss as AnyObject) {
             self.performeRoomViewDismiss = false
         }
         
         let roomView = presentedViewController as? RoomScheduleViewController
         if roomView == nil {
             officeRoom = room
-            self.performSegueWithIdentifier(roomViewControllerSegueIdentifier, sender: self)
-        } else if let currentRoom = officeRoom where currentRoom.isEqualTo(room) {
+            self.performSegue(withIdentifier: roomViewControllerSegueIdentifier, sender: self)
+        } else if let currentRoom = officeRoom, currentRoom.isEqualTo(room) {
                 roomView?.checkRoomStatus()
         } else {
             officeRoom = room
-            dismissViewControllerAnimated(false){
-                self.performSegueWithIdentifier(self.roomViewControllerSegueIdentifier, sender: self)
+            dismiss(animated: false){
+                self.performSegue(withIdentifier: self.roomViewControllerSegueIdentifier, sender: self)
             }
         }
     }
     
     func movedAwayFromClosestBeacon() {
-        NSThread.synchronize(performeRoomViewDismiss) {
+        Thread.synchronize(performeRoomViewDismiss as AnyObject) {
             self.performeRoomViewDismiss = true
         }
         
-        NSThread.excuteAfterDelay(2) {
-            NSThread.synchronize(self.performeRoomViewDismiss) {
+        Thread.excuteAfterDelay(2) {
+            Thread.synchronize(self.performeRoomViewDismiss as AnyObject) {
                 if (self.performeRoomViewDismiss) {
-                    self.dismissViewControllerAnimated(false){}
+                    self.dismiss(animated: false){}
                 }
             }
         }

@@ -76,23 +76,23 @@ class AuthControllerUnitTest: XCTestCase {
     }
     
     //MARK: test helper methods
-    private func removeItemFromKeychain() {
-        GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName(settings.keychainItemName)
+    fileprivate func removeItemFromKeychain() {
+        GTMOAuth2ViewControllerTouch.removeAuthFromKeychain(forName: settings.keychainItemName)
     }
     
-    private func saveItemToKeychain() -> Bool {
-        return GTMOAuth2ViewControllerTouch.saveParamsToKeychainForName(settings.keychainItemName, authentication: auth)
+    fileprivate func saveItemToKeychain() -> Bool {
+        return GTMOAuth2ViewControllerTouch.saveParamsToKeychain(forName: settings.keychainItemName, authentication: auth)
     }
     
-    private var auth: GTMOAuth2Authentication {
+    fileprivate var auth: GTMOAuth2Authentication {
         get {
-            let _auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
-                settings.keychainItemName,
+            let _auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychain(
+                forName: settings.keychainItemName,
                 clientID: settings.clientID, clientSecret: nil)
-            _auth.accessToken = "Some Token"
-            _auth.refreshToken = "some other token"
-            _auth.scope = "some scope new"
-            return _auth
+            _auth?.accessToken = "Some Token"
+            _auth?.refreshToken = "some other token"
+            _auth?.scope = "some scope new"
+            return _auth!
         }
     }
     

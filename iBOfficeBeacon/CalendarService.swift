@@ -15,7 +15,7 @@ class CalendarService: NSObject {
     let calendarClient: CalendarClient
     let eventProcessor: CalendarEventsProcessor
     let coordinator: RoomScheduleCoordinator
-    let dateFormatter = NSDateFormatter()
+    let dateFormatter = DateFormatter()
     
     var handler: onFoundScheduleHandler?
     
@@ -27,7 +27,7 @@ class CalendarService: NSObject {
         super.init()
     }
     
-    func findScheduleForRoom(room: OfficeRoom, onFoundHandler handler: onFoundScheduleHandler) {
+    func findScheduleForRoom(_ room: OfficeRoom, onFoundHandler handler: @escaping onFoundScheduleHandler) {
         self.handler = handler
         calendarClient.fetchEventsForCalendarWithID(room.calendarID, onFetched:
             { events in
@@ -41,18 +41,18 @@ class CalendarService: NSObject {
     }
     
     typealias BookRoomCallBack = (Bool)->Void
-    func bookRoomAsync(room: OfficeRoom, withSchedule schedule: ScheduleProtocol, onCompeletion: BookRoomCallBack) {
+    func bookRoomAsync(_ room: OfficeRoom, withSchedule schedule: ScheduleProtocol, onCompeletion: @escaping BookRoomCallBack) {
         let endTime = calculateEndTimeForNewEventFromSchedule(schedule)
-        let event = eventProcessor.eventStartsAt(NSDate(), endsAt: endTime, includesAttendees: [room.calendarID])
+        let event = eventProcessor.eventStartsAt(Date(), endsAt: endTime, includesAttendees: [room.calendarID])
         calendarClient.insertEventAsync(event, onCompeletion: onCompeletion)
     }
     
-    private func calculateEndTimeForNewEventFromSchedule(schedule: ScheduleProtocol) -> NSDate {
+    fileprivate func calculateEndTimeForNewEventFromSchedule(_ schedule: ScheduleProtocol) -> Date {
         let maxMinutesForBookingEvent = 30
         var eventLength = 30
         if schedule.minutesTillNextEvent < maxMinutesForBookingEvent {
             eventLength = schedule.minutesTillNextEvent - 1
         }
-        return NSDate().dateByAddingTimeInterval(Double(eventLength * 60))
+        return Date().addingTimeInterval(Double(eventLength * 60))
     }
 }

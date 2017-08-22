@@ -8,13 +8,13 @@
 
 class CLLocationManagerStub: CLLocationManager {
     
-    static var currentStatus = CLAuthorizationStatus.AuthorizedAlways
+    static var currentStatus = CLAuthorizationStatus.authorizedAlways
     
     override class func authorizationStatus() -> CLAuthorizationStatus {
         return currentStatus
     }
     
-    class func setStatus(status: CLAuthorizationStatus) {
+    class func setStatus(_ status: CLAuthorizationStatus) {
         currentStatus = status
     }
 }

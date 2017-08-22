@@ -20,7 +20,7 @@ class AppUpdateControllerUnitTest: XCTestCase {
         fakeSettings = FakeAppSettings(environment: .Default)
         fakeSettings.setFeautreToggle(.HockeyAppIntegration, To: true)
         subject = AppUpdateController(updateManager: spyManager, settings: fakeSettings)
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("AppUpdateCheckDate")
+        UserDefaults.standard.removeObject(forKey: "AppUpdateCheckDate")
     }
 
     func testItCallsCheckForUpdateWhenHockeyAppIntegrationIsEnabled() {
@@ -46,8 +46,8 @@ class AppUpdateControllerUnitTest: XCTestCase {
         subject.performUpdateCheckInBackground()
         
         waitForBackgroundTask() { _ in
-            let updateDate = NSUserDefaults.standardUserDefaults().objectForKey("AppUpdateCheckDate")
-            XCTAssertTrue((updateDate as! NSDate).compareDateToDayPrecision(NSDate()) == .OrderedSame)
+            let updateDate = UserDefaults.standard.object(forKey: "AppUpdateCheckDate")
+            XCTAssertTrue((updateDate as! Date).compareDateToDayPrecision(Date()) == .orderedSame)
         }
     }
     
@@ -67,8 +67,8 @@ class AppUpdateControllerUnitTest: XCTestCase {
     }
     
     func testItDoesNotCheckForUpdateIfItHasAlreadyCheckedToday() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(NSDate(), forKey: "AppUpdateCheckDate")
+        let defaults = UserDefaults.standard
+        defaults.set(Date(), forKey: "AppUpdateCheckDate")
         
         subject.performUpdateCheckInBackground()
         
@@ -78,8 +78,8 @@ class AppUpdateControllerUnitTest: XCTestCase {
     }
     
     func testItChecksForUpdateIfLastCheckedIsMoreThanOneDayAgo() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(NSDate().dateByAddingTimeInterval(oneDay*(-1)), forKey: "AppUpdateCheckDate")
+        let defaults = UserDefaults.standard
+        defaults.set(Date().addingTimeInterval(oneDay*(-1)), forKey: "AppUpdateCheckDate")
         
         subject.performUpdateCheckInBackground()
         
@@ -88,9 +88,9 @@ class AppUpdateControllerUnitTest: XCTestCase {
         }
     }
     
-    private func waitForBackgroundTask(handler: XCWaitCompletionHandler) {
-        fullfillExpectation(expectationWithDescription("BackgroundCheck"),
+    fileprivate func waitForBackgroundTask(_ handler: @escaping XCWaitCompletionHandler) {
+        fullfillExpectation(expectation(description: "BackgroundCheck"),
                             withinTime: hundredMs * 2)
-        self.waitForExpectationsWithTimeout(hundredMs * 3, handler: handler)
+        self.waitForExpectations(timeout: hundredMs * 3, handler: handler)
     }
 }

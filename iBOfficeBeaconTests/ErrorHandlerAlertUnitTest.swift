@@ -19,9 +19,9 @@ class ErrorHandlerAlertUnitTest: XCTestCase {
     
     func testItDisplaysAlertMessageWhenParsingAddressFailedNotificationIsFired() {
         let viewControllerSpy = ViewControllerSpy()
-        UIApplication.sharedApplication().keyWindow?.rootViewController = viewControllerSpy
+        UIApplication.shared.keyWindow?.rootViewController = viewControllerSpy
 
-        NSNotificationCenter.defaultCenter().postNotificationName(BeaconAddressLoader.ParsingAddressFailed, object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: BeaconAddressLoader.ParsingAddressFailed), object: nil)
         let alertView = viewControllerSpy.presentedAlertController
         
         XCTAssertTrue(alertView?.title == "Error")
@@ -30,9 +30,9 @@ class ErrorHandlerAlertUnitTest: XCTestCase {
     
     func testItDisplaysAlertMessageWhenUserIsNotAuthenticatedNotificationIsFired() {
         let viewControllerSpy = ViewControllerSpy()
-        UIApplication.sharedApplication().keyWindow?.rootViewController = viewControllerSpy
+        UIApplication.shared.keyWindow?.rootViewController = viewControllerSpy
         
-        NSNotificationCenter.defaultCenter().postNotificationName(GoogleAuthorizationErrorHandler.UserIsNotAuthenticatedNotification, object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: GoogleAuthorizationErrorHandler.UserIsNotAuthenticatedNotification), object: nil)
         
         let alertView = viewControllerSpy.presentedAlertController
         

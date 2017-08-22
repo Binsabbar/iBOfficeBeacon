@@ -11,13 +11,12 @@ import UIKit
 
 extension AppDelegate {
 
-    func assignBeaconManagerForLaunchOptions(options: [NSObject: AnyObject]?) {
-        if let ft = wiring.settings().featureToggles[FeatureToggles.LocalNotificationProximity.rawValue]
-            where ft {
+    func assignBeaconManagerForLaunchOptions(_ options: [AnyHashable: Any]?) {
+        if let ft = wiring.settings().featureToggles[FeatureToggles.LocalNotificationProximity.rawValue], ft {
                 wiring.localNotificationService().registerNotification()
         }
         
-        if options != nil && options!.keys.contains(UIApplicationLaunchOptionsLocationKey) {
+        if options != nil && options!.keys.contains(UIApplicationLaunchOptionsKey.location) {
             startBackgroundMonitoring()
         }
     }

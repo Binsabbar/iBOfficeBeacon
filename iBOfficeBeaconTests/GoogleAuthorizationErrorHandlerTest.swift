@@ -80,9 +80,8 @@ class GoogleAuthorizationErrorHandlerTest: XCTestCase {
             .pushViewController(ViewControllerSpy())
             .build()
         
-        NSNotificationCenter
-            .defaultCenter()
-            .addObserver(self, selector: #selector(GoogleAuthorizationErrorHandlerTest.userIsNotAuthenticatedNotification), name: GoogleAuthorizationErrorHandler.UserIsNotAuthenticatedNotification, object: nil)
+        NotificationCenter.default
+            .addObserver(self, selector: #selector(GoogleAuthorizationErrorHandlerTest.userIsNotAuthenticatedNotification), name: NSNotification.Name(rawValue: GoogleAuthorizationErrorHandler.UserIsNotAuthenticatedNotification), object: nil)
 
         subject.handleError(error)
         

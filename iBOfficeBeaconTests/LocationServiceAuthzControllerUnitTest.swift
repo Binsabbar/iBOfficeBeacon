@@ -19,13 +19,13 @@ class LocationServiceAuthzControllerUnitTest: XCTestCase {
         super.setUp()
         fakeManager = FakeESTBeaconManager()
         viewControllerSpy = ViewControllerSpy()
-        UIApplication.sharedApplication().keyWindow?.rootViewController = viewControllerSpy
+        UIApplication.shared.keyWindow?.rootViewController = viewControllerSpy
         
         subject = LocationServiceAuthzController(locationClass: CLLocationManagerStub.self, manager: fakeManager)
     }
     
     func testItShowsAlertWhenAuthzStatusIsDenied() {
-        CLLocationManagerStub.setStatus(.Denied)
+        CLLocationManagerStub.setStatus(.denied)
    
         subject.checkLocationAuthorizationStatus()
         
@@ -34,7 +34,7 @@ class LocationServiceAuthzControllerUnitTest: XCTestCase {
     }
     
     func testItShowsAlertWhenAuthzStatusIsRestricted() {
-        CLLocationManagerStub.setStatus(.Restricted)
+        CLLocationManagerStub.setStatus(.restricted)
         
         subject.checkLocationAuthorizationStatus()
         
@@ -43,7 +43,7 @@ class LocationServiceAuthzControllerUnitTest: XCTestCase {
     }
     
     func testItRequestAuthzWhenAuthzStatusIsNotDetermined() {
-        CLLocationManagerStub.setStatus(.NotDetermined)
+        CLLocationManagerStub.setStatus(.notDetermined)
         
         subject.checkLocationAuthorizationStatus()
         
@@ -52,7 +52,7 @@ class LocationServiceAuthzControllerUnitTest: XCTestCase {
     }
     
     func testItDoesNotShowsAlertWhenAuthzStatusIsAuthorizedWhenInUse() {
-        CLLocationManagerStub.setStatus(.AuthorizedWhenInUse)
+        CLLocationManagerStub.setStatus(.authorizedWhenInUse)
         
         subject.checkLocationAuthorizationStatus()
         

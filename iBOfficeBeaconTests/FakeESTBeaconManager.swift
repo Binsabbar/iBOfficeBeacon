@@ -16,7 +16,7 @@ enum FakeESTBeaconManagerMethods:Int {
 }
 
 class FakeESTBeaconManager: ESTBeaconManager {
-    let queue:dispatch_queue_t!
+    let queue:DispatchQueue!
     
     var beaconRegions:[CLBeaconRegion] = []
     var rangedBeaconRegions = Set<CLBeaconRegion>()
@@ -24,7 +24,7 @@ class FakeESTBeaconManager: ESTBeaconManager {
     var startRangingCalledWithRegions = Set<CLBeaconRegion>()
     var stopRangingCalledWithRegions = Set<CLBeaconRegion>()
     
-    var state:CLRegionState = CLRegionState.Unknown
+    var state:CLRegionState = CLRegionState.unknown
     
     var isDetermineRegionStateCalled = false
     var isStartMonitorRegionCalled = false
@@ -36,7 +36,7 @@ class FakeESTBeaconManager: ESTBeaconManager {
     var callStack:[FakeESTBeaconManagerMethods] = []
     
     override init() {
-        queue = dispatch_queue_create("FakeESTManagerQueueTest", nil)
+        queue = DispatchQueue(label: "FakeESTManagerQueueTest", attributes: [])
         super.init()
     }
     
@@ -45,65 +45,65 @@ class FakeESTBeaconManager: ESTBeaconManager {
         requestWhenInUseAuthorizationIsCalled = true
     }
     
-    override func startRangingBeaconsInRegion(region: CLBeaconRegion) {
+    override func startRangingBeacons(in region: CLBeaconRegion) {
         callStack.append(.startRangingBeaconsInRegion)
         isStartRangingBeaconsCalled = true
         startRangingCalledWithRegions.insert(region)
-        super.startRangingBeaconsInRegion(region)
+        super.startRangingBeacons(in: region)
     }
     
-    override func startMonitoringForRegion(region: CLBeaconRegion) {
+    override func startMonitoring(for region: CLBeaconRegion) {
         callStack.append(.startMonitoringForRegion)
         isStartMonitorRegionCalled = true
-        super.startMonitoringForRegion(region)
+        super.startMonitoring(for: region)
     }
     
-    override func stopMonitoringForRegion(region: CLBeaconRegion) {
+    override func stopMonitoring(for region: CLBeaconRegion) {
         self.isStopMonitorRegionCalled = true
         callStack.append(.stopMonitoringForRegion)
-        super.stopRangingBeaconsInRegion(region)
+        super.stopRangingBeacons(in: region)
     }
     
-    override func stopRangingBeaconsInRegion(region: CLBeaconRegion) {
+    override func stopRangingBeacons(in region: CLBeaconRegion) {
         self.isStopRangingBeaconsCalled = true
         callStack.append(.stopRangingBeaconsInRegion)
         stopRangingCalledWithRegions.insert(region)
-        super.stopRangingBeaconsInRegion(region)
+        super.stopRangingBeacons(in: region)
     }
     
     // MARK: Mockign delegate calls in main thread
-    func mockDidExitRegion(region: CLBeaconRegion) {
-        self.mockDidDetermineState(CLRegionState.Outside, forRegion: region)
+    func mockDidExitRegion(_ region: CLBeaconRegion) {
+        self.mockDidDetermineState(CLRegionState.outside, forRegion: region)
         if let del = delegate {
-            dispatch_async(queue) {
+            queue.async {
                 del.beaconManager?(self, didExitRegion: region)
             }
         }
     }
     
-    func mockDidEnterRegion(region: CLBeaconRegion) {
-        self.mockDidDetermineState(CLRegionState.Inside, forRegion: region)
+    func mockDidEnterRegion(_ region: CLBeaconRegion) {
+        self.mockDidDetermineState(CLRegionState.inside, forRegion: region)
         if let del = delegate {
-            if del.respondsToSelector(#selector(ESTBeaconManagerDelegate.beaconManager(_:didEnterRegion:))) {
-                dispatch_async(queue) {
-                    del.beaconManager?(self, didEnterRegion: region)
+            if del.responds(to: #selector(ESTBeaconManagerDelegate.beaconManager(_:didEnter:))) {
+                queue.async {
+                    del.beaconManager?(self, didEnter: region)
                 }
             }
         }
     }
     
-    func mockDidDetermineState(state: CLRegionState, forRegion region: CLBeaconRegion) {
+    func mockDidDetermineState(_ state: CLRegionState, forRegion region: CLBeaconRegion) {
         if let del = delegate {
-            dispatch_async(dispatch_get_main_queue()) {
-                del.beaconManager?(self, didDetermineState: state, forRegion: region)
+            DispatchQueue.main.async {
+                del.beaconManager?(self, didDetermineState: state, for: region)
             }
         }
     }
     
-    func mockDidRangeBeacons(beacons:[CLBeacon], InRegion region:CLBeaconRegion) {
+    func mockDidRangeBeacons(_ beacons:[CLBeacon], InRegion region:CLBeaconRegion) {
         if let del = delegate {
-            dispatch_async(dispatch_get_main_queue()) {
-                del.beaconManager?(self, didRangeBeacons: beacons, inRegion: region)
+            DispatchQueue.main.async {
+                del.beaconManager?(self, didRangeBeacons: beacons, in: region)
             }
         }
     }

@@ -23,12 +23,12 @@ class SpreadsheetAPITest: XCTestCase {
     
     let remoteFile = "remote file id"
     let localFile = "local file.txt"
-    let dummyFetchedData = "dummy string".dataUsingEncoding(NSUTF8StringEncoding)
+    let dummyFetchedData = "dummy string".data(using: String.Encoding.utf8)
     let dummyError = NSError(domain: "someError", code: 1, userInfo: nil)
     
     var remoteFileMeta: FileMetadata {
         get {
-            return FileMetadata(name: "file name", id: remoteFile, modifiedAt: NSDate())
+            return FileMetadata(name: "file name", id: remoteFile, modifiedAt: Date())
         }
     }
     
@@ -43,7 +43,7 @@ class SpreadsheetAPITest: XCTestCase {
                                     fileService: fakeFileService,
                                     delegate: delegateSpy)
         
-        testExpectation =  expectationWithDescription("SheetDriveServiceTest")
+        testExpectation =  expectation(description: "SheetDriveServiceTest")
     }
     
     override func tearDown() {
@@ -53,13 +53,13 @@ class SpreadsheetAPITest: XCTestCase {
     
     func testItRequestsRemoteFileMetadataForTheGivenFileId() {
         fakeSheetDriveWrapper.fileMetadata = remoteFileMeta
-        fakeSheetDriveWrapper.fetchedData = dummyFetchedData
+        fakeSheetDriveWrapper.fetchedData = dummyFetchedData as! NSData as Data
         
         spreadsheetAPI.saveRemoteSheetFileWithId(remoteFile, locallyToFile: localFile)
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
         
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertTrue(self.fakeSheetDriveWrapper.hasRequestFileMetadataForIdCalled)
             XCTAssertTrue(self.fakeSheetDriveWrapper.requestedFileId == self.remoteFile)
         }
@@ -71,13 +71,13 @@ class SpreadsheetAPITest: XCTestCase {
         fileHelper.assertFileIsDeleted(localFile)
         
         fakeSheetDriveWrapper.fileMetadata = remoteFileMeta
-        fakeSheetDriveWrapper.fetchedData = dummyFetchedData
+        fakeSheetDriveWrapper.fetchedData = dummyFetchedData as! NSData as Data
         
         spreadsheetAPI.saveRemoteSheetFileWithId(remoteFile, locallyToFile: localFile)
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
         
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertTrue(self.fakeSheetDriveWrapper.hasFetchedFileCalled)
             XCTAssertTrue(self.fakeSheetDriveWrapper.fetchedData == self.dummyFetchedData)
             XCTAssertTrue(self.fakeFileService.fileName == self.localFile)
@@ -86,19 +86,19 @@ class SpreadsheetAPITest: XCTestCase {
     
     // MARK: When local file exists, but it is not up to date with remote
     func testItFetchesTheContentOfTheRemoteFileWhenLocalFileModifiedDateIsEarlierThanRemoteFile() {
-        let twoDaysAgo = NSDate(timeIntervalSinceNow: past2Hours)
+        let twoDaysAgo = Date(timeIntervalSinceNow: past2Hours)
         fileHelper.writeString("Some Random data", toFile: localFile)
         fileHelper.changeFile(localFile, modifiedDateToDate: twoDaysAgo)
         
         fakeSheetDriveWrapper.fileMetadata = remoteFileMeta
-        fakeSheetDriveWrapper.fetchedData = dummyFetchedData
+        fakeSheetDriveWrapper.fetchedData = dummyFetchedData as! NSData as Data
         fakeFileService.writeDataResult = true
         
         spreadsheetAPI.saveRemoteSheetFileWithId(remoteFile, locallyToFile: localFile)
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
         
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertTrue(self.fakeFileService.hasWriteDataToFileNameBeenCalled)
             XCTAssertTrue(self.fakeFileService.writtenData == self.dummyFetchedData)
             XCTAssertTrue(self.fakeFileService.fileName == self.localFile)
@@ -107,9 +107,9 @@ class SpreadsheetAPITest: XCTestCase {
     
     // MARK: When local file exists, but it is up to date with remote
     func testItDoesNotFetcheTheContentOfTheRemoteFileWhenLocalFileModifiedDateIsLaterThanRemoteFile() {
-        let twoDaysAgo = NSDate(timeIntervalSinceNow: past2Hours)
+        let twoDaysAgo = Date(timeIntervalSinceNow: past2Hours)
         fileHelper.writeString("Some Random data", toFile: localFile)
-        fileHelper.changeFile(localFile, modifiedDateToDate: NSDate())
+        fileHelper.changeFile(localFile, modifiedDateToDate: Date())
         
         fakeSheetDriveWrapper.fileMetadata = FileMetadata(name: remoteFile, id: remoteFile, modifiedAt: twoDaysAgo)
         
@@ -117,7 +117,7 @@ class SpreadsheetAPITest: XCTestCase {
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
         
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertFalse(self.fakeSheetDriveWrapper.hasFetchedFileCalled)
             XCTAssertFalse(self.fakeFileService.hasWriteDataToFileNameBeenCalled)
         }
@@ -126,14 +126,14 @@ class SpreadsheetAPITest: XCTestCase {
     //MARK: Saving file content
     func testItSavesTheContentOfTheFetchedFileLocallyToTheGivnFileName() {
         fakeSheetDriveWrapper.fileMetadata = remoteFileMeta
-        fakeSheetDriveWrapper.fetchedData = dummyFetchedData
+        fakeSheetDriveWrapper.fetchedData = dummyFetchedData as! NSData as Data
         fakeFileService.writeDataResult = true
         
         spreadsheetAPI.saveRemoteSheetFileWithId(remoteFile, locallyToFile: localFile)
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
         
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertTrue(self.fakeFileService.hasWriteDataToFileNameBeenCalled)
             XCTAssertTrue(self.fakeFileService.writtenData == self.dummyFetchedData)
             XCTAssertTrue(self.fakeFileService.fileName == self.localFile)
@@ -142,9 +142,9 @@ class SpreadsheetAPITest: XCTestCase {
     
     // MARK: Delegate methods invocations
     func testItInvokesItsDelegateWhenRemoteFileContentHasNotModifiedCompareToLocalOne() {
-        let twoDaysAgo = NSDate(timeIntervalSinceNow: oneDay * 2 * -1)
+        let twoDaysAgo = Date(timeIntervalSinceNow: oneDay * 2 * -1)
         fileHelper.writeString("Some Random data", toFile: localFile)
-        fileHelper.changeFile(localFile, modifiedDateToDate: NSDate())
+        fileHelper.changeFile(localFile, modifiedDateToDate: Date())
         
         fakeSheetDriveWrapper.fileMetadata = FileMetadata(name: remoteFile, id: remoteFile, modifiedAt: twoDaysAgo)
         
@@ -152,7 +152,7 @@ class SpreadsheetAPITest: XCTestCase {
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
         
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertTrue(self.delegateSpy.isLocalFileIsUpToDateWithRequestedFileCalled)
             XCTAssertFalse(self.fakeSheetDriveWrapper.hasFetchedFileCalled)
         }
@@ -160,14 +160,14 @@ class SpreadsheetAPITest: XCTestCase {
     
     func testItInvokesItsDelegateWhenTheFileIsSavedLocally() {
         fakeSheetDriveWrapper.fileMetadata = remoteFileMeta
-        fakeSheetDriveWrapper.fetchedData = dummyFetchedData
+        fakeSheetDriveWrapper.fetchedData = dummyFetchedData as! Data
         fakeFileService.writeDataResult = true
         
         spreadsheetAPI.saveRemoteSheetFileWithId(remoteFile, locallyToFile: localFile)
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
         
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertTrue(self.delegateSpy.isRequestedFileCalled)
         }
     }
@@ -179,7 +179,7 @@ class SpreadsheetAPITest: XCTestCase {
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
         
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertFalse(self.delegateSpy.isRequestedFileCalled)
             XCTAssertTrue(self.delegateSpy.isRequestingRemoteFileFailedWithErrorCalled)
         }
@@ -193,7 +193,7 @@ class SpreadsheetAPITest: XCTestCase {
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
         
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertFalse(self.delegateSpy.isRequestedFileCalled)
             XCTAssertTrue(self.delegateSpy.isFetchingRemoteFileFailedWithErrorCalled)
         }
@@ -201,14 +201,14 @@ class SpreadsheetAPITest: XCTestCase {
     
     func testItInvokesFileCouldNotBeSavedWhenFileCouldNotBeSaved() {
         fakeSheetDriveWrapper.fileMetadata = remoteFileMeta
-        fakeSheetDriveWrapper.fetchedData = dummyFetchedData
+        fakeSheetDriveWrapper.fetchedData = dummyFetchedData as! NSData as Data
         fakeFileService.writeDataResult = false
         
         spreadsheetAPI.saveRemoteSheetFileWithId(remoteFile, locallyToFile: localFile)
         
         fullfillExpectation(testExpectation, withinTime: hundredMs)
         
-        waitForExpectationsWithTimeout(halfSecond) { _ in
+        waitForExpectations(timeout: halfSecond) { _ in
             XCTAssertFalse(self.delegateSpy.isRequestedFileCalled)
             XCTAssertTrue(self.delegateSpy.isFileCouldNotBeSavedCalled)
         }

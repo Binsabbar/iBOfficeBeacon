@@ -9,6 +9,6 @@
 import Foundation
 
 class DummyErrorHandler: ErrorHandlingProtocol {
-    func handleError(error: NSError) {
+    func handleError(_ error: NSError) {
     }
 }

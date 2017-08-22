@@ -16,8 +16,8 @@ protocol ScheduleProtocol {
 
 class FreeSchedule: ScheduleProtocol {
     
-    private let _minutesTillNextEvent: Int
-    private let _availableTimeslots: Set<FreeTimeslot>
+    fileprivate let _minutesTillNextEvent: Int
+    fileprivate let _availableTimeslots: Set<FreeTimeslot>
     
     var isBusy = false
     var availableTimeslots: Set<FreeTimeslot> { return _availableTimeslots }
@@ -35,10 +35,10 @@ class BusySchedule: ScheduleProtocol {
     var availableTimeslots = Set<FreeTimeslot>()
     var minutesTillNextEvent = 0
     
-    let nextAvailable: NSDate
+    let nextAvailable: Date
     let currentEvent: CalendarEvent
     
-    init(with event: CalendarEvent, nextAvailable: NSDate) {
+    init(with event: CalendarEvent, nextAvailable: Date) {
         currentEvent = event
         self.nextAvailable = nextAvailable
     }

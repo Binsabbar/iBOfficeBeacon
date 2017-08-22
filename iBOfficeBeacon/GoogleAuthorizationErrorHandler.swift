@@ -11,25 +11,25 @@ import Foundation
 class GoogleAuthorizationErrorHandler: ErrorHandlingProtocol {
     
     static var UserIsNotAuthenticatedNotification = "UserIsNotAuthenticated"
-    private let authController: AuthController
-    private let unauthorisedErrorCode = 403
-    private let settings: AppSettings
+    fileprivate let authController: AuthController
+    fileprivate let unauthorisedErrorCode = 403
+    fileprivate let settings: AppSettings
     
     init (authController: AuthController) {
         self.authController = authController
         self.settings = Wiring.sharedWiring.settings()
     }
     
-    func handleError(error: NSError) {
+    func handleError(_ error: NSError) {
         if error.code == unauthorisedErrorCode {
             if settings.environment == AppEnvironment.Dev
-            && error.description.containsString("Forbidden") {
+            && error.description.contains("Forbidden") {
                 return
             }
             authController.logout()
-            let nv = UIApplication.sharedApplication().windows.first?.rootViewController as! UINavigationController
-            nv.popToRootViewControllerAnimated(true)
-            NSNotificationCenter.defaultCenter().postNotificationName(GoogleAuthorizationErrorHandler.UserIsNotAuthenticatedNotification, object: nil)
+            let nv = UIApplication.shared.windows.first?.rootViewController as! UINavigationController
+            nv.popToRootViewController(animated: true)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: GoogleAuthorizationErrorHandler.UserIsNotAuthenticatedNotification), object: nil)
         }
     }
 }

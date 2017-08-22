@@ -6,13 +6,13 @@ class BeaconManager: NSObject, ESTBeaconManagerDelegate {
     
     typealias compeletionHandler = ([CLBeacon]) -> Void
     
-    private let manager: ESTBeaconManager
+    fileprivate let manager: ESTBeaconManager
     
-    private var eventHandler:TWBeaconEventDelegate?
-    private var handler: compeletionHandler?
+    fileprivate var eventHandler:TWBeaconEventDelegate?
+    fileprivate var handler: compeletionHandler?
     
-    private var regions = Set<CLBeaconRegion>()
-    private var lastRangedBeacon: CLBeacon?
+    fileprivate var regions = Set<CLBeaconRegion>()
+    fileprivate var lastRangedBeacon: CLBeacon?
     
     init(manager: ESTBeaconManager) {
         self.manager = manager
@@ -20,16 +20,16 @@ class BeaconManager: NSObject, ESTBeaconManagerDelegate {
         manager.delegate = self
     }
     
-    func startRangingOnCompletion(onCompletion: compeletionHandler) {
+    func startRangingOnCompletion(_ onCompletion: @escaping compeletionHandler) {
         self.handler = onCompletion
         startRanging()
     }
     
-    func setBeaconTransitionEventsHandler(eventHandler: TWBeaconEventDelegate){
+    func setBeaconTransitionEventsHandler(_ eventHandler: TWBeaconEventDelegate){
         self.eventHandler = eventHandler
     }
     
-    func addBeaconRegion(newRegion: CLBeaconRegion) {
+    func addBeaconRegion(_ newRegion: CLBeaconRegion) {
         regions.insert(newRegion)
     }
     
@@ -40,7 +40,7 @@ class BeaconManager: NSObject, ESTBeaconManagerDelegate {
     
     func stopRanging() {
         regions.forEach {
-            manager.stopRangingBeaconsInRegion($0)
+            manager.stopRangingBeacons(in: $0)
         }
     }
     
@@ -49,16 +49,16 @@ class BeaconManager: NSObject, ESTBeaconManagerDelegate {
     }
     
     //MARK: ESTBEaconManagerDelegate
-    func beaconManager(manager: AnyObject, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
+    func beaconManager(_ manager: Any, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         guard isOur(region) else { return }
         
         let lastBeacon:CLBeacon? = selectLastRangedBeaconFrom(beacons)
         
-        if let lastBeacon = lastBeacon where isBeaconOutOfRange(lastBeacon) {
+        if let lastBeacon = lastBeacon, isBeaconOutOfRange(lastBeacon) {
             lastRangedBeacon = nil
             self.eventHandler?.movedAwayFromClosestBeacon()
         }
-        else if let beacon = closestBeaconIn(beacons) where
+        else if let beacon = closestBeaconIn(beacons),
             lastBeacon == nil || !isBeacon(beacon, equalTo: lastBeacon!) {
             self.lastRangedBeacon = beacon
             self.handler?([beacon])
@@ -66,52 +66,52 @@ class BeaconManager: NSObject, ESTBeaconManagerDelegate {
     }
     
     //MARK: helpers
-    private func startRanging() {
+    fileprivate func startRanging() {
         regions.forEach {
-            manager.startRangingBeaconsInRegion($0)
+            manager.startRangingBeacons(in: $0)
         }
     }
     
-    private func isBeaconOutOfRange(beacon: CLBeacon) -> Bool {
-        return beacon.proximity != .Immediate &&
+    fileprivate func isBeaconOutOfRange(_ beacon: CLBeacon) -> Bool {
+        return beacon.proximity != .immediate &&
             beacon.accuracy > BeaconManager.IMMEDIATE_ACCURACY
     }
     
-    private func isBeacon(beacon: CLBeacon, equalTo anotherBeacon: CLBeacon) -> Bool {
+    fileprivate func isBeacon(_ beacon: CLBeacon, equalTo anotherBeacon: CLBeacon) -> Bool {
         return  anotherBeacon.proximityUUID == beacon.proximityUUID &&
             anotherBeacon.major == beacon.major &&
             anotherBeacon.minor == beacon.minor
     }
     
-    private func isImmediate(beacon: CLBeacon) -> Bool {
-        return beacon.proximity == .Immediate &&
+    fileprivate func isImmediate(_ beacon: CLBeacon) -> Bool {
+        return beacon.proximity == .immediate &&
             beacon.accuracy <= BeaconManager.IMMEDIATE_ACCURACY
     }
     
-    private func isOur(region: CLBeaconRegion) -> Bool {
+    fileprivate func isOur(_ region: CLBeaconRegion) -> Bool {
         return containsRegion(region)
     }
 
-    private func closestBeaconIn(beacons: [CLBeacon]) -> CLBeacon? {
+    fileprivate func closestBeaconIn(_ beacons: [CLBeacon]) -> CLBeacon? {
         var immediateBeacons = beacons.filter(isImmediate)
         if immediateBeacons.count == 0 { return nil }
         
         let firstBeacon = immediateBeacons.removeFirst()
-        return immediateBeacons.reduce(firstBeacon, combine: closestBeacon)
+        return immediateBeacons.reduce(firstBeacon, closestBeacon)
     }
     
     
-    private func closestBeacon(beacon: CLBeacon, anotherBeacon: CLBeacon) -> CLBeacon {
+    fileprivate func closestBeacon(_ beacon: CLBeacon, anotherBeacon: CLBeacon) -> CLBeacon {
         return beacon.accuracy < anotherBeacon.accuracy ? beacon : anotherBeacon
     }
     
-    private func containsRegion(anotherRegion: CLBeaconRegion) -> Bool {
-        return regions.contains({ (aRegion) -> Bool in
+    fileprivate func containsRegion(_ anotherRegion: CLBeaconRegion) -> Bool {
+        return regions.contains(where: { (aRegion) -> Bool in
             return aRegion.isEqualTo(anotherRegion)
         })
     }
     
-    private func selectLastRangedBeaconFrom(beacons: [CLBeacon]) -> CLBeacon? {
+    fileprivate func selectLastRangedBeaconFrom(_ beacons: [CLBeacon]) -> CLBeacon? {
         var selectedBeacon:CLBeacon? = nil
         if let lastBeacon = self.lastRangedBeacon {
             for beacon in beacons {

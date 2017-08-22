@@ -24,7 +24,7 @@ class SheetDriveWrapperTest: XCTestCase {
         super.setUp()
         delegate = NSObject()
         service = GTLRDriveService()
-        testExpectation = expectationWithDescription("GTLDriveClientTest")
+        testExpectation = expectation(description: "GTLDriveClientTest")
         client = SheetDriveWrapper(withService: service)
     }
 
@@ -38,7 +38,7 @@ class SheetDriveWrapperTest: XCTestCase {
         
         client.requestFileMetadataForFileId(fileId, completionHandler: dummyCompeletionHandler)
         
-        waitForExpectationsWithTimeout(twoSeconds) { _ in}
+        waitForExpectations(timeout: twoSeconds) { _ in}
     }
     
     func testItCallsCompletionBlockWithFileObjectIfFileIsFound() {
@@ -54,7 +54,7 @@ class SheetDriveWrapperTest: XCTestCase {
             self.testExpectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(twoSeconds) { _ in}
+        waitForExpectations(timeout: twoSeconds) { _ in}
     }
     
     func testItCallsCompletionBlockWithNSErrorIfFileIsNotFound() {
@@ -65,11 +65,11 @@ class SheetDriveWrapperTest: XCTestCase {
         
         client.requestFileMetadataForFileId(fileId) { (fileMeta, error) in
             XCTAssertNotNil(error)
-            XCTAssertTrue(fileMeta.isKindOfClass(NullFileMetadata))
+            XCTAssertTrue(fileMeta.isKind(of: NullFileMetadata.self))
             self.testExpectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(twoSeconds) { _ in}
+        waitForExpectations(timeout: twoSeconds) { _ in}
     }
     
     func testItSetsExportMimeTypeToText_CSV() {
@@ -84,7 +84,7 @@ class SheetDriveWrapperTest: XCTestCase {
 
         client.fetchFile(dummyFileMetaWithID(anId)){_ in}	
     
-        waitForExpectationsWithTimeout(second) {_ in}
+        waitForExpectations(timeout: second) {_ in}
     }
     
     func testItSetsFileIdInTheQueryWhenItExportsFile() {
@@ -99,45 +99,45 @@ class SheetDriveWrapperTest: XCTestCase {
         
         client.fetchFile(dummyFileMetaWithID(anId)){_ in}
         
-        waitForExpectationsWithTimeout(second) {_ in}
+        waitForExpectations(timeout: second) {_ in}
     }
     
     func testItCallsCompletionHandlerWithTheFileData() {
         let stringInFile = "hello world"
-        let dummyFileData = stringInFile.dataUsingEncoding(NSUTF8StringEncoding)
+        let dummyFileData = stringInFile.data(using: String.Encoding.utf8)
     
-        service.fetcherService = GTMSessionFetcherService.mockFetcherServiceWithFakedData(dummyFileData, fakedError: nil)
+        service.fetcherService = GTMSessionFetcherService.mockFetcherService(withFakedData: dummyFileData, fakedError: nil)
         
         client.fetchFile(dummyFileMetaWithID(fileId)) { (data, _) in
-            let dataAsString = String(data: data!, encoding: NSUTF8StringEncoding)!
+            let dataAsString = String(data: data!, encoding: String.Encoding.utf8)!
             XCTAssertTrue(isString(firstString: dataAsString, equalsToOtherString: stringInFile))
             self.testExpectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(second) {_ in}
+        waitForExpectations(timeout: second) {_ in}
     }
  
     func testItCallsCompletionHandlerWithNSErrorIfFileCouldNotBeFetched() {
         let error = NSError(domain: "error", code: 1, userInfo: nil)
-        service.fetcherService = GTMSessionFetcherService.mockFetcherServiceWithFakedData(nil, fakedError: error)
+        service.fetcherService = GTMSessionFetcherService.mockFetcherService(withFakedData: nil, fakedError: error)
         
         client.fetchFile(dummyFileMetaWithID(fileId)) { (data, anError) in
             XCTAssertNotNil(anError)
             self.testExpectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(second) {_ in}
+        waitForExpectations(timeout: second) {_ in}
     }
     
-    private func dummyFileMetaWithID(id: String) -> FileMetadata {
-        return FileMetadata(name: "random", id: id, modifiedAt: NSDate())
+    fileprivate func dummyFileMetaWithID(_ id: String) -> FileMetadata {
+        return FileMetadata(name: "random", id: id, modifiedAt: Date())
     }
     
-    private func fakeRemoteDriveFile() -> GTLRDrive_File {
+    fileprivate func fakeRemoteDriveFile() -> GTLRDrive_File {
         let fakeFileObject = GTLRDrive_File()
         fakeFileObject.name = "The file name"
         fakeFileObject.identifier = fileId
-        fakeFileObject.modifiedTime = GTLRDateTime(date: NSDate())
+        fakeFileObject.modifiedTime = GTLRDateTime(date: Date())
         return fakeFileObject
     }
 }

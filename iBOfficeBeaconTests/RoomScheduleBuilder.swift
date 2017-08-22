@@ -10,22 +10,22 @@ import Foundation
 
 class RoomScheduleBuilder {
 
-    private let isBusy: Bool
-    private var minutesTillNextEvent: Int = 0
-    private var timeslots = Set<FreeTimeslot>()
-    private var event: CalendarEvent?
-    private var availableAt = NSDate()
+    fileprivate let isBusy: Bool
+    fileprivate var minutesTillNextEvent: Int = 0
+    fileprivate var timeslots = Set<FreeTimeslot>()
+    fileprivate var event: CalendarEvent?
+    fileprivate var availableAt = Date()
     
     typealias EventBuilder = CalendarEventBuilder
     
-    private init(timeslots: Set<FreeTimeslot>) {
+    fileprivate init(timeslots: Set<FreeTimeslot>) {
         isBusy = false
         self.timeslots = timeslots
     }
     
-    private init(event: CalendarEvent) {
+    fileprivate init(event: CalendarEvent) {
         isBusy = true
-        availableAt = event.endDatetime
+        availableAt = event.endDatetime as Date
         self.event = event
     }
     
@@ -37,7 +37,7 @@ class RoomScheduleBuilder {
         return RoomScheduleBuilder(event: event)
     }
     
-    func withAvailableAt(availableAt: NSDate) -> RoomScheduleBuilder {
+    func withAvailableAt(_ availableAt: Date) -> RoomScheduleBuilder {
         self.availableAt = availableAt
         return self
     }

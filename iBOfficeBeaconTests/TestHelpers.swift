@@ -9,38 +9,38 @@
 import Foundation
 import XCTest
 
-let hundredMs = NSTimeInterval(0.1)
-let halfSecond = NSTimeInterval(0.5)
-let second = NSTimeInterval(1)
-let twoSeconds = NSTimeInterval(2)
-let fiveSeconds = NSTimeInterval(5)
+let hundredMs = TimeInterval(0.1)
+let halfSecond = TimeInterval(0.5)
+let second = TimeInterval(1)
+let twoSeconds = TimeInterval(2)
+let fiveSeconds = TimeInterval(5)
 
-let oneDay = NSTimeInterval(86400)
-let oneHour = NSTimeInterval(3600)
-let halfAnHour = NSTimeInterval(1800)
-let pastHour = NSTimeInterval(-3600)
-let past2Hours = NSTimeInterval(-3600) * 2
+let oneDay = TimeInterval(86400)
+let oneHour = TimeInterval(3600)
+let halfAnHour = TimeInterval(1800)
+let pastHour = TimeInterval(-3600)
+let past2Hours = TimeInterval(-3600) * 2
 
 
-func fullfillExpectation(expection:XCTestExpectation, withinTime seconds: NSTimeInterval) {
+func fullfillExpectation(_ expection:XCTestExpectation, withinTime seconds: TimeInterval) {
     let delay = seconds * Double(NSEC_PER_SEC)
-    let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+    let dispatchTime = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
     
-    dispatch_after(dispatchTime, dispatch_get_main_queue()) { () -> Void in
+    DispatchQueue.main.asyncAfter(deadline: dispatchTime) { () -> Void in
         expection.fulfill()
     }
 }
 
-func compareDates(firstDate: NSDate, otherDate: NSDate) -> Bool {
-    let result = NSCalendar.currentCalendar().compareDate(firstDate, toDate: otherDate,
-                                                          toUnitGranularity: .Second)
-    return result == .OrderedSame
+func compareDates(_ firstDate: Date, otherDate: Date) -> Bool {
+    let result = (Calendar.current as NSCalendar).compare(firstDate, to: otherDate,
+                                                          toUnitGranularity: .second)
+    return result == .orderedSame
 }
 
 func isString(firstString s1: String, equalsToOtherString s2: String, ignoreCase: Bool=true) -> Bool{
     if ignoreCase {
-        return s1.lowercaseString.compare(s2.lowercaseString) == .OrderedSame
+        return s1.lowercased().compare(s2.lowercased()) == .orderedSame
     }
     
-    return s1.compare(s2) == .OrderedSame
+    return s1.compare(s2) == .orderedSame
 }

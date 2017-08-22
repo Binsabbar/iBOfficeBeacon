@@ -13,8 +13,8 @@ class AppUpdateController {
     let manager: BITUpdateManager
     let settings: AppSettings
     
-    var backgroundQueue: dispatch_queue_t {
-        return dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
+    var backgroundQueue: DispatchQueue {
+        return DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
     }
     
     init(updateManager manager: BITUpdateManager, settings: AppSettings){
@@ -24,9 +24,8 @@ class AppUpdateController {
     
     func performUpdateCheckInBackground() {
         let toggleName = FeatureToggles.HockeyAppIntegration.rawValue
-        if let hockeyAppIntegrationEnabled = settings.featureToggles[toggleName]
-        where hockeyAppIntegrationEnabled {
-            dispatch_async(backgroundQueue) {
+        if let hockeyAppIntegrationEnabled = settings.featureToggles[toggleName], hockeyAppIntegrationEnabled {
+            backgroundQueue.async {
                 if !self.hasUpdateBeenCheckedToday() {
                     self.manager.checkForUpdate()
                     self.updateUserSettings()
@@ -35,15 +34,15 @@ class AppUpdateController {
         }
     }
     
-    private func updateUserSettings() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(NSDate(), forKey: "AppUpdateCheckDate")
+    fileprivate func updateUserSettings() {
+        let defaults = UserDefaults.standard
+        defaults.set(Date(), forKey: "AppUpdateCheckDate")
     }
     
-    private func hasUpdateBeenCheckedToday() -> Bool {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if let updateCheckDate = defaults.objectForKey("AppUpdateCheckDate") as? NSDate {
-            return updateCheckDate.compareDateToDayPrecision(NSDate()) == .OrderedSame
+    fileprivate func hasUpdateBeenCheckedToday() -> Bool {
+        let defaults = UserDefaults.standard
+        if let updateCheckDate = defaults.object(forKey: "AppUpdateCheckDate") as? Date {
+            return updateCheckDate.compareDateToDayPrecision(Date()) == .orderedSame
         }
         return false
     }

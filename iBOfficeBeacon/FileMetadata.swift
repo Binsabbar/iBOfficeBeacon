@@ -12,9 +12,9 @@ class FileMetadata:NSObject {
     
     let fileName: String
     let fileId: String
-    let modifiedAt: NSDate
+    let modifiedAt: Date
     
-    init(name: String, id: String, modifiedAt: NSDate) {
+    init(name: String, id: String, modifiedAt: Date) {
         fileName = name
         fileId = id
         self.modifiedAt = modifiedAt
@@ -25,7 +25,7 @@ class FileMetadata:NSObject {
 class NullFileMetadata : FileMetadata {
     
     init() {
-        super.init(name: "", id: "", modifiedAt: NSDate())
+        super.init(name: "", id: "", modifiedAt: Date())
     }
     
 }

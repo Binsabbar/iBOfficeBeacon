@@ -18,9 +18,9 @@ class RoomScheduleViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var activityIndicatorLabel: UILabel!
     
-    private let wiring = Wiring.sharedWiring
-    private var calendarService: CalendarService!
-    private var gradientView: GradientView!
+    fileprivate let wiring = Wiring.sharedWiring
+    fileprivate var calendarService: CalendarService!
+    fileprivate var gradientView: GradientView!
     
     var officeRoom: OfficeRoom?
     var currentSchedule: ScheduleProtocol?
@@ -32,14 +32,14 @@ class RoomScheduleViewController: UIViewController {
         gradientView = self.view as! GradientView
         
         
-        bookRoomButton.hidden = true
+        bookRoomButton.isHidden = true
         activityIndicator.stopAnimating()
         activityIndicator.hidesWhenStopped = true
-        activityIndicatorLabel.hidden = true
+        activityIndicatorLabel.isHidden = true
         toggleAllLabelsVisibilityTo(hidden: true)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         drawTopAndBottomBorder()
     }
@@ -48,54 +48,54 @@ class RoomScheduleViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkRoomStatus()
     }
     
-    private func startActivityIndicatorWithMessage(message: String) {
+    fileprivate func startActivityIndicatorWithMessage(_ message: String) {
         activityIndicatorLabel.text = message
-        activityIndicatorLabel.hidden = false
+        activityIndicatorLabel.isHidden = false
         activityIndicator.startAnimating()
     }
     
-    @IBAction func bookRoomTouched(sender: AnyObject) {
+    @IBAction func bookRoomTouched(_ sender: AnyObject) {
         toggleAllLabelsVisibilityTo(hidden: true)
         startActivityIndicatorWithMessage("Booking a room ...")
-        bookRoomButton.hidden = true
-        NSThread.excuteAfterDelay(1) {
+        bookRoomButton.isHidden = true
+        Thread.excuteAfterDelay(1) {
             self.calendarService.bookRoomAsync(self.officeRoom!, withSchedule: self.currentSchedule!) { (result) in
                 if(result) {
                     self.checkRoomStatus()
                 } else {
                     let alert = UIAlertController(title: "Booking a Room",
                                                   message: "An error occured while booking the room. Please try again later.",
-                                                  preferredStyle: .Alert)
-                    let action = UIAlertAction(title: "OK", style: .Default, handler: { (_) in
+                                                  preferredStyle: .alert)
+                    let action = UIAlertAction(title: "OK", style: .default, handler: { (_) in
                         self.checkRoomStatus()
                     })
                     alert.addAction(action)
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         }
     }
 
     func checkRoomStatus() {
-        if let room = officeRoom where room.beaconMinor != 0 {
+        if let room = officeRoom, room.beaconMinor != 0 {
             roomNameLabel.text = room.name
-            roomNameLabel.hidden = false
+            roomNameLabel.isHidden = false
 
             if room.isUknown {
                 scheduleDetailsLabel.text = "This room is not registered in the app"
-                scheduleDetailsLabel.hidden = false
+                scheduleDetailsLabel.isHidden = false
                 return
             }
             startActivityIndicatorWithMessage("Checking room status ...")
-            NSThread.excuteAfterDelay(1){
+            Thread.excuteAfterDelay(1){
                 self.calendarService.findScheduleForRoom(room) { (currentSchedule) in
                         self.activityIndicator.stopAnimating()
-                        self.activityIndicatorLabel.hidden = true
+                        self.activityIndicatorLabel.isHidden = true
                         self.setupScheduleLabelsWithSchedule(currentSchedule!, room: room)
                     }
             }
@@ -105,7 +105,7 @@ class RoomScheduleViewController: UIViewController {
     }
     
     //MARK: - UI Tasks
-    private func setupScheduleLabelsWithSchedule(schedule: ScheduleProtocol, room: OfficeRoom) {
+    fileprivate func setupScheduleLabelsWithSchedule(_ schedule: ScheduleProtocol, room: OfficeRoom) {
         let scheduleVM = RoomScheduleViewModel(model: schedule, room: room)
         
         roomStatusLabel.text = scheduleVM.statusLabelTitle
@@ -115,7 +115,7 @@ class RoomScheduleViewController: UIViewController {
         
         bookRoomButton.colorForNormalState = scheduleVM.bookButtonColorForNormalState
         bookRoomButton.colorForTapState = scheduleVM.bookButtonColorForTapState
-        bookRoomButton.hidden = scheduleVM.shouldHideBookButton
+        bookRoomButton.isHidden = scheduleVM.shouldHideBookButton
         bookRoomButton.titleLabel?.textColor = scheduleVM.bookButtonBackgroundColor
         
         scheduleDetailsLabel.text = scheduleVM.scheduleLabelTitle
@@ -129,23 +129,23 @@ class RoomScheduleViewController: UIViewController {
         toggleAllLabelsVisibilityTo(hidden: false)
     }
     
-    private func toggleAllLabelsVisibilityTo(hidden hidden: Bool) {
-        roomNameLabel.hidden = hidden
-        roomStatusLabel.hidden = hidden
-        scheduleDetailsLabel.hidden = hidden
-        scheduleTimeInfoLabel.hidden = hidden
-        scheduleDetailsLabel.hidden = hidden
+    fileprivate func toggleAllLabelsVisibilityTo(hidden: Bool) {
+        roomNameLabel.isHidden = hidden
+        roomStatusLabel.isHidden = hidden
+        scheduleDetailsLabel.isHidden = hidden
+        scheduleTimeInfoLabel.isHidden = hidden
+        scheduleDetailsLabel.isHidden = hidden
     }
     
-    private func drawTopAndBottomBorder() {
+    fileprivate func drawTopAndBottomBorder() {
         let bottomBorder = CALayer()
-        bottomBorder.frame = CGRectMake(0.0, roomNameLabel.frame.size.height - 2,
-                                        roomNameLabel.frame.size.width, 1.0);
-        bottomBorder.backgroundColor = UIColor.whiteColor().CGColor
+        bottomBorder.frame = CGRect(x: 0.0, y: roomNameLabel.frame.size.height - 2,
+                                        width: roomNameLabel.frame.size.width, height: 1.0);
+        bottomBorder.backgroundColor = UIColor.white.cgColor
         
         let topBorder = CALayer()
-        topBorder.frame = CGRectMake(0.0, 0.0, roomNameLabel.frame.size.width, 1.0);
-        topBorder.backgroundColor = UIColor.whiteColor().CGColor
+        topBorder.frame = CGRect(x: 0.0, y: 0.0, width: roomNameLabel.frame.size.width, height: 1.0);
+        topBorder.backgroundColor = UIColor.white.cgColor
         
         roomNameLabel.layer.addSublayer(bottomBorder)
         roomNameLabel.layer.addSublayer(topBorder)

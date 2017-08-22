@@ -18,20 +18,20 @@ enum FunctionName:Int{
 
 class IBeaconEventSimulator {
     
-    private var manager: FakeESTBeaconManager!
+    fileprivate var manager: FakeESTBeaconManager!
     
-    private var callsParameters = [[AnyObject]]()
-    private var determineStataParams = [CLRegionState]()
+    fileprivate var callsParameters = [[AnyObject]]()
+    fileprivate var determineStataParams = [CLRegionState]()
     
-    private var callTracker = [FunctionName]()
+    fileprivate var callTracker = [FunctionName]()
     
     init(estManager: FakeESTBeaconManager){
         self.manager = estManager
     }
     
     func simulate() {
-        let queue = dispatch_queue_create("Simulator Invocation", nil)
-        dispatch_async(queue) { _ in
+        let queue = DispatchQueue(label: "Simulator Invocation", attributes: [])
+        queue.async { _ in
             for index in 0..<self.callTracker.count {
                 let funcCall = self.callTracker[index]
                 let params = self.callsParameters[index]
@@ -40,44 +40,44 @@ class IBeaconEventSimulator {
         }
     }
     
-    func range(beacons:[CLBeacon], inRegion region: CLBeaconRegion) -> IBeaconEventSimulator {
+    func range(_ beacons:[CLBeacon], inRegion region: CLBeaconRegion) -> IBeaconEventSimulator {
         callTracker.append(FunctionName.ragne)
-        let params = [beacons, region]
-        callsParameters.append(params)
+        let params = [beacons, region] as [Any]
+        callsParameters.append(params as [AnyObject])
         return self
     }
     
-    func exit(region: CLBeaconRegion) -> IBeaconEventSimulator {
+    func exit(_ region: CLBeaconRegion) -> IBeaconEventSimulator {
         callTracker.append(FunctionName.onExit)
         let params = [region]
         callsParameters.append(params)
         return self
     }
     
-    func enter(region: CLBeaconRegion) -> IBeaconEventSimulator {
+    func enter(_ region: CLBeaconRegion) -> IBeaconEventSimulator {
         callTracker.append(FunctionName.onEnter)
         let params = [region]
         callsParameters.append(params)
         return self
     }
     
-    func wait(seconds:NSTimeInterval) -> IBeaconEventSimulator {
+    func wait(_ seconds:TimeInterval) -> IBeaconEventSimulator {
         callTracker.append(FunctionName.wait)
-        callsParameters.append([seconds])
+        callsParameters.append([seconds as AnyObject])
         return self
     }
     
-    func state(state: CLRegionState, forRegion region:CLBeaconRegion) -> IBeaconEventSimulator {
+    func state(_ state: CLRegionState, forRegion region:CLBeaconRegion) -> IBeaconEventSimulator {
         callTracker.append(FunctionName.regionState)
         callsParameters.append([region])
         determineStataParams.append(state)
         return self
     }
  
-    private func invoke(function : FunctionName, withParams params: [AnyObject]) {
+    fileprivate func invoke(_ function : FunctionName, withParams params: [AnyObject]) {
         switch function {
         case .regionState:
-            let state = determineStataParams.removeAtIndex(0)
+            let state = determineStataParams.remove(at: 0)
             let region = params[0] as! CLBeaconRegion
             manager.mockDidDetermineState(state, forRegion: region)
         case .onEnter:
@@ -91,8 +91,8 @@ class IBeaconEventSimulator {
             let region = params[1] as! CLBeaconRegion
             manager.mockDidRangeBeacons(beacons, InRegion: region)
         case .wait:
-            let seconds = params[0] as! NSTimeInterval
-            NSThread.sleepForTimeInterval(seconds)
+            let seconds = params[0] as! TimeInterval
+            Thread.sleep(forTimeInterval: seconds)
         }
     }
 }

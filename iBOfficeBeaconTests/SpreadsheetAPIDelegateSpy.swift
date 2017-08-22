@@ -16,23 +16,23 @@ class SpreadsheetAPIDelegateSpy : SpreadsheetAPIDelegate {
     var isFileCouldNotBeSavedCalled = false
     var isLocalFileIsUpToDateWithRequestedFileCalled = false
     
-    func requestedFile(remoteName: String, hasBeenSavedLocallyToFile localName: String) {
+    func requestedFile(_ remoteName: String, hasBeenSavedLocallyToFile localName: String) {
         isRequestedFileCalled = true
     }
     
-    func requestingRemoteFileFailedWithError(error: NSError) {
+    func requestingRemoteFileFailedWithError(_ error: NSError) {
         isRequestingRemoteFileFailedWithErrorCalled = true
     }
     
-    func fetchingRemoteFileFailedWithError(error: NSError) {
+    func fetchingRemoteFileFailedWithError(_ error: NSError) {
         isFetchingRemoteFileFailedWithErrorCalled = true
     }
     
-    func fileCouldNotBeSavedTo(fileName: String)  {
+    func fileCouldNotBeSavedTo(_ fileName: String)  {
         isFileCouldNotBeSavedCalled = true
     }
     
-    func localFile(localName: String, isUpToDateWithRequestedFile remoteName: String) {
+    func localFile(_ localName: String, isUpToDateWithRequestedFile remoteName: String) {
         isLocalFileIsUpToDateWithRequestedFileCalled = true
     }
 }

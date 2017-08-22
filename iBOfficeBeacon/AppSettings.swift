@@ -23,12 +23,12 @@ enum FeatureToggles: String {
 
 class AppSettings {
     
-    private static var infoKey = "iBOfficeBeaconAppSettings"
+    fileprivate static var infoKey = "iBOfficeBeaconAppSettings"
     
     static var LOCAL_BEACON_ADDRESS_FILE_NAME = "officeAddresses.txt"
     class var BUILD_ENVIRONMENT: AppEnvironment {
-        if let env = NSBundle.mainBundle().infoDictionary?["BUILD_ENVIRONMENT"] as? String,
-            environment = AppEnvironment(rawValue: env) {
+        if let env = Bundle.main.infoDictionary?["BUILD_ENVIRONMENT"] as? String,
+            let environment = AppEnvironment(rawValue: env) {
             return environment
         }
         return .Default
@@ -36,7 +36,7 @@ class AppSettings {
     
     let environment: AppEnvironment
     let appInfo: [String:AnyObject]
-    let infoDictionary = NSBundle.mainBundle().infoDictionary
+    let infoDictionary = Bundle.main.infoDictionary
     
     var hockeyAppID: String {
         return valueForKey("HockeyAppID")
@@ -81,7 +81,7 @@ class AppSettings {
         }
     }
     
-    private func constructFeatureTogglesForCurrentEnvironment() -> [String:Bool] {
+    fileprivate func constructFeatureTogglesForCurrentEnvironment() -> [String:Bool] {
         var featureToggles = [String:Bool]()
         
         if let features = appInfo["FeatureToggles"] as? [String: [String:Bool]] {
@@ -96,10 +96,10 @@ class AppSettings {
         return featureToggles
     }
     
-    private func valueForKey(key: String) -> String {
+    fileprivate func valueForKey(_ key: String) -> String {
         
         if let value = appInfo[key] as? [String: String],
-            environmentValue = value[environment.rawValue] {
+            let environmentValue = value[environment.rawValue] {
             return environmentValue
         }
         return "NOT_SET"

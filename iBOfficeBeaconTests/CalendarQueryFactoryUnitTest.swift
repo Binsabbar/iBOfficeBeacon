@@ -13,7 +13,7 @@ class CalendarQueryFactoryUnitTest: XCTestCase {
     let calendarID = "some-id"
     let maxEventResults = 30
     let methodName = "calendar.events.list"
-    let timeZone = NSTimeZone(abbreviation: "UTC")
+    let timeZone = TimeZone(abbreviation: "UTC")
 
     var query: GTLRCalendarQuery_EventsList!
     
@@ -37,21 +37,21 @@ class CalendarQueryFactoryUnitTest: XCTestCase {
     
     
     func testItSetsMinDatetimeToTodayAtEightAM() {
-        let today = NSDate.todayWithHours(8, andMinutes: 00)
+        let today = Date.todayWithHours(8, andMinutes: 00)
         let datetime = GTLRDateTime(date: today)
         
         XCTAssertTrue(query.timeMin == datetime)
     }
     
     func testItSetsMaxDatetimeToTodayAtEightPM() {
-        let today = NSDate.todayWithHours(20, andMinutes: 00)
+        let today = Date.todayWithHours(20, andMinutes: 00)
         let datetime = GTLRDateTime(date: today)
         
         XCTAssertTrue(query.timeMax == datetime)
     }
     
     func testItSetsTimeZoneToUTC() {
-        XCTAssertTrue(query.timeZone == timeZone?.abbreviation)
+        XCTAssertTrue(query.timeZone == timeZone?.abbreviation())
     }
     
     func testItSetsOrderByStartTime() {
@@ -60,7 +60,7 @@ class CalendarQueryFactoryUnitTest: XCTestCase {
     
     //MARK: InsertEventQuery - #insertEventRequestForCalendarWithID
     func testItReturnsInsertEventQuery() {
-        let event = GTLTCalendar_EventsBuilder.buildGTLRCalendar_EventForCalendarID("some-id", withDate: NSDate())
+        let event = GTLTCalendar_EventsBuilder.buildGTLRCalendar_EventForCalendarID("some-id", withDate: Date())
         
         let query = CalendarQueryFactory.insertEventRequestForEvent(event)
         

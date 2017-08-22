@@ -10,22 +10,22 @@ import Foundation
 
 class NavigationControllerSpy: UINavigationController {
     
-    override func popToRootViewControllerAnimated(animated: Bool) -> [UIViewController]? {
+    override func popToRootViewController(animated: Bool) -> [UIViewController]? {
         if(viewControllers.count > 0) {
             self.viewControllers.removeLast()
         }
         return self.viewControllers
     }
     
-    override func popViewControllerAnimated(animated: Bool) -> UIViewController? {
+    override func popViewController(animated: Bool) -> UIViewController? {
         return self.viewControllers.removeLast()
     }
     
-    override func pushViewController(viewController: UIViewController, animated: Bool) {
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         
     }
     
-    override func popToViewController(viewController: UIViewController, animated: Bool) -> [UIViewController]? {
+    override func popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         for view in viewControllers {
             if view == viewController {
                 return self.viewControllers

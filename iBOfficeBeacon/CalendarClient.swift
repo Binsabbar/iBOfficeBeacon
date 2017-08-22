@@ -21,27 +21,27 @@ class CalendarClient: NSObject {
         self.errorHandler = errorHandler
     }
     
-    func fetchEventsForCalendarWithID(calendarID: String,
-                                      onFetched: OnFetchedHandler,
-                                      onFailur: onFailHandler){
+    func fetchEventsForCalendarWithID(_ calendarID: String,
+                                      onFetched: @escaping OnFetchedHandler,
+                                      onFailur: @escaping onFailHandler){
         let query = CalendarQueryFactory.listEventsQueryForCalendarWithID(calendarID)
         
         let _ = service.executeQuery(query) { (ticket, result, error) in
             if let anError = error {
-                onFailur(anError)
-                self.errorHandler.handleError(anError)
+                onFailur(anError as NSError)
+                self.errorHandler.handleError(anError as NSError)
             } else {
                 onFetched((result as? GTLRCalendar_Events) ?? GTLRCalendar_Events())
             }
         }
     }
     
-    func insertEventAsync(event: GTLRCalendar_Event, onCompeletion:(Bool)->Void) {
+    func insertEventAsync(_ event: GTLRCalendar_Event, onCompeletion:@escaping (Bool)->Void) {
         let query = CalendarQueryFactory.insertEventRequestForEvent(event)
         service.executeQuery(query) { (ticket, result, error) in
             if let e = error {
                 onCompeletion(false)
-                self.errorHandler.handleError(e)
+                self.errorHandler.handleError(e as NSError)
             } else {
                 onCompeletion(true)
             }

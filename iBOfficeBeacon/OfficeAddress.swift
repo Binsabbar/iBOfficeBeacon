@@ -20,7 +20,7 @@ class OfficeAddress {
         self.rooms = [OfficeRoom]()
     }
     
-    func addRoom(room: OfficeRoom) {
+    func addRoom(_ room: OfficeRoom) {
         self.rooms.append(room)
     }
 }

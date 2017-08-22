@@ -23,8 +23,8 @@ class TWBeaconServiceIntegrationTest: XCTestCase, TWBeaconServiceProtocol {
     var isDeviceEntersRegionCalled = false
     
     //MARK: Room details
-    var regionUUID: NSUUID {
-        return NSUUID(UUIDString: fakeSettings.beaconUUID)!
+    var regionUUID: UUID {
+        return UUID(uuidString: fakeSettings.beaconUUID)!
     }
     let officeMajor = 1
     let firstRoomMinor = 23
@@ -60,25 +60,25 @@ class TWBeaconServiceIntegrationTest: XCTestCase, TWBeaconServiceProtocol {
         
         simulator.simulate()
 
-        let expectation = expectationWithDescription("Calls Its Delegate when room is found")
+        let expectation = self.expectation(description: "Calls Its Delegate when room is found")
         fullfillExpectation(expectation, withinTime: second)
         
-        waitForExpectationsWithTimeout(twoSeconds) { _ in
+        waitForExpectations(timeout: twoSeconds) { _ in
             XCTAssertTrue(self.isFoundRoomPassedInTheCallBack)
         }
     }
     
     //MARK: Helper methods
-    private func createCLBeacons() -> [CLBeaconStub] {
+    fileprivate func createCLBeacons() -> [CLBeaconStub] {
         let beacon = CLBeaconStub(withUUID: regionUUID,
                                   andMajor: officeMajor,
                                   andMinor: testSelectedRoom.beaconMinor)
-        beacon.proximity = CLProximity.Immediate
+        beacon.proximity = CLProximity.immediate
         return [beacon]
     }
     
     //MARK: TWBeaconServiceProtocol
-    func foundRoom(room: OfficeRoom) {
+    func foundRoom(_ room: OfficeRoom) {
         isFoundRoomPassedInTheCallBack = room.name == testSelectedRoom.name &&
                                         room.beaconMinor == testSelectedRoom.beaconMinor
     }
@@ -89,7 +89,7 @@ class TWBeaconServiceIntegrationTest: XCTestCase, TWBeaconServiceProtocol {
     
     
     // MARK: Setups
-    private func setupBooleanVariablesToFalse() {
+    fileprivate func setupBooleanVariablesToFalse() {
         isFoundRoomPassedInTheCallBack = false
         isDeviceExitsRegionCalled = false
         isDeviceEntersRegionCalled = false
@@ -102,7 +102,7 @@ class TWBeaconServiceIntegrationTest: XCTestCase, TWBeaconServiceProtocol {
     }
     
     var localFileName = "integration_test.txt"
-    private func setupBeaconAddressStore() {
+    fileprivate func setupBeaconAddressStore() {
         let spreadsheetFactoryBlock:
             BeaconAddressLoader.SpreadsheetApiFactoryBlock = { (delegate) in
                 let serviceDrive = ServiceDriveMockHelper.mockDriveFetchServiceWithRemoteData(self.fetchedData,

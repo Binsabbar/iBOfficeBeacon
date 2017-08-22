@@ -32,10 +32,10 @@ enum FreeTimeslotDuration: Hashable {
 class FreeTimeslot: Hashable {
 
     let duration: FreeTimeslotDuration
-    let from: NSDate
-    let to: NSDate
+    let from: Date
+    let to: Date
     
-    init(duration: FreeTimeslotDuration, from: NSDate, to: NSDate) {
+    init(duration: FreeTimeslotDuration, from: Date, to: Date) {
         self.duration = duration
         self.from = from
         self.to = to
@@ -48,8 +48,8 @@ class FreeTimeslot: Hashable {
 
 func ==(lhs: FreeTimeslot, rhs: FreeTimeslot) -> Bool {
     return lhs.duration == rhs.duration &&
-        lhs.from.isEqualToDate(rhs.from) &&
-        lhs.to.isEqualToDate(rhs.to)
+        (lhs.from == rhs.from) &&
+        (lhs.to == rhs.to)
 }
 
 func == (lhs: FreeTimeslotDuration, rhs: FreeTimeslotDuration) -> Bool {

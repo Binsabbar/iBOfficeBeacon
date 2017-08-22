@@ -9,11 +9,11 @@
 import Foundation
 class CLBeaconStub: CLBeacon {
     
-    private var stubProximity:CLProximity = .Immediate
-    private var stubMajor: NSNumber!
-    private var stubMinor: NSNumber!
-    private var stubProximityUUID: NSUUID!
-    private var stubAccuracy: CLLocationAccuracy!
+    fileprivate var stubProximity:CLProximity = .immediate
+    fileprivate var stubMajor: NSNumber!
+    fileprivate var stubMinor: NSNumber!
+    fileprivate var stubProximityUUID: UUID!
+    fileprivate var stubAccuracy: CLLocationAccuracy!
     
     override var proximity:CLProximity {
         get {
@@ -24,7 +24,7 @@ class CLBeaconStub: CLBeacon {
         }
     }
     
-    override var proximityUUID: NSUUID {
+    override var proximityUUID: UUID {
         get {
             return stubProximityUUID
         }
@@ -62,23 +62,23 @@ class CLBeaconStub: CLBeacon {
     
     init(proximity: CLProximity){
         super.init()
-        self.major = NSNumber(int: 1)
-        self.minor = NSNumber(int: 1)
-        self.proximityUUID = NSUUID()
+        self.major = NSNumber(value: 1 as Int32)
+        self.minor = NSNumber(value: 1 as Int32)
+        self.proximityUUID = UUID()
         self.accuracy = CLLocationAccuracy(0.1)
         stubProximity = proximity
     }
     
-    init(withUUID uuid:NSUUID, andMajor major: Int, andProximity proximity: CLProximity){
+    init(withUUID uuid:UUID, andMajor major: Int, andProximity proximity: CLProximity){
         super.init()
-        self.minor = NSNumber(int: 1)
+        self.minor = NSNumber(value: 1 as Int32)
         self.major = NSNumber(integerLiteral: major)
         self.accuracy = CLLocationAccuracy(0.1)
         self.proximityUUID = uuid
         stubProximity = proximity
     }
     
-    init(uuid:NSUUID, major: Int, minor: Int, proximity: CLProximity, accuracy: Double){
+    init(uuid:UUID, major: Int, minor: Int, proximity: CLProximity, accuracy: Double){
         super.init()
         self.proximityUUID = uuid
         self.minor = NSNumber(integerLiteral: minor)
@@ -87,7 +87,7 @@ class CLBeaconStub: CLBeacon {
         stubProximity = proximity
     }
     
-    init(withUUID uuid:NSUUID, andMajor major: Int, andMinor minor: Int){
+    init(withUUID uuid:UUID, andMajor major: Int, andMinor minor: Int){
         super.init()
         self.major = NSNumber(integerLiteral: major)
         self.minor = NSNumber(integerLiteral: minor)

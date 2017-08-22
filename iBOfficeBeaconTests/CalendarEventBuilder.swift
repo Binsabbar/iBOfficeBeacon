@@ -10,34 +10,34 @@ import Foundation
 
 class CalendarEventBuilder {
     
-    private var startDate = NSDate()
-    private var endDate = NSDate()
-    private var title = "default title"
+    fileprivate var startDate = Date()
+    fileprivate var endDate = Date()
+    fileprivate var title = "default title"
     
-    private init(startDate: NSDate, endDate: NSDate, title: String) {
+    fileprivate init(startDate: Date, endDate: Date, title: String) {
         self.startDate = startDate
         self.endDate = endDate
         self.title = title
     }
     
     
-    class func currentCalendarEvents(withLength length: NSTimeInterval) -> CalendarEventBuilder {
-        let startDate = NSDate()
-        let endDate = startDate.dateByAddingTimeInterval(length)
+    class func currentCalendarEvents(withLength length: TimeInterval) -> CalendarEventBuilder {
+        let startDate = Date()
+        let endDate = startDate.addingTimeInterval(length)
         let title = "Event built by builder"
         return CalendarEventBuilder(startDate: startDate, endDate: endDate, title: title)
     }
     
-    class func futureCalendarEventsStartsIn(minutes: NSTimeInterval,
-                                            withLength length: NSTimeInterval)
+    class func futureCalendarEventsStartsIn(_ minutes: TimeInterval,
+                                            withLength length: TimeInterval)
         -> CalendarEventBuilder {
-            let startDate = NSDate().dateByAddingTimeInterval(minutes)
-            let endDate = startDate.dateByAddingTimeInterval(length)
+            let startDate = Date().addingTimeInterval(minutes)
+            let endDate = startDate.addingTimeInterval(length)
             let title = "Event built by builder"
             return CalendarEventBuilder(startDate: startDate, endDate: endDate, title: title)
     }
     
-    func withTitle(title: String) -> CalendarEventBuilder {
+    func withTitle(_ title: String) -> CalendarEventBuilder {
         self.title = title
         return self
     }

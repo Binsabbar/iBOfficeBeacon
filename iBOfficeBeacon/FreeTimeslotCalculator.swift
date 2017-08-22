@@ -16,14 +16,14 @@ class FreeTimeslotCalculator {
     typealias Duration = FreeTimeslotDuration
     
     
-    func calculateFreeTimeslotsFrom(minutes minutes: Int) -> Set<FreeTimeslot>{
+    func calculateFreeTimeslotsFrom(minutes: Int) -> Set<FreeTimeslot>{
         if minutes > 0{
             return buildTimeslots(from: minutes)
         }
         return Set<FreeTimeslot>()
     }
     
-    private func buildTimeslots(from availableTime: Int) -> Set<FreeTimeslot> {
+    fileprivate func buildTimeslots(from availableTime: Int) -> Set<FreeTimeslot> {
         let timeSlots: Set<FreeTimeslot>
         var durations = [Duration]()
         
@@ -49,11 +49,11 @@ class FreeTimeslotCalculator {
         return timeSlots
     }
     
-    private func makeTimelotsFrom(durations: [Duration]) -> Set<FreeTimeslot> {
-        let start = NSDate()
+    fileprivate func makeTimelotsFrom(_ durations: [Duration]) -> Set<FreeTimeslot> {
+        let start = Date()
         var timeSlots = Set<FreeTimeslot>()
         durations.forEach({
-            let end = start.dateByAddingTimeInterval(Double($0.minutes() * 60))
+            let end = start.addingTimeInterval(Double($0.minutes() * 60))
             let timeSlot = FreeTimeslot(duration: $0, from: start, to: end)
             timeSlots.insert(timeSlot)
         })

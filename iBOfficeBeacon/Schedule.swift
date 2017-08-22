@@ -13,7 +13,7 @@ class RoomSchedule:NSObject {
     var isBusyNow = false
     var minutesTillNextEvent:Int?
     var availableTimeSlots = Set<FreeTimeslot>()
-    var nextAvailable: NSDate?
+    var nextAvailable: Date?
     var currentEvent: CalendarEvent?
 
     class func createFreeRoomSchedule() -> RoomSchedule {

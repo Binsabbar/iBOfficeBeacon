@@ -934,7 +934,7 @@
 					E35F58D91B07731D003D04DB = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 2DJKLJFV99;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
@@ -948,7 +948,7 @@
 					E35F58EE1B07731D003D04DB = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 2DJKLJFV99;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Manual;
 						TestTargetID = E35F58D91B07731D003D04DB;
 					};
@@ -1389,7 +1389,7 @@
 				PROVISIONING_PROFILE = "54e75cc3-7ea1-4564-ae36-4f8512694559";
 				PROVISIONING_PROFILE_SPECIFIER = "iOS 10 Provision Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = iBOfficeBeacon/ObjCBridge.h;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Beta;
 		};
@@ -1419,7 +1419,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = iBOfficeBeaconTests/ObjCBridge.h;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iBOfficeBeacon.beta.app/iBOfficeBeacon.beta";
 			};
 			name = Beta;
@@ -1549,7 +1549,7 @@
 				PROVISIONING_PROFILE = "f2bf6b63-41d5-4816-a419-83ad59ac381b";
 				PROVISIONING_PROFILE_SPECIFIER = "iOS 10 Provision Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = iBOfficeBeacon/ObjCBridge.h;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1584,7 +1584,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "iBOfficeBeacon Prod Profile";
 				"SDKROOT[arch=*]" = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = iBOfficeBeacon/ObjCBridge.h;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1614,7 +1614,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = iBOfficeBeaconTests/ObjCBridge.h;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iBOfficeBeacon.dev.app/iBOfficeBeacon.dev";
 			};
 			name = Debug;
@@ -1641,7 +1641,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = iBOfficeBeaconTests/ObjCBridge.h;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iBOfficeBeacon.app/iBOfficeBeacon";
 			};
 			name = Release;

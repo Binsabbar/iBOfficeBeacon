@@ -12,9 +12,9 @@ class TWBeaconService:NSObject {
     
     var delegate: TWBeaconServiceProtocol?
     
-    private let manager: BeaconManager
-    private let store: BeaconAddressStore
-    private let appSettings: AppSettings
+    fileprivate let manager: BeaconManager
+    fileprivate let store: BeaconAddressStore
+    fileprivate let appSettings: AppSettings
     
     init(beaconManager: BeaconManager, beaconStore: BeaconAddressStore,
          appSettings: AppSettings) {
@@ -25,7 +25,7 @@ class TWBeaconService:NSObject {
     }
     
     func startRanging() throws -> Void {
-        let uuid = NSUUID(UUIDString: self.appSettings.beaconUUID)
+        let uuid = UUID(uuidString: self.appSettings.beaconUUID)
         
         guard let _ = uuid else {
             throw MalformedBeaconUUIDError(stringUUID: self.appSettings.beaconUUID)
@@ -36,15 +36,15 @@ class TWBeaconService:NSObject {
         if store.offices != nil {
             self.startBeaconManagerRanging()
         } else {
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TWBeaconService.startBeaconManagerRanging), name: BeaconAddressStore.OfficesUpdatedNotificationID, object: store)
+            NotificationCenter.default.addObserver(self, selector: #selector(TWBeaconService.startBeaconManagerRanging), name: NSNotification.Name(rawValue: BeaconAddressStore.OfficesUpdatedNotificationID), object: store)
         }
     }
     
     func startBeaconManagerRanging() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         manager.startRangingOnCompletion { (beacons) in
-            let major = beacons.first!.major.integerValue
-            let minor = beacons.first!.minor.integerValue
+            let major = beacons.first!.major.intValue
+            let minor = beacons.first!.minor.intValue
             let room = self.store.roomWithMajor(major, minor: minor)
             if let theRoom = room {
                 self.delegate?.foundRoom(theRoom)

@@ -16,7 +16,7 @@ class LoginViewController: UIViewController, AuthControlerProtocol {
     
     var wiring:Wiring!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         wiring.appUpdateController().performUpdateCheckInBackground()
@@ -30,29 +30,29 @@ class LoginViewController: UIViewController, AuthControlerProtocol {
         wiring.authorizationController().authDelegate = self
     }
     
-    @IBAction func loginTapped(sender: AnyObject) {
+    @IBAction func loginTapped(_ sender: AnyObject) {
         let view = wiring.authorizationController().authorizationView()
-        self.presentViewController(view, animated: true, completion: nil)
+        self.present(view, animated: true, completion: nil)
     }
     
-    func authenticationFinishedWithResult(result: AuthResult) {
-        if result == .Succeed {
-            self.performSegueWithIdentifier("showMainView", sender: self)
+    func authenticationFinishedWithResult(_ result: AuthResult) {
+        if result == .succeed {
+            self.performSegue(withIdentifier: "showMainView", sender: self)
         }
     }
     
-    private func setupButtonColor() {
-        loginButton.colorForNormalState = UIColor.clearColor()
+    fileprivate func setupButtonColor() {
+        loginButton.colorForNormalState = UIColor.clear
         loginButton.colorForTapState = AppColours.darkestGrey
     }
     
-    private func setupLabel() {
+    fileprivate func setupLabel() {
         label.text = loginPromptText
-        label.backgroundColor = UIColor.clearColor()
+        label.backgroundColor = UIColor.clear
         label.numberOfLines = 3
-        label.textAlignment = .Center
+        label.textAlignment = .center
         label.textColor = AppColours.lightGrey
-        label.font = UIFont.systemFontOfSize(20)
-        label.lineBreakMode = .ByWordWrapping
+        label.font = UIFont.systemFont(ofSize: 20)
+        label.lineBreakMode = .byWordWrapping
     }
 }

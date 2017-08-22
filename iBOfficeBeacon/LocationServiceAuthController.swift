@@ -24,25 +24,25 @@ class LocationServiceAuthzController {
     
     func checkLocationAuthorizationStatus() {
         switch locationClass.authorizationStatus() {
-        case .Denied, .Restricted:
-            let alert = UIAlertController(title: "Location Disabled", message: alertMessage, preferredStyle: .Alert)
+        case .denied, .restricted:
+            let alert = UIAlertController(title: "Location Disabled", message: alertMessage, preferredStyle: .alert)
             alert.addAction(alertAction)
-            UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
             break
-        case .NotDetermined:
+        case .notDetermined:
             manager.requestWhenInUseAuthorization()
             break
         default: break
         }
     }
 
-    private var alertMessage: String {
+    fileprivate var alertMessage: String {
         return "Location Service is disabled. In order to use the app, please enable it in the Settigs under Privacy, Location Services."
     }
     
-    private var alertAction: UIAlertAction {
-        return UIAlertAction(title: "Go to Settings now", style: .Default, handler: { action in
-                UIApplication.sharedApplication().openURL(NSURL(string:UIApplicationOpenSettingsURLString)!)
+    fileprivate var alertAction: UIAlertAction {
+        return UIAlertAction(title: "Go to Settings now", style: .default, handler: { action in
+                UIApplication.shared.openURL(URL(string:UIApplicationOpenSettingsURLString)!)
         })
     }
 }

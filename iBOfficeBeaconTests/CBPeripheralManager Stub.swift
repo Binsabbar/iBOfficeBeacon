@@ -11,15 +11,15 @@ import Foundation
 @available(iOS 10.0, *)
 class CBPeripheralManagerStub: CBPeripheralManager {
     
-    private var curentState: CBManagerState?
+    fileprivate var curentState: CBManagerState?
     
-    func setCBPeripheralState(state: CBManagerState) {
+    func setCBPeripheralState(_ state: CBManagerState) {
         curentState = state
     }
     
     override var state: CBManagerState {
         get {
-            return curentState ?? .Unknown
+            return curentState ?? .unknown
         }
     }
 }

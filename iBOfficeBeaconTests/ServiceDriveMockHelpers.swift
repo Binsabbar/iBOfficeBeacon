@@ -9,7 +9,7 @@ import Foundation
 
 class ServiceDriveMockHelper {
     
-    static func mockDriveFetchServiceWithRemoteData(fetchedString: String, forSheetID sheetID: String) -> GTLRDriveService {
+    static func mockDriveFetchServiceWithRemoteData(_ fetchedString: String, forSheetID sheetID: String) -> GTLRDriveService {
         
         let serviceDrive = GTLRDriveService()
         serviceDrive.testBlock = { (ticket, testResponse) in
@@ -22,7 +22,7 @@ class ServiceDriveMockHelper {
                 }
             } else if ticket.originalQuery is GTLRDriveQuery_FilesExport {
                 let googleData = GTLRDataObject()
-                googleData.data = fetchedString.dataUsingEncoding(NSUTF8StringEncoding)!
+                googleData.data = fetchedString.data(using: String.Encoding.utf8)!
                 testResponse(googleData, nil)
                 return
             }
@@ -33,7 +33,7 @@ class ServiceDriveMockHelper {
         return serviceDrive
     }
 
-    static func mockDriveServiceRequestFileWithError(error: NSError) -> GTLRDriveService {
+    static func mockDriveServiceRequestFileWithError(_ error: NSError) -> GTLRDriveService {
         let serviceDrive = GTLRDriveService()
         serviceDrive.testBlock = { (ticket, testResponse) in
             testResponse(nil, error)
@@ -41,7 +41,7 @@ class ServiceDriveMockHelper {
         return serviceDrive
     }
     
-    static func mockDriveFetchServiceWithError(error: NSError, forSheetID sheetID: String) -> GTLRDriveService {
+    static func mockDriveFetchServiceWithError(_ error: NSError, forSheetID sheetID: String) -> GTLRDriveService {
         
         let serviceDrive = GTLRDriveService()
         serviceDrive.testBlock = { (ticket, testResponse) in
@@ -55,15 +55,15 @@ class ServiceDriveMockHelper {
         return serviceDrive
     }
 
-    private static func isQueryFileID(query: GTLRQueryProtocol, EqualTosheetID sheetID: String) -> Bool{
+    fileprivate static func isQueryFileID(_ query: GTLRQueryProtocol, EqualTosheetID sheetID: String) -> Bool{
         return query is GTLRDriveQuery_FilesGet && (query as! GTLRDriveQuery_FilesGet).fileId == sheetID
     }
     
-    private static func initDriveFile(sheetID: String) -> GTLRDrive_File {
+    fileprivate static func initDriveFile(_ sheetID: String) -> GTLRDrive_File {
         let driveFile = GTLRDrive_File()
         driveFile.name = sheetID
         driveFile.identifier = sheetID
-        driveFile.modifiedTime = GTLRDateTime(date: NSDate())
+        driveFile.modifiedTime = GTLRDateTime(date: Date())
         return driveFile
     }
 }

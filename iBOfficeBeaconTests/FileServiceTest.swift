@@ -12,7 +12,7 @@ class FileServiceTest: XCTestCase {
 
     let dummyString = "A dummy string"
     let fileName = "File Service Test.txt"
-    let threeDaysAgoDate = NSDate(timeIntervalSinceNow: oneDay * 3 * -1)
+    let threeDaysAgoDate = Date(timeIntervalSinceNow: oneDay * 3 * -1)
     
     override func setUp() {
         super.setUp()
@@ -32,11 +32,11 @@ class FileServiceTest: XCTestCase {
         
         let modifiedDate = service.lastModifiedDateForFileName(fileName)
         
-        XCTAssertTrue(modifiedDate.compareDateToSecondPrecision(threeDaysAgoDate) == .OrderedSame)
+        XCTAssertTrue(modifiedDate.compareDateToSecondPrecision(threeDaysAgoDate) == .orderedSame)
     }
     
     func testReturnsFullFilePathInDocumentDirectory() {
-        let expectedFilePath = (FileUtilHelper.documentDirectory as NSString).stringByAppendingPathComponent(fileName)
+        let expectedFilePath = (FileUtilHelper.documentDirectory as NSString).appendingPathComponent(fileName)
         
         let service = FileService()
         
@@ -48,7 +48,7 @@ class FileServiceTest: XCTestCase {
     func testReturnsTrueIfItWritesDataToAGivenFileInDocumentDirectory() {
         let fileHelper = FileUtilHelper(searchDirectory: FileUtilHelper.documentDirectory)
         fileHelper.deleteFile(fileName)
-        let data = dummyString.dataUsingEncoding(NSUTF8StringEncoding)!
+        let data = dummyString.data(using: String.Encoding.utf8)!
         let service = FileService()
         
         let result = service.writeData(data, toFileName: fileName)
@@ -60,7 +60,7 @@ class FileServiceTest: XCTestCase {
     func testReturnsFalseIfDataCannotBeWritten() {
         let fileHelper = FileUtilHelper(searchDirectory: FileUtilHelper.documentDirectory)
         fileHelper.deleteFile(fileName)
-        let data = dummyString.dataUsingEncoding(NSUTF16StringEncoding)!
+        let data = dummyString.data(using: String.Encoding.utf16)!
         let service = FileService()
         
         let result = service.writeData(data, toFileName: fileName)

@@ -13,8 +13,8 @@ class UIBorderedButton: UIButton {
     var colorForNormalState: UIColor?
     
     
-    override var highlighted: Bool {
-        get { return super.highlighted }
+    override var isHighlighted: Bool {
+        get { return super.isHighlighted }
         set {
             if newValue {
                 if let color = colorForTapState {
@@ -26,21 +26,21 @@ class UIBorderedButton: UIButton {
                     backgroundColor = color
                 }
             }
-            super.highlighted = newValue
+            super.isHighlighted = newValue
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.clearColor().CGColor
+        self.layer.borderColor = UIColor.clear.cgColor
         self.layer.cornerRadius = 4.0
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.clearColor().CGColor
+        self.layer.borderColor = UIColor.clear.cgColor
         self.layer.cornerRadius = 4.0
     }
 }

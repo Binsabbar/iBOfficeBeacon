@@ -5,10 +5,10 @@ import Foundation
 class BeaconAddressStore: BeaconAddressLoaderProtocol {
     static let OfficesUpdatedNotificationID = "OfficesUpdatedNotificationID"
     
-    private var loader: BeaconAddressLoader!
-    private var mapper: BeaconAddressMapper!
-    private var addressSheetID: String!
-    private(set) var _offices: [OfficeAddress]?
+    fileprivate var loader: BeaconAddressLoader!
+    fileprivate var mapper: BeaconAddressMapper!
+    fileprivate var addressSheetID: String!
+    fileprivate(set) var _offices: [OfficeAddress]?
     
     var currentOffice: OfficeAddress?
     
@@ -27,9 +27,8 @@ class BeaconAddressStore: BeaconAddressLoaderProtocol {
         self.loader.loadBeaconAddressFromSheetWithID(addressSheetID)
     }
 
-    func roomWithMajor(major: Int, minor: Int) -> OfficeRoom? {
-        if let office = currentOffice
-        where office.major == major {
+    func roomWithMajor(_ major: Int, minor: Int) -> OfficeRoom? {
+        if let office = currentOffice, office.major == major {
             return findRoomWithMinor(minor, inOffice: office)
         } else if let office = officeWithMajor(major) {
             return findRoomWithMinor(minor, inOffice: office)
@@ -38,7 +37,7 @@ class BeaconAddressStore: BeaconAddressLoaderProtocol {
     }
     
     //MARK: Private methods
-    private func officeWithMajor(major: Int) -> OfficeAddress? {
+    fileprivate func officeWithMajor(_ major: Int) -> OfficeAddress? {
         if let offices = self.offices {
             for office in offices {
                 if office.major == major {
@@ -50,7 +49,7 @@ class BeaconAddressStore: BeaconAddressLoaderProtocol {
         return nil
     }
     
-    private func findRoomWithMinor(minor: Int, inOffice office: OfficeAddress) -> OfficeRoom? {
+    fileprivate func findRoomWithMinor(_ minor: Int, inOffice office: OfficeAddress) -> OfficeRoom? {
         for room in office.rooms {
             if(room.beaconMinor == minor) {
                 return room
@@ -59,7 +58,7 @@ class BeaconAddressStore: BeaconAddressLoaderProtocol {
         return nil
     }
     
-    private(set) var offices: [OfficeAddress]? {
+    fileprivate(set) var offices: [OfficeAddress]? {
         get {
             if _offices == nil {
                 self.loader.loadBeaconAddressFromSheetWithID(addressSheetID)
@@ -70,14 +69,14 @@ class BeaconAddressStore: BeaconAddressLoaderProtocol {
         
         set {
             _offices = newValue
-            NSNotificationCenter.defaultCenter()
-                .postNotificationName(BeaconAddressStore.OfficesUpdatedNotificationID,
+            NotificationCenter.default
+                .post(name: Notification.Name(rawValue: BeaconAddressStore.OfficesUpdatedNotificationID),
                                       object: self)
         }
     }
     
     //MARK: BeaconAddressLoaderProtocol
-    func beaconAddressesLoaded(addresses: [[String : String]]?) {
+    func beaconAddressesLoaded(_ addresses: [[String : String]]?) {
         if let loadedAddresses = addresses {
             offices = mapper.mapAddresses(loadedAddresses)
         }

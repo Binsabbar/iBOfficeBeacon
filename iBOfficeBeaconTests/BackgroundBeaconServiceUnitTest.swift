@@ -16,8 +16,8 @@ class BackgroundBeaconServiceUnitTest: XCTestCase {
     var notificationServ: FakeNotificationService!
     var officeStore: FakeBeaconAddressStore!
     
-    let region = CLBeaconRegion(proximityUUID: NSUUID(), major: 1, minor: 2, identifier: "test")
-    let region2 = CLBeaconRegion(proximityUUID: NSUUID(), major: 22, minor: 312, identifier: "test 2")
+    let region = CLBeaconRegion(proximityUUID: UUID(), major: 1, minor: 2, identifier: "test")
+    let region2 = CLBeaconRegion(proximityUUID: UUID(), major: 22, minor: 312, identifier: "test 2")
     var officeRoom: OfficeRoom!
     
     override func setUp() {
@@ -42,19 +42,20 @@ class BackgroundBeaconServiceUnitTest: XCTestCase {
     }
     
     func testItFiresNotificationOfTheRoomNameWhenDeviceEnterRegion() {
-        simulator.enter(region).wait(hundredMs)
+        _ = simulator.enter(region).wait(hundredMs)
         officeStore.setRoom(officeRoom)
         
         subject.startBackgroundMonitoring()
 
         simulator.simulate()
         
-        let expectation = expectationWithDescription("")
+        let expectation = self.expectation(description: "")
         fullfillExpectation(expectation, withinTime: halfSecond)
-        waitForExpectationsWithTimeout(second) { _ in
+        
+        waitForExpectations(timeout: second) { _ in
             XCTAssertTrue(self.notificationServ.fireNotificationCalled)
             if let message = self.notificationServ.message {
-                XCTAssertTrue(message.containsString(self.officeRoom.name))
+                XCTAssertTrue(message.contains(self.officeRoom.name))
             } else {
                 XCTFail("Room name is not set")
             }
@@ -69,9 +70,9 @@ class BackgroundBeaconServiceUnitTest: XCTestCase {
         
         simulator.simulate()
         
-        let expectation = expectationWithDescription("")
+        let expectation = self.expectation(description: "")
         fullfillExpectation(expectation, withinTime: halfSecond)
-        waitForExpectationsWithTimeout(second) { _ in
+        waitForExpectations(timeout: second) { _ in
             XCTAssertTrue(self.notificationServ.clearLastNotificationCalled)
         }
     }
@@ -88,9 +89,9 @@ class BackgroundBeaconServiceUnitTest: XCTestCase {
         
         simulator.simulate()
         
-        let expectation = expectationWithDescription("")
+        let expectation = self.expectation(description: "")
         fullfillExpectation(expectation, withinTime: halfSecond)
-        waitForExpectationsWithTimeout(second) { _ in
+        waitForExpectations(timeout: second) { _ in
             XCTAssertTrue(self.notificationServ.clearLastNotificationCalled)
             XCTAssertTrue(self.notificationServ.clearLastNotificationCounter == totalClearCalls)
         }
@@ -109,9 +110,9 @@ class BackgroundBeaconServiceUnitTest: XCTestCase {
         
         simulator.simulate()
         
-        let expectation = expectationWithDescription("")
+        let expectation = self.expectation(description: "")
         fullfillExpectation(expectation, withinTime: twoSeconds)
-        waitForExpectationsWithTimeout(twoSeconds) { _ in
+        waitForExpectations(timeout: twoSeconds) { _ in
             XCTAssertTrue(self.notificationServ.clearLastNotificationCounter == totalClearCalls)
         }
     }
@@ -123,11 +124,11 @@ class FakeBeaconAddressStore: BeaconAddressStore {
     
     var room: OfficeRoom!
     
-    func setRoom(room: OfficeRoom) {
+    func setRoom(_ room: OfficeRoom) {
         self.room = room
     }
     
-    override func roomWithMajor(major: Int, minor: Int) -> OfficeRoom? {
+    override func roomWithMajor(_ major: Int, minor: Int) -> OfficeRoom? {
         return room
     }
 }

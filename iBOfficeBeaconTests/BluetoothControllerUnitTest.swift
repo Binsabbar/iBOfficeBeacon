@@ -23,9 +23,9 @@ class BluetoothControllerUnitTest: XCTestCase {
     
     func testItDoesNotShowAlertIfStateIsOn() {
         let viewControllerSpy = ViewControllerSpy()
-        UIApplication.sharedApplication().keyWindow?.rootViewController = viewControllerSpy
+        UIApplication.shared.keyWindow?.rootViewController = viewControllerSpy
         
-        manager.setCBPeripheralState(.PoweredOn)
+        manager.setCBPeripheralState(.poweredOn)
         
         subject.peripheralManagerDidUpdateState(manager)
         
@@ -34,9 +34,9 @@ class BluetoothControllerUnitTest: XCTestCase {
 
     func testItShowsAlertIfStateIsOff() {
         let viewControllerSpy = ViewControllerSpy()
-        UIApplication.sharedApplication().keyWindow?.rootViewController = viewControllerSpy
+        UIApplication.shared.keyWindow?.rootViewController = viewControllerSpy
         
-        manager.setCBPeripheralState(.PoweredOff)
+        manager.setCBPeripheralState(.poweredOff)
         
         subject.peripheralManagerDidUpdateState(manager)
         

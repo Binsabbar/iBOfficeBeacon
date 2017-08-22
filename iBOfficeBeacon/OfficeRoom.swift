@@ -21,7 +21,7 @@ class OfficeRoom {
         self.beaconMinor = minor
     }
     
-    func isEqualTo(anotherRoom: OfficeRoom) -> Bool {
+    func isEqualTo(_ anotherRoom: OfficeRoom) -> Bool {
         return self.name == anotherRoom.name &&
             self.calendarID == anotherRoom.calendarID
     }

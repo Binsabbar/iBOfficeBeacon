@@ -12,12 +12,12 @@ class ViewControllerSpy: UIViewController {
     
     var presentViewControllerIsCalled = false
     
-    override func presentViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
         presentViewControllerIsCalled = true
         lastPresentedViewController = viewControllerToPresent
     }
     
-    private(set) var lastPresentedViewController: UIViewController?
+    fileprivate(set) var lastPresentedViewController: UIViewController?
     
     var presentedAlertController:UIAlertController? {
         get {

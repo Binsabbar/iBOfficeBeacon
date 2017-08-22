@@ -10,11 +10,11 @@ import Foundation
 
 class CalendarEvent {
     
-    let startDatetime: NSDate
-    let endDatetime: NSDate
-    let title: NSString
+    let startDatetime: Date
+    let endDatetime: Date
+    let title: String
     
-    init(start: NSDate, end: NSDate, title: NSString) {
+    init(start: Date, end: Date, title: String) {
         if(start.isLaterThanDate(end)) {
             preconditionFailure("Event start time cannot be later than event end time")
         }
@@ -24,13 +24,13 @@ class CalendarEvent {
         self.title = title
     }
     
-    func isConsecutiveToAnotherEvent(event: CalendarEvent) -> Bool {
+    func isConsecutiveToAnotherEvent(_ event: CalendarEvent) -> Bool {
         return self.startDatetime == event.endDatetime ||
             ( self.startDatetime.isLaterThanDate(event.endDatetime) &&
-            self.startDatetime.timeIntervalSinceDate(event.endDatetime) < 61)
+            self.startDatetime.timeIntervalSince(event.endDatetime) < 61)
     }
     
-    func isEqualTo(anotherEvent: CalendarEvent) -> Bool {
+    func isEqualTo(_ anotherEvent: CalendarEvent) -> Bool {
         return self.startDatetime == anotherEvent.startDatetime &&
             self.endDatetime == anotherEvent.endDatetime &&
             self.title == anotherEvent.title
@@ -40,7 +40,7 @@ class CalendarEvent {
         let start = startDatetime.beginningOfDay()
         let end = start.tomorrow()
         
-        return start.compareDateToSecondPrecision(startDatetime) == .OrderedSame &&
-            end.compareDateToSecondPrecision(endDatetime) == .OrderedSame
+        return start.compareDateToSecondPrecision(startDatetime) == .orderedSame &&
+            end.compareDateToSecondPrecision(endDatetime) == .orderedSame
     }
 }

@@ -21,9 +21,9 @@ class TWBeaconServiceUnitTest: XCTestCase, TWBeaconServiceProtocol {
     let region2 = CLBeaconRegionStub(withMajor: 34)
     
     var beacons = [
-        CLBeaconStub(withUUID: NSUUID(),
-                    andMajor: NSNumber(unsignedInt: arc4random()).integerValue,
-                    andMinor: NSNumber(unsignedInt: arc4random()).integerValue)
+        CLBeaconStub(withUUID: UUID(),
+                    andMajor: NSNumber(value: arc4random() as UInt32).intValue,
+                    andMinor: NSNumber(value: arc4random() as UInt32).intValue)
     ]
     
     var numberOfTimeExitCalled = 0
@@ -57,10 +57,10 @@ class TWBeaconServiceUnitTest: XCTestCase, TWBeaconServiceProtocol {
         
         simulator.simulate()
         
-        let expectation = expectationWithDescription("")
+        let expectation = self.expectation(description: "")
         fullfillExpectation(expectation, withinTime: twoSeconds)
         
-        waitForExpectationsWithTimeout(fiveSeconds) { _ in
+        waitForExpectations(timeout: fiveSeconds) { _ in
             XCTAssertTrue(self.numberOfTimesFoundRoomCalled == 1)
         }
     }
@@ -69,15 +69,15 @@ class TWBeaconServiceUnitTest: XCTestCase, TWBeaconServiceProtocol {
         appSettings.fakeBeaconUUID = "not-valid-uuid"
 
         XCTAssertThrowsError(try subject.startRanging(), "") {
-            (error: ErrorType) in
+            (error: Error) in
             let anError = error as? MalformedBeaconUUIDError
             let errMessage = anError?.userInfo[NSLocalizedDescriptionKey] as! String
-            XCTAssertTrue(errMessage.containsString("not-valid-uuid"))
+            XCTAssertTrue(errMessage.contains("not-valid-uuid"))
         }
     }
     
     //MARK: ServiceProtocol
-    func foundRoom(room: OfficeRoom) { self.numberOfTimesFoundRoomCalled += 1 }
+    func foundRoom(_ room: OfficeRoom) { self.numberOfTimesFoundRoomCalled += 1 }
  
     //MARK: Double: BeaconProvider
     class BeaconAddressStoreDouble: BeaconAddressStore {
@@ -96,20 +96,20 @@ class TWBeaconServiceUnitTest: XCTestCase, TWBeaconServiceProtocol {
     class ManagerDouble: BeaconManager {
     
         var callBack: compeletionHandler!
-        private var eventHandler:TWBeaconEventDelegate?
+        fileprivate var eventHandler:TWBeaconEventDelegate?
         
         override init(manager: ESTBeaconManager) { super.init(manager: manager) }
 
-        override func startRangingOnCompletion(onCompletion: compeletionHandler) {
+        override func startRangingOnCompletion(_ onCompletion: @escaping compeletionHandler) {
                 self.callBack = onCompletion
         }
         
         
-        override func setBeaconTransitionEventsHandler(eventHandler: TWBeaconEventDelegate) {
+        override func setBeaconTransitionEventsHandler(_ eventHandler: TWBeaconEventDelegate) {
             self.eventHandler = eventHandler
         }
         
-        override func beaconManager(manager: AnyObject, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
+        override func beaconManager(_ manager: Any, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
             self.callBack(beacons)
         }
         
