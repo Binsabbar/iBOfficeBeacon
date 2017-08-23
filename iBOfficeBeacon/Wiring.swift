@@ -35,6 +35,7 @@ class Wiring: NSObject {
     fileprivate var _fileService: FileService!
     
     fileprivate var _authController: AuthController!
+    fileprivate var _googleAuthController: GoogleAuthController!
     fileprivate var _appUpdateController: AppUpdateController!
     fileprivate var _locationServiceAuthzController: LocationServiceAuthzController!
     fileprivate var _bluetoothController: BluetoothController!
@@ -155,6 +156,15 @@ class Wiring: NSObject {
     
     func roomScheduleCoordinator() -> RoomScheduleCoordinator {
         return RoomScheduleCoordinator(timeslotsCalculator: FreeTimeslotCalculator())
+    }
+    
+    func googleAuthorizationController() -> GoogleAuthController {
+        if(_googleAuthController == nil) {
+            let googleSettings = settings().googleSettings
+            let services = [googleCalendarService(), googleDriveService()]
+            _googleAuthController = GoogleAuthController(services: services, withSettings: googleSettings)
+        }
+        return _googleAuthController
     }
     
     func authorizationController() -> AuthController {

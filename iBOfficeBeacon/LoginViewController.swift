@@ -7,10 +7,12 @@
 //
 
 
-class LoginViewController: UIViewController, AuthControlerProtocol {
+class LoginViewController: UIViewController, GIDSignInUIDelegate {
 
     @IBOutlet weak var loginButton: UIBlurredBorderedButton!
     @IBOutlet weak var label: UILabel!
+    
+    let googleAuth = Wiring.sharedWiring.googleAuthorizationController()
     
     let loginPromptText = "Use your work email to login \nto access room information"
     
@@ -27,20 +29,23 @@ class LoginViewController: UIViewController, AuthControlerProtocol {
         setupButtonColor()
         setupLabel()
         wiring = Wiring.sharedWiring
-        wiring.authorizationController().authDelegate = self
     }
     
     @IBAction func loginTapped(_ sender: AnyObject) {
-        let view = wiring.authorizationController().authorizationView()
-        self.present(view, animated: true, completion: nil)
+        googleAuth.startSignInProcess(uidelegate: self, callback: signInCallback)
     }
     
-    func authenticationFinishedWithResult(_ result: AuthResult) {
+    fileprivate func signInCallback(_ result: AuthResult) {
         if result == .succeed {
             self.performSegue(withIdentifier: "showMainView", sender: self)
+        } else {
+            present(showAlert("Error loging in", message: "There was an error while trying to logging you in"),
+                    animated: true)
         }
     }
     
+
+    //MARK: UI Setup
     fileprivate func setupButtonColor() {
         loginButton.colorForNormalState = UIColor.clear
         loginButton.colorForTapState = AppColours.darkestGrey
@@ -54,5 +59,13 @@ class LoginViewController: UIViewController, AuthControlerProtocol {
         label.textColor = AppColours.lightGrey
         label.font = UIFont.systemFont(ofSize: 20)
         label.lineBreakMode = .byWordWrapping
+    }
+    
+    //MARK: Helpers
+    fileprivate func showAlert(_ title : String, message: String) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alert.addAction(action)
+        return alert
     }
 }

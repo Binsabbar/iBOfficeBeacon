@@ -23,17 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     fileprivate func initRootViewController() {
-        if(wiring.authorizationController().canAuthorize()) {
-            let storyboardName = "MainV1"
-            let entryViewName = "mainViewV1"
-            
-            let storyboard = UIStoryboard.init(name: storyboardName, bundle: Bundle.main)
-            
-            if let nv = window?.rootViewController as? UINavigationController {
-                let viewC = storyboard.instantiateViewController(withIdentifier: entryViewName)
-                nv.pushViewController(viewC, animated: false)
+        wiring.googleAuthorizationController().canAuthorizeAync { (result) in
+            if(result == .succeed) {
+                let storyboardName = "MainV1"
+                let entryViewName = "mainViewV1"
+                
+                let storyboard = UIStoryboard.init(name: storyboardName, bundle: Bundle.main)
+                
+                if let nv = self.window?.rootViewController as? UINavigationController {
+                    let viewC = storyboard.instantiateViewController(withIdentifier: entryViewName)
+                    nv.pushViewController(viewC, animated: false)
+                }
             }
-        }
+         }
     }
 
     
@@ -57,6 +59,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url,
+                                                    sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                    annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+
     }
     
 }

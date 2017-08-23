@@ -139,6 +139,8 @@
 		E3A54F9D1CA96372008B0343 /* CalendarEventUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A54F9C1CA96372008B0343 /* CalendarEventUnitTest.swift */; };
 		E3A54F9F1CA96FC3008B0343 /* GTLEventsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A54F9E1CA96FC3008B0343 /* GTLEventsBuilder.swift */; };
 		E3A569BA1DE85E26001AE96A /* NSThreadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A569B91DE85E26001AE96A /* NSThreadExtension.swift */; };
+		E3A5C6621F4C709E00B3909C /* GoogleAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C6611F4C709E00B3909C /* GoogleAuthController.swift */; };
+		E3A5C6631F4C787100B3909C /* GoogleAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C6611F4C709E00B3909C /* GoogleAuthController.swift */; };
 		E3A828671DDF1ACE00010896 /* MainV1.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3A828691DDF1ACE00010896 /* MainV1.storyboard */; };
 		E3AC8D3E1C832F0900E1FF70 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3AC8D3D1C832F0900E1FF70 /* Media.xcassets */; };
 		E3B37E7A1C2C9B0D00495C7B /* TWBeaconService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B37E791C2C9B0D00495C7B /* TWBeaconService.swift */; };
@@ -310,6 +312,7 @@
 		E3A54F9C1CA96372008B0343 /* CalendarEventUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventUnitTest.swift; sourceTree = "<group>"; };
 		E3A54F9E1CA96FC3008B0343 /* GTLEventsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTLEventsBuilder.swift; sourceTree = "<group>"; };
 		E3A569B91DE85E26001AE96A /* NSThreadExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSThreadExtension.swift; sourceTree = "<group>"; };
+		E3A5C6611F4C709E00B3909C /* GoogleAuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAuthController.swift; sourceTree = "<group>"; };
 		E3A828681DDF1ACE00010896 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainV1.storyboard; sourceTree = "<group>"; };
 		E3AC8D3D1C832F0900E1FF70 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		E3B37E791C2C9B0D00495C7B /* TWBeaconService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWBeaconService.swift; sourceTree = "<group>"; };
@@ -431,6 +434,7 @@
 				E366817A1D07918A00B88DEA /* BluetoothController.swift */,
 				E3E2F6771D10EC590063A4AA /* ErrorHandlerAlert.swift */,
 				E38129041DE9B6A3007ABEA1 /* LogoutController.swift */,
+				E3A5C6611F4C709E00B3909C /* GoogleAuthController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -1119,6 +1123,7 @@
 				6EEB8F601C681AD500DC623E /* BeaconEventDelegate.swift in Sources */,
 				E37047221CCCF5D600250178 /* BeaconManager.swift in Sources */,
 				E3CA95F01D773C1900443702 /* GoogleAuthorizationErrorHandler.swift in Sources */,
+				E3A5C6621F4C709E00B3909C /* GoogleAuthController.swift in Sources */,
 				E33C2E281CC8FAE000D77CD2 /* ParserHelpers.swift in Sources */,
 				E33F682B1CF9F50700CD3ADC /* GradientLayer.swift in Sources */,
 				E3649EE01D7459E6003E1F51 /* ErrorHandlingServiceProtocol.swift in Sources */,
@@ -1235,6 +1240,7 @@
 				E36681801D0794E200B88DEA /* BluetoothController.swift in Sources */,
 				E36737C81CF899BF00C2FD5A /* RoomScheduleViewModel.swift in Sources */,
 				E3163B5D1D3B09CE005FCFE4 /* FileMetadata.swift in Sources */,
+				E3A5C6631F4C787100B3909C /* GoogleAuthController.swift in Sources */,
 				E3B4B5BA1CA7183B0057BB4A /* CalendarEventsProcessor.swift in Sources */,
 				E3600D7A1CC929F50063AC48 /* BeaconAddressMapper.swift in Sources */,
 				E3761B4B1C7A47DB00A6471A /* LocalNotificationService.swift in Sources */,

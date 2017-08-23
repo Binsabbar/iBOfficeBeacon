@@ -12,6 +12,7 @@ def myPods
     pod 'GTMOAuth2'
     pod 'GoogleAPIClientForREST/Drive'
     pod 'GoogleAPIClientForREST/Calendar'
+    pod 'Google/SignIn'
 
     #pod "SwiftCSV", '~> 0.3.1 //installed manually in the project
 end
