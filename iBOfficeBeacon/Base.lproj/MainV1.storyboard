@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y2l-WF-DcI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y2l-WF-DcI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -92,10 +92,14 @@
                                     <action selector="loginTapped:" destination="xD3-oE-g0D" eventType="touchUpInside" id="qpW-Cm-D7q"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="p82-d9-Pg2">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0gN-cL-ppk" firstAttribute="centerX" secondItem="Vh5-SB-rOs" secondAttribute="centerX" id="2aP-Ex-ngv"/>
+                            <constraint firstItem="p82-d9-Pg2" firstAttribute="centerX" secondItem="Vh5-SB-rOs" secondAttribute="centerX" id="AEh-Cp-hJq"/>
                             <constraint firstItem="Wu5-jR-HTc" firstAttribute="top" secondItem="5bx-LJ-2Ho" secondAttribute="bottom" constant="70" id="CJL-gU-Oip">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
@@ -110,6 +114,7 @@
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="0gN-cL-ppk" secondAttribute="trailing" constant="-8" id="b6C-QY-8OF"/>
+                            <constraint firstItem="p82-d9-Pg2" firstAttribute="centerY" secondItem="Vh5-SB-rOs" secondAttribute="centerY" id="eRv-8E-IeF"/>
                             <constraint firstItem="i6c-Aw-BBP" firstAttribute="top" secondItem="0gN-cL-ppk" secondAttribute="bottom" constant="60" id="i1f-wi-eE7"/>
                             <constraint firstItem="0gN-cL-ppk" firstAttribute="leading" secondItem="Vh5-SB-rOs" secondAttribute="leadingMargin" constant="-8" id="rdh-zR-mSU"/>
                             <constraint firstItem="i6c-Aw-BBP" firstAttribute="leading" secondItem="Vh5-SB-rOs" secondAttribute="leadingMargin" constant="10" id="ySk-qt-fZ1">
@@ -160,6 +165,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="p82-d9-Pg2" id="cY6-LK-3Zy"/>
                         <outlet property="label" destination="0gN-cL-ppk" id="YMY-dx-f4O"/>
                         <outlet property="loginButton" destination="i6c-Aw-BBP" id="odZ-Qf-uqj"/>
                         <segue destination="HHV-Rn-tqU" kind="show" identifier="showMainView" id="8GD-TK-iRJ"/>
@@ -419,7 +425,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Y2l-WF-DcI" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="EwI-Gp-Hr1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="EwI-Gp-Hr1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

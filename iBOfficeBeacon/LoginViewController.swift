@@ -11,24 +11,32 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
 
     @IBOutlet weak var loginButton: UIBlurredBorderedButton!
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let googleAuth = Wiring.sharedWiring.googleAuthorizationController()
     
     let loginPromptText = "Use your work email to login \nto access room information"
     
-    var wiring:Wiring!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        setupButtonColor()
+        setupLabel()
+        hideLoginUIElements()
+        googleAuth.canAuthorizeAync { (result) in
+            if(result == .succeed) {
+                self.performSegue(withIdentifier: "showMainView", sender: self)
+            }
+            self.activityIndicator.stopAnimating()
+            self.showLoginUIElements()
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        wiring.appUpdateController().performUpdateCheckInBackground()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupButtonColor()
-        setupLabel()
-        wiring = Wiring.sharedWiring
+        Wiring.sharedWiring.appUpdateController().performUpdateCheckInBackground()
     }
     
     @IBAction func loginTapped(_ sender: AnyObject) {
@@ -43,7 +51,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
                     animated: true)
         }
     }
-    
+
 
     //MARK: UI Setup
     fileprivate func setupButtonColor() {
@@ -59,6 +67,16 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
         label.textColor = AppColours.lightGrey
         label.font = UIFont.systemFont(ofSize: 20)
         label.lineBreakMode = .byWordWrapping
+    }
+    
+    fileprivate func hideLoginUIElements() {
+        label.isHidden = true
+        loginButton.isHidden = true
+    }
+    
+    fileprivate func showLoginUIElements() {
+        label.isHidden = false
+        loginButton.isHidden = false
     }
     
     //MARK: Helpers
