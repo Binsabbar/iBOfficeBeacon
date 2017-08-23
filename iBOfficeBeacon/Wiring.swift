@@ -215,7 +215,7 @@ class Wiring: NSObject {
     
     func logoutController() -> LogoutController {
         if _logoutController == nil {
-            _logoutController = LogoutController(authController: authorizationController(),
+            _logoutController = LogoutController(googleAuthController: googleAuthorizationController(),
                                                  fileService: fileService())
         }
         return _logoutController
