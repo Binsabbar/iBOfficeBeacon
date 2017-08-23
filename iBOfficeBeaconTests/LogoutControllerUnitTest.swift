@@ -10,15 +10,15 @@ import XCTest
 
 class LogoutControllerUnitTest: XCTestCase {
     
-    var authControllerSpy: AuthControllerSpy!
+    var authControllerSpy: GoogleAuthControllerSpy!
     var fileServiceSpy: FileServiceSpy!
     var controller: LogoutController!
     
     override func setUp() {
         super.setUp()
-        authControllerSpy = AuthControllerSpy()
+        authControllerSpy = GoogleAuthControllerSpy()
         fileServiceSpy = FileServiceSpy()
-        controller = LogoutController(authController: authControllerSpy, fileService: fileServiceSpy)
+        controller = LogoutController(googleAuthController: authControllerSpy, fileService: fileServiceSpy)
     }
     
     func testItRemovesItemsFromKeychain() {

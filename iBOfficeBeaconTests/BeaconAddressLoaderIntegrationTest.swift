@@ -174,7 +174,7 @@ class BeaconAddressLoaderIntegrationTest: XCTestCase, BeaconAddressLoaderProtoco
     }
     
     fileprivate func initSubject(_ factory: @escaping BeaconAddressLoader.SpreadsheetApiFactoryBlock) {
-        let errorHandler = GoogleAuthorizationErrorHandler(authController: AuthControllerSpy())
+        let errorHandler = GoogleAuthorizationErrorHandler(authController: GoogleAuthControllerSpy())
         subject = BeaconAddressLoader(spreadsheetApiCreate: factory,
                                       localFileName: localFileName,
                                       fileService: fileService,

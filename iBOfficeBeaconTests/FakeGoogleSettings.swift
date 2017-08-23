@@ -12,6 +12,6 @@ class FakeGoogleSettings: GoogleSettings {
     
     override init(clientID: String) {
         super.init(clientID: clientID)
-        self.keychainItemName = AUTH_CONTROLLER_UT_KEYCHAIN_ITEM_NAME
+        self.keychainItemName = "somenames"
     }
 }

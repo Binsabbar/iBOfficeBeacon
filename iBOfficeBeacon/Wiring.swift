@@ -34,7 +34,6 @@ class Wiring: NSObject {
     fileprivate var _googleDriveService: GTLRDriveService!
     fileprivate var _fileService: FileService!
     
-    fileprivate var _authController: AuthController!
     fileprivate var _googleAuthController: GoogleAuthController!
     fileprivate var _appUpdateController: AppUpdateController!
     fileprivate var _locationServiceAuthzController: LocationServiceAuthzController!
@@ -70,7 +69,7 @@ class Wiring: NSObject {
     
     func googleAuthorizationErrorHandler() -> GoogleAuthorizationErrorHandler {
         if _googleAuthorizationErrorHandler == nil {
-            _googleAuthorizationErrorHandler = GoogleAuthorizationErrorHandler(authController: authorizationController())
+            _googleAuthorizationErrorHandler = GoogleAuthorizationErrorHandler(authController: googleAuthorizationController())
         }
         return _googleAuthorizationErrorHandler
     }
@@ -165,15 +164,6 @@ class Wiring: NSObject {
             _googleAuthController = GoogleAuthController(services: services, withSettings: googleSettings)
         }
         return _googleAuthController
-    }
-    
-    func authorizationController() -> AuthController {
-        if (_authController == nil) {
-            let googleSettings = settings().googleSettings
-            let services = [googleCalendarService(), googleDriveService()]
-            _authController = AuthController(services: services, withSettings: googleSettings)
-        }
-        return _authController
     }
     
     func appUpdateController() -> AppUpdateController {
