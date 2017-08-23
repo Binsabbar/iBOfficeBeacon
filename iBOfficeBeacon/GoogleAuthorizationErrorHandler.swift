@@ -11,11 +11,11 @@ import Foundation
 class GoogleAuthorizationErrorHandler: ErrorHandlingProtocol {
     
     static var UserIsNotAuthenticatedNotification = "UserIsNotAuthenticated"
-    fileprivate let authController: AuthController
+    fileprivate let authController: GoogleAuthController
     fileprivate let unauthorisedErrorCode = 403
     fileprivate let settings: AppSettings
     
-    init (authController: AuthController) {
+    init (authController: GoogleAuthController) {
         self.authController = authController
         self.settings = Wiring.sharedWiring.settings()
     }

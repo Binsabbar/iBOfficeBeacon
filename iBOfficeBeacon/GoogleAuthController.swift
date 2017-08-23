@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum AuthResult {
+    case succeed
+    case failed
+}
+
 class GoogleAuthController: NSObject, GIDSignInDelegate{
     
     typealias AsycSignInCallback = (AuthResult) -> Void

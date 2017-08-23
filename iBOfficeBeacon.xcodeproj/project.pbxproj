@@ -141,14 +141,12 @@
 		E3A569BA1DE85E26001AE96A /* NSThreadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A569B91DE85E26001AE96A /* NSThreadExtension.swift */; };
 		E3A5C6621F4C709E00B3909C /* GoogleAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C6611F4C709E00B3909C /* GoogleAuthController.swift */; };
 		E3A5C6631F4C787100B3909C /* GoogleAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C6611F4C709E00B3909C /* GoogleAuthController.swift */; };
+		E3A5C6651F4DCEF300B3909C /* GoogleAuthControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C6641F4DCEF300B3909C /* GoogleAuthControllerSpy.swift */; };
 		E3A828671DDF1ACE00010896 /* MainV1.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3A828691DDF1ACE00010896 /* MainV1.storyboard */; };
 		E3AC8D3E1C832F0900E1FF70 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3AC8D3D1C832F0900E1FF70 /* Media.xcassets */; };
 		E3B37E7A1C2C9B0D00495C7B /* TWBeaconService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B37E791C2C9B0D00495C7B /* TWBeaconService.swift */; };
 		E3B37E7B1C2C9B0D00495C7B /* TWBeaconService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B37E791C2C9B0D00495C7B /* TWBeaconService.swift */; };
 		E3B37E7D1C2CC72700495C7B /* TWBeaconServiceIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B37E7C1C2CC72700495C7B /* TWBeaconServiceIntegrationTest.swift */; };
-		E3B49C351CA56AF900C9D97F /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B49C341CA56AF900C9D97F /* AuthController.swift */; };
-		E3B49C361CA5777200C9D97F /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B49C341CA56AF900C9D97F /* AuthController.swift */; };
-		E3B4B5B71CA6A8350057BB4A /* AuthControllerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4B5B61CA6A8350057BB4A /* AuthControllerUnitTest.swift */; };
 		E3B4B5B91CA7183B0057BB4A /* CalendarEventsProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4B5B81CA7183B0057BB4A /* CalendarEventsProcessor.swift */; };
 		E3B4B5BA1CA7183B0057BB4A /* CalendarEventsProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4B5B81CA7183B0057BB4A /* CalendarEventsProcessor.swift */; };
 		E3B4B5BC1CA71A960057BB4A /* CalendarEventsProcessorUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4B5BB1CA71A960057BB4A /* CalendarEventsProcessorUnitTest.swift */; };
@@ -157,7 +155,6 @@
 		E3B979741B07A320004FF250 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B979731B07A320004FF250 /* CoreBluetooth.framework */; };
 		E3BE944F1C33FFB5005D6FE0 /* AppColours.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BE944E1C33FFB5005D6FE0 /* AppColours.swift */; };
 		E3CA95EC1D77320300443702 /* ErrorHandlingServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3649EDF1D7459E6003E1F51 /* ErrorHandlingServiceProtocol.swift */; };
-		E3CA95EE1D7737ED00443702 /* AuthControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CA95ED1D7737ED00443702 /* AuthControllerSpy.swift */; };
 		E3CA95F01D773C1900443702 /* GoogleAuthorizationErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CA95EF1D773C1900443702 /* GoogleAuthorizationErrorHandler.swift */; };
 		E3CA95F11D773C1900443702 /* GoogleAuthorizationErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CA95EF1D773C1900443702 /* GoogleAuthorizationErrorHandler.swift */; };
 		E3D58E7D1CC421E2009C0BCC /* BeaconAddressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D58E7C1CC421E2009C0BCC /* BeaconAddressStore.swift */; };
@@ -313,12 +310,11 @@
 		E3A54F9E1CA96FC3008B0343 /* GTLEventsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTLEventsBuilder.swift; sourceTree = "<group>"; };
 		E3A569B91DE85E26001AE96A /* NSThreadExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSThreadExtension.swift; sourceTree = "<group>"; };
 		E3A5C6611F4C709E00B3909C /* GoogleAuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAuthController.swift; sourceTree = "<group>"; };
+		E3A5C6641F4DCEF300B3909C /* GoogleAuthControllerSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAuthControllerSpy.swift; sourceTree = "<group>"; };
 		E3A828681DDF1ACE00010896 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainV1.storyboard; sourceTree = "<group>"; };
 		E3AC8D3D1C832F0900E1FF70 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		E3B37E791C2C9B0D00495C7B /* TWBeaconService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWBeaconService.swift; sourceTree = "<group>"; };
 		E3B37E7C1C2CC72700495C7B /* TWBeaconServiceIntegrationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWBeaconServiceIntegrationTest.swift; sourceTree = "<group>"; };
-		E3B49C341CA56AF900C9D97F /* AuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
-		E3B4B5B61CA6A8350057BB4A /* AuthControllerUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthControllerUnitTest.swift; sourceTree = "<group>"; };
 		E3B4B5B81CA7183B0057BB4A /* CalendarEventsProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventsProcessor.swift; sourceTree = "<group>"; };
 		E3B4B5BB1CA71A960057BB4A /* CalendarEventsProcessorUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventsProcessorUnitTest.swift; sourceTree = "<group>"; };
 		E3B9796E1B078AFD004FF250 /* CLBeaconRegionStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBeaconRegionStub.swift; sourceTree = "<group>"; };
@@ -326,7 +322,6 @@
 		E3B979711B07A31A004FF250 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E3B979731B07A320004FF250 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		E3BE944E1C33FFB5005D6FE0 /* AppColours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColours.swift; sourceTree = "<group>"; };
-		E3CA95ED1D7737ED00443702 /* AuthControllerSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthControllerSpy.swift; sourceTree = "<group>"; };
 		E3CA95EF1D773C1900443702 /* GoogleAuthorizationErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAuthorizationErrorHandler.swift; sourceTree = "<group>"; };
 		E3D58E7C1CC421E2009C0BCC /* BeaconAddressStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconAddressStore.swift; sourceTree = "<group>"; };
 		E3D58E871CC51A03009C0BCC /* InsertEventRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertEventRequest.swift; sourceTree = "<group>"; };
@@ -415,7 +410,6 @@
 		E304C9A71CA9BFAA0022323A /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E3B4B5B61CA6A8350057BB4A /* AuthControllerUnitTest.swift */,
 				E3D7FF5F1CF6620C00A17578 /* AppUpdateControllerUnitTest.swift */,
 				E36737CD1CF9034500C2FD5A /* LocationServiceAuthzControllerUnitTest.swift */,
 				E366817E1D07946B00B88DEA /* BluetoothControllerUnitTest.swift */,
@@ -428,7 +422,6 @@
 		E3076B321CA5E99A000A8603 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E3B49C341CA56AF900C9D97F /* AuthController.swift */,
 				E3D7FF5C1CF661F600A17578 /* AppUpdateController.swift */,
 				E36737CA1CF8F2FD00C2FD5A /* LocationServiceAuthController.swift */,
 				E366817A1D07918A00B88DEA /* BluetoothController.swift */,
@@ -868,13 +861,13 @@
 		E3D7FF631CF6632900A17578 /* Spies */ = {
 			isa = PBXGroup;
 			children = (
-				E3CA95ED1D7737ED00443702 /* AuthControllerSpy.swift */,
 				E3D7FF611CF6632600A17578 /* UpdateManagerSpy.swift */,
 				E366817C1D07943C00B88DEA /* ViewControllerSpy.swift */,
 				E3163B7E1D402C48005FCFE4 /* SpreadsheetAPIDelegateSpy.swift */,
 				E30D4D781DAA721D002F643D /* NavigationControllerSpy.swift */,
 				E3E18ABA1DCA6ED000E70333 /* ErrorHandlerSpy.swift */,
 				E38129091DE9BBA3007ABEA1 /* FileServiceSpy.swift */,
+				E3A5C6641F4DCEF300B3909C /* GoogleAuthControllerSpy.swift */,
 			);
 			name = Spies;
 			sourceTree = "<group>";
@@ -1158,7 +1151,6 @@
 				E3F7A4371DDF2AD50049DE9B /* MainViewController.swift in Sources */,
 				E38865E91C78F5420026CC64 /* CLBeaconRegionExtension.swift in Sources */,
 				E3E2F6781D10EC590063A4AA /* ErrorHandlerAlert.swift in Sources */,
-				E3B49C351CA56AF900C9D97F /* AuthController.swift in Sources */,
 				E33F682D1CFA084B00CD3ADC /* UIBlurredBorderedButton.swift in Sources */,
 				E36737C21CF8805500C2FD5A /* RoomScheduleViewModel.swift in Sources */,
 				E3128D431E0D67F4007992A8 /* MalformedBeaconUUIDError.swift in Sources */,
@@ -1195,7 +1187,6 @@
 				E302235D1E534E5C000938BA /* RoomSchedule.swift in Sources */,
 				E336EE8A1E06D47D00E5A628 /* FakeAppSettings.swift in Sources */,
 				E366817F1D07946B00B88DEA /* BluetoothControllerUnitTest.swift in Sources */,
-				E3B4B5B71CA6A8350057BB4A /* AuthControllerUnitTest.swift in Sources */,
 				E3E18ABB1DCA6ED000E70333 /* ErrorHandlerSpy.swift in Sources */,
 				E31405E21DC107F30071DAC4 /* DummyErrorHandler.swift in Sources */,
 				E3826D631C5ECF0200F618A7 /* CLBeaconStub.swift in Sources */,
@@ -1233,7 +1224,6 @@
 				E3E540B31D438A810085B594 /* SpreadsheetAPIIntegrationTest.swift in Sources */,
 				E3163B681D3BDD48005FCFE4 /* UTF8DataWriterServiceTest.swift in Sources */,
 				E3A00D221DBE5A1D00E926DE /* NSErrorBuilder.swift in Sources */,
-				E3CA95EE1D7737ED00443702 /* AuthControllerSpy.swift in Sources */,
 				E3ECDE8B1CA8782C002762E6 /* RoomScheduleCoordinatorUnitTest.swift in Sources */,
 				E366817D1D07943C00B88DEA /* ViewControllerSpy.swift in Sources */,
 				E3761B4D1C7A4AF700A6471A /* TWBeaconServiceProtocol.swift in Sources */,
@@ -1255,7 +1245,6 @@
 				6EEC0CB61C67E83300ADA7AE /* TestHelpers.swift in Sources */,
 				E3D7FF621CF6632600A17578 /* UpdateManagerSpy.swift in Sources */,
 				E3DBD85F1C94839D00BDB79C /* CalendarClient.swift in Sources */,
-				E3B49C361CA5777200C9D97F /* AuthController.swift in Sources */,
 				E3163B6C1D3BE8F4005FCFE4 /* UTF8DataWriterService.swift in Sources */,
 				E3600D781CC9285F0063AC48 /* BeaconAddressMapperUnitTest.swift in Sources */,
 				E34CE0161E3CC3B000BF549B /* FreeTimeslot.swift in Sources */,
@@ -1290,6 +1279,7 @@
 				E3B4B5BC1CA71A960057BB4A /* CalendarEventsProcessorUnitTest.swift in Sources */,
 				E381290A1DE9BBA3007ABEA1 /* FileServiceSpy.swift in Sources */,
 				E3649EE41D745C99003E1F51 /* GoogleAuthorizationErrorHandlerTest.swift in Sources */,
+				E3A5C6651F4DCEF300B3909C /* GoogleAuthControllerSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

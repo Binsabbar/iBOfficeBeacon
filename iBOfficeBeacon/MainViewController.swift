@@ -18,7 +18,6 @@ class MainViewController: UIViewController, TWBeaconServiceProtocol, TWBeaconEve
     let roomViewControllerSegueIdentifier = "showRoomView"
     
     var beaconService: TWBeaconService!
-    var authController: AuthController!
     var errorAlertController: ErrorAlertController!
     
     var officeRoom: OfficeRoom?
@@ -42,7 +41,6 @@ class MainViewController: UIViewController, TWBeaconServiceProtocol, TWBeaconEve
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        authController = wiring.authorizationController()
         errorAlertController = wiring.errorAlertController()
         errorAlertController.registerForNotifications()
         

@@ -10,7 +10,7 @@ import XCTest
 
 class GoogleAuthorizationErrorHandlerTest: XCTestCase {
 
-    var authController = AuthControllerSpy()
+    var authController = GoogleAuthControllerSpy()
     
     var subject: GoogleAuthorizationErrorHandler!
     var isUserIsNotAuthenticatedNotificationFired = false
