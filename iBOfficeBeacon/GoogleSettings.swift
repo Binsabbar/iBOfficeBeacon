@@ -13,7 +13,7 @@ class GoogleSettings {
     let clientID: String
     var keychainItemName = "Google Calendar API"
     
-    fileprivate let _scopes = [kGTLRAuthScopeCalendar, kGTLRAuthScopeDriveReadonly]
+    let _scopes = [kGTLRAuthScopeCalendar, kGTLRAuthScopeDriveReadonly]
     var scopes: String {
         get {
             return self._scopes.joined(separator: " ")

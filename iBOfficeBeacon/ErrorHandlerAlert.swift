@@ -35,8 +35,9 @@ class ErrorAlertController {
         NotificationCenter.default.addObserver(self, selector: #selector(ErrorAlertController.loadingBeaconAddressFailed), name: NSNotification.Name(rawValue: BeaconAddressLoader.ParsingAddressFailed), object: nil)
         
         NotificationCenter.default.addObserver(self,
-                                                         selector: #selector(ErrorAlertController.userIsNotAuthorised),
-                                                         name: NSNotification.Name(rawValue: GoogleAuthorizationErrorHandler.UserIsNotAuthenticatedNotification), object: nil)
+                                               selector: #selector(ErrorAlertController.userIsNotAuthorised),
+                                               name: NSNotification.Name(rawValue: GoogleAuthorizationErrorHandler.UserIsNotAuthenticatedNotification),
+                                               object: nil)
     }
     
     
