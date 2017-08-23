@@ -10,16 +10,16 @@ import Foundation
 
 class LogoutController {
     
-    let authController: AuthController
+    let googleAuthController: GoogleAuthController
     let fileService: FileService
     
-    init(authController: AuthController, fileService: FileService) {
-        self.authController = authController
+    init(googleAuthController: GoogleAuthController, fileService: FileService) {
+        self.googleAuthController = googleAuthController
         self.fileService = fileService
     }
     
     func logout() {
-        authController.logout()
         fileService.deleteFile(AppSettings.LOCAL_BEACON_ADDRESS_FILE_NAME)
+        googleAuthController.logout()
     }
 }
