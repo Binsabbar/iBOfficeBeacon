@@ -39,8 +39,9 @@ class GoogleAuthController: NSObject, GIDSignInDelegate{
         if(GIDSignIn.sharedInstance().hasAuthInKeychain()) {
             canAuthCallback = compeletion
             GIDSignIn.sharedInstance().signInSilently()
+        } else {
+            compeletion(AuthResult.failed)
         }
-        compeletion(AuthResult.failed)
     }
     
     

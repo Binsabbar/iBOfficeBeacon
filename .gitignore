@@ -8,3 +8,6 @@ HockeySDK-iOS/*
 Pods/
 Podfile.lock
 
+iBOfficeBeacon/InfoDev.plist
+iBOfficeBeacon/InfoLocalDev.plist.plist
+iBOfficeBeacon/InfoLocalDev.plist

@@ -23,19 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     fileprivate func initRootViewController() {
-        wiring.googleAuthorizationController().canAuthorizeAync { (result) in
-            if(result == .succeed) {
-                let storyboardName = "MainV1"
-                let entryViewName = "mainViewV1"
-                
-                let storyboard = UIStoryboard.init(name: storyboardName, bundle: Bundle.main)
-                
-                if let nv = self.window?.rootViewController as? UINavigationController {
-                    let viewC = storyboard.instantiateViewController(withIdentifier: entryViewName)
-                    nv.pushViewController(viewC, animated: false)
-                }
-            }
-         }
+
     }
 
     
