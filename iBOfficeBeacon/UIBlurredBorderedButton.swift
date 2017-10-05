@@ -100,7 +100,7 @@ import UIKit
         vibrancyEffectView.frame = view.bounds
         
         blurEffectView.layer.cornerRadius = 20
-        blurEffectView.addSubview(vibrancyEffectView)
+        blurEffectView.contentView.addSubview(vibrancyEffectView)
         blurEffectView.isUserInteractionEnabled = false
         view.addSubview(blurEffectView)
         view.sendSubview(toBack: blurEffectView)
