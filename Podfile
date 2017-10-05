@@ -6,7 +6,7 @@ def myPods
     pod 'EstimoteSDK', '3.8.2'
     
     # to beta testing
-    pod 'HockeySDK-Source'
+    pod 'HockeySDK-Source', '5.0.0'
     
     # google API
     pod 'GTMOAuth2'
