@@ -11,3 +11,6 @@ Podfile.lock
 iBOfficeBeacon/InfoDev.plist
 iBOfficeBeacon/InfoLocalDev.plist.plist
 iBOfficeBeacon/InfoLocalDev.plist
+.envrc
+fastlane/
+.DS_Store
