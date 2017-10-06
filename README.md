@@ -29,7 +29,7 @@ This project is licensed under the Apache License, Version 2.0 [the "License”]
 -----
 
 # Getting started:
-The project supports `iOS9` and above, is designed for iPhone, and written in `Swift 3`. The app supports **Google Calendar** as backend Calendar system.
+The project supports `iOS9` and above, is designed for iPhone, and written in `Swift 3.2`. The app supports **Google Calendar** as backend Calendar system.
 
 ## Setting up the project:
 1. Install the latest Xcode from App Store.
